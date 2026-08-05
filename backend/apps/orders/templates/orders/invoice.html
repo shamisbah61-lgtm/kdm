@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KDM Invoice - {{ order.order_number }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-kdm-red: #d32f2f;
+            --color-kdm-black: #111111;
+            --color-kdm-grey: #444444;
+            --color-kdm-light: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--color-kdm-black);
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 40px;
+            border: 2px solid var(--color-kdm-black);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            background: #fff;
+            position: relative;
+        }
+
+        .invoice-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: repeating-linear-gradient(
+              45deg,
+              var(--color-kdm-red),
+              var(--color-kdm-red) 20px,
+              var(--color-kdm-black) 20px,
+              var(--color-kdm-black) 40px
+            );
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-kdm-black);
+            padding-bottom: 20px;
+        }
+
+        .kdm-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--color-kdm-red);
+            letter-spacing: 2px;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .kdm-tagline {
+            font-size: 14px;
+            color: var(--color-kdm-grey);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .invoice-meta {
+            text-align: right;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .invoice-title {
+            font-size: 24px;
+            color: var(--color-kdm-black);
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .meta-detail {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            color: var(--color-kdm-grey);
+            font-weight: 600;
+            margin: 2px 0;
+        }
+        .meta-detail span {
+            color: var(--color-kdm-black);
+            font-weight: 700;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .info-section h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--color-kdm-red);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-kdm-red);
+            padding-bottom: 5px;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .info-section p {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .invoice-table th {
+            font-family: 'Orbitron', sans-serif;
+            background: var(--color-kdm-black);
+            color: #fff;
+            padding: 12px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .invoice-table th.text-center { text-align: center; }
+        .invoice-table th.text-right { text-align: right; }
+
+        .invoice-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .invoice-table td.text-center { text-align: center; }
+        .invoice-table td.text-right { text-align: right; }
+
+        .invoice-table tr:nth-child(even) td {
+            background-color: var(--color-kdm-light);
+        }
+
+        .totals-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .totals-table {
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .totals-table td {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .totals-table td.label {
+            text-align: right;
+            color: var(--color-kdm-grey);
+            text-transform: uppercase;
+        }
+        
+        .totals-table td.value {
+            text-align: right;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .totals-table tr.grand-total td {
+            border-top: 2px solid var(--color-kdm-black);
+            border-bottom: 2px solid var(--color-kdm-black);
+            font-size: 20px;
+            color: var(--color-kdm-red);
+            font-weight: 700;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--color-kdm-grey);
+            border-top: 1px dashed #ccc;
+            padding-top: 20px;
+            font-weight: 600;
+        }
+
+        .footer span {
+            color: var(--color-kdm-red);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .print-btn-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .print-btn {
+            font-family: 'Orbitron', sans-serif;
+            padding: 12px 30px;
+            background-color: var(--color-kdm-red);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+        .print-btn:hover {
+            background-color: var(--color-kdm-black);
+        }
+
+        @media print {
+            .print-btn-container { display: none; }
+            .invoice-box {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+            .invoice-box::before {
+                display: none;
+            }
+            .invoice-table th {
+                background: #000 !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .totals-table tr.grand-total td {
+                color: #000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-btn-container">
+        <button class="print-btn" onclick="window.print()">Print Document</button>
+    </div>
+
+    <div class="invoice-box">
+        <div class="header-grid">
+            <div>
+                <h1 class="kdm-logo">KDM</h1>
+                <div class="kdm-tagline">Kerala Domestic Market</div>
+                <div class="kdm-tagline" style="font-size: 11px; margin-top: 4px;">Ultimate Automotive & Bike Modification Hub</div>
+            </div>
+            <div class="invoice-meta">
+                <h2 class="invoice-title">INVOICE</h2>
+                <div class="meta-detail">ORDER NO: <span>#{{ order.order_number }}</span></div>
+                <div class="meta-detail">DATE: <span>{{ order.created_at|date:"M d, Y" }}</span></div>
+                <div class="meta-detail">STATUS: <span>{{ order.status|upper }}</span></div>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-section">
+                <h4>Billed / Shipped To</h4>
+                {% if order.address %}
+                    <p style="font-family: 'Orbitron', sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 8px;">{{ order.address.name }}</p>
+                    <p>{{ order.address.address }}</p>
+                    <p>{{ order.address.city }}, {{ order.address.state }} {{ order.address.zipcode }}</p>
+                    <p>{{ order.address.country }}</p>
+                    <p style="margin-top: 8px;">PHONE: {{ order.address.phone }}</p>
+                {% else %}
+                    <p>N/A</p>
+                {% endif %}
+            </div>
+            
+            <div class="info-section">
+                <h4>Payment Details</h4>
+                <p>METHOD: <strong>{{ order.get_payment_method_display|upper }}</strong></p>
+                <p>STATUS: <strong>{{ order.payment_status|upper }}</strong></p>
+                <p style="margin-top: 12px;">CUSTOMER EMAIL:</p>
+                <p><strong>{{ order.user.email }}</strong></p>
+            </div>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Parts / Items</th>
+                    <th class="text-center">Unit Price</th>
+                    <th class="text-center">Qty</th>
+                    <th class="text-right">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td class="text-center">₹{{ item.price }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-right">₹{{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="totals-wrapper">
+            <table class="totals-table">
+                <tr>
+                    <td class="label">Subtotal:</td>
+                    <td class="value">₹{{ order.total_amount }}</td>
+                </tr>
+                {% if order.discount_amount > 0 %}
+                <tr>
+                    <td class="label">Discount{% if order.coupon %} ({{ order.coupon.code }}){% endif %}:</td>
+                    <td class="value">-₹{{ order.discount_amount }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="label" style="font-size: 12px; font-weight: normal; padding-top: 0;">Includes 18% GST:</td>
+                    <td class="value" style="font-size: 13px; font-weight: normal; padding-top: 0;">₹{{ order.gst_amount }}</td>
+                </tr>
+                <tr class="grand-total">
+                    <td class="label">Grand Total:</td>
+                    <td class="value">₹{{ order.final_amount }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            Thank you for shopping with <span>KDM</span>.<br>
+            For support or installation inquiries, please contact garage@kdm.com
+        </div>
+    </div>
+
+</body>
+</html>
