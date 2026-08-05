@@ -13,7 +13,9 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-fallback-key-2026')
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']  # Update for production environments
+ALLOWED_HOSTS = ["127.0.0.1",
+    "localhost",
+    ".onrender.com",]  # Update for production environments
 
 # Application definition
 INSTALLED_APPS = [
