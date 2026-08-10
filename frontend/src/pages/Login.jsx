@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { LogIn, UserPlus, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -60,198 +61,166 @@ export default function Login() {
   };
 
   return (
-    <div className="container auth-page animate-fade-in">
-      <div className="auth-card">
-        <div className="auth-toggle-headers">
+    <div className="container min-h-[85vh] flex items-center justify-center py-20 pt-[120px] animate-fade-in relative">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+      
+      <div className="w-full max-w-lg bg-gradient-to-b from-[var(--bg-card)] to-[var(--alt-bg)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-8 md:p-12 shadow-2xl relative z-10 backdrop-blur-xl">
+        
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-black text-[var(--color-text-bright)] mb-2 tracking-tight">Welcome to KDM</h1>
+          <p className="text-[var(--color-text-muted)] font-medium">Access your premium automotive portal.</p>
+        </div>
+
+        <div className="flex border-b border-[var(--border-color)] mb-8">
           <button
-            className={`auth-toggle-btn ${isLogin ? 'active' : ''}`}
+            className={`flex-1 flex items-center justify-center gap-2 bg-transparent border-none text-[15px] font-bold uppercase tracking-wider py-4 cursor-pointer transition-all duration-300 relative ${isLogin ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-dim)] hover:text-[var(--color-text-bright)]'}`}
             onClick={() => { setIsLogin(true); setError(''); setSuccess(''); }}
           >
-            Sign In
+            <LogIn size={18} /> Sign In
+            {isLogin && <div className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-[var(--color-primary)]"></div>}
           </button>
           <button
-            className={`auth-toggle-btn ${!isLogin ? 'active' : ''}`}
+            className={`flex-1 flex items-center justify-center gap-2 bg-transparent border-none text-[15px] font-bold uppercase tracking-wider py-4 cursor-pointer transition-all duration-300 relative ${!isLogin ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-dim)] hover:text-[var(--color-text-bright)]'}`}
             onClick={() => { setIsLogin(false); setError(''); setSuccess(''); }}
           >
-            Register
+            <UserPlus size={18} /> Register
+            {!isLogin && <div className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-[var(--color-primary)]"></div>}
           </button>
         </div>
 
-        {error && <div className="error-banner">{error}</div>}
-        {success && <div className="success-banner">{success}</div>}
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/30 text-red-500 px-4 py-3 rounded-lg mb-6 text-sm font-medium flex items-start gap-2">
+            <AlertCircle size={18} className="shrink-0 mt-0.5" />
+            <p className="m-0">{error}</p>
+          </div>
+        )}
+        
+        {success && (
+          <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 px-4 py-3 rounded-lg mb-6 text-sm font-medium flex items-start gap-2">
+            <CheckCircle2 size={18} className="shrink-0 mt-0.5" />
+            <p className="m-0">{success}</p>
+          </div>
+        )}
 
         {isLogin ? (
           /* Login Form */
-          <form onSubmit={handleLoginSubmit} className="auth-form animate-fade-in">
-            <div className="form-group">
-              <label className="form-label">Email Address</label>
+          <form onSubmit={handleLoginSubmit} className="animate-fade-in flex flex-col gap-5">
+            <div>
+              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Email Address</label>
               <input
                 type="email"
-                className="form-input"
+                className="form-input bg-[var(--bg-main)] border-2 font-medium"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="john@example.com"
                 required
               />
             </div>
-            <div className="form-group">
-              <label className="form-label">Password</label>
+            <div>
+              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Password</label>
               <input
                 type="password"
-                className="form-input"
+                className="form-input bg-[var(--bg-main)] border-2 font-medium"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary auth-submit-btn" style={{ color: '#000' }}>
-              Sign In
+            <div className="flex justify-end -mt-2">
+              <a href="#" className="text-xs font-semibold text-[var(--color-text-dim)] hover:text-[var(--color-primary)] transition-colors no-underline">Forgot Password?</a>
+            </div>
+            <button type="submit" className="btn btn-primary w-full h-[50px] text-base mt-2 shadow-[0_10px_30px_rgba(220,38,38,0.3)]">
+              Sign In to Account
             </button>
           </form>
         ) : (
           /* Register Form */
-          <form onSubmit={handleRegisterSubmit} className="auth-form animate-fade-in">
-            <div className="form-group-row">
-              <div className="form-group">
-                <label className="form-label">First Name</label>
+          <form onSubmit={handleRegisterSubmit} className="animate-fade-in flex flex-col gap-5">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">First Name</label>
                 <input
                   type="text"
-                  className="form-input"
+                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="John"
                   required
                 />
               </div>
-              <div className="form-group">
-                <label className="form-label">Last Name</label>
+              <div>
+                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Last Name</label>
                 <input
                   type="text"
-                  className="form-input"
+                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Doe"
                   required
                 />
               </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Email Address</label>
+            <div>
+              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Email Address</label>
               <input
                 type="email"
-                className="form-input"
+                className="form-input bg-[var(--bg-main)] border-2 font-medium"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="john@example.com"
                 required
               />
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Phone Number</label>
+            <div>
+              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Phone Number</label>
               <input
-                type="text"
-                className="form-input"
+                type="tel"
+                className="form-input bg-[var(--bg-main)] border-2 font-medium"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                placeholder="+91 98765 43210"
                 required
               />
             </div>
 
-            <div className="form-group-row">
-              <div className="form-group">
-                <label className="form-label">Password</label>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Password</label>
                 <input
                   type="password"
-                  className="form-input"
+                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
                   required
                 />
               </div>
-              <div className="form-group">
-                <label className="form-label">Confirm Password</label>
+              <div>
+                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Confirm Password</label>
                 <input
                   type="password"
-                  className="form-input"
+                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
                   value={passwordConfirm}
                   onChange={(e) => setPasswordConfirm(e.target.value)}
+                  placeholder="••••••••"
                   required
                 />
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary auth-submit-btn" style={{ color: '#000' }}>
+            <button type="submit" className="btn btn-primary w-full h-[50px] text-base mt-2 shadow-[0_10px_30px_rgba(220,38,38,0.3)]">
               Create Account
             </button>
+            <p className="text-center text-xs text-[var(--color-text-dim)] mt-2">
+              By registering, you agree to our Terms of Service and Privacy Policy.
+            </p>
           </form>
         )}
       </div>
-
-      <style>{`
-        .auth-page {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 60px 0;
-          min-height: calc(100vh - 200px);
-        }
-        .auth-card {
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-lg);
-          padding: 40px;
-          width: 100%;
-          max-width: 480px;
-          box-shadow: var(--glass-shadow);
-        }
-        .auth-toggle-headers {
-          display: flex;
-          border-bottom: 1px solid var(--border-color);
-          margin-bottom: 30px;
-        }
-        .auth-toggle-btn {
-          flex: 1;
-          background: none;
-          border: none;
-          color: var(--color-text-dim);
-          font-family: var(--font-heading);
-          font-size: 20px;
-          font-weight: 600;
-          padding: 12px 0;
-          cursor: pointer;
-          transition: var(--transition-smooth);
-        }
-        .auth-toggle-btn.active {
-          color: var(--color-primary);
-          border-bottom: 2px solid var(--color-primary);
-        }
-        .form-group-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-        .auth-submit-btn {
-          width: 100%;
-          height: 46px;
-          margin-top: 10px;
-        }
-        .error-banner {
-          background: rgba(219, 68, 55, 0.15);
-          border: 1px solid var(--color-error);
-          color: var(--color-error);
-          padding: 12px;
-          border-radius: var(--border-radius-md);
-          margin-bottom: 20px;
-          font-size: 13px;
-        }
-        .success-banner {
-          background: rgba(82, 164, 71, 0.15);
-          border: 1px solid var(--color-success);
-          color: var(--color-success);
-          padding: 12px;
-          border-radius: var(--border-radius-md);
-          margin-bottom: 20px;
-          font-size: 13px;
-        }
-      `}</style>
     </div>
   );
 }
