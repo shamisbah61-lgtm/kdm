@@ -35,11 +35,11 @@ export default function Wishlist() {
 
   if (!wishlist || wishlist.length === 0) {
     return (
-      <div className="container empty-state" style={{ padding: '80px 24px', textAlign: 'center', background: 'var(--alt-bg)', borderRadius: 'var(--border-radius-lg)', border: '1px dashed var(--border-color)', marginTop: '40px' }}>
-        <Heart size={48} style={{ color: 'var(--color-text-dim)', marginBottom: '16px' }} />
-        <h2 style={{ marginBottom: '8px' }}>Your Wishlist is Empty</h2>
-        <p style={{ color: 'var(--color-text-muted)' }}>Save items you love here to buy them later.</p>
-        <Link to="/products" className="btn btn-primary" style={{ marginTop: '24px' }}>
+      <div className="container empty-state py-20 px-6 text-center bg-[var(--alt-bg)] rounded-[var(--border-radius-lg)] border border-dashed border-[var(--border-color)] mt-10">
+        <Heart size={48} className="text-[var(--color-text-dim)] mb-4 mx-auto" />
+        <h2 className="mb-2">Your Wishlist is Empty</h2>
+        <p className="text-[var(--color-text-muted)]">Save items you love here to buy them later.</p>
+        <Link to="/products" className="btn btn-primary mt-6 inline-block">
           Explore Products
         </Link>
       </div>
@@ -47,32 +47,31 @@ export default function Wishlist() {
   }
 
   return (
-    <div className="container animate-fade-in" style={{ paddingBottom: '80px', marginTop: '40px' }}>
-      <h1 style={{ marginBottom: '32px' }}>My Wishlist</h1>
-      <div className="grid-cols-4">
+    <div className="container animate-fade-in pb-20 mt-10">
+      <h1 className="mb-8">My Wishlist</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {wishlist.map(item => (
-          <div key={item.id} className="card product-card">
+          <div key={item.id} className="card product-card flex flex-col">
             <div className="product-image-wrapper">
-              <Link to={`/products/${item.product?.slug}`} style={{ display: 'block', height: '100%', width: '100%' }}>
+              <Link to={`/products/${item.product?.slug}`} className="block h-full w-full">
                 <img src={item.product?.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'} alt={item.product?.name} className="product-thumbnail" />
               </Link>
               <button 
-                className="quick-wishlist-btn active"
+                className="quick-wishlist-btn active !bg-[var(--color-primary)] !text-black"
                 onClick={() => handleRemove(item.id)}
                 title="Remove from Wishlist"
-                style={{ background: 'var(--color-primary)', color: '#000' }}
               >
                 <Trash2 size={16} />
               </button>
             </div>
-            <div className="product-card-body">
+            <div className="product-card-body flex-1 flex flex-col">
               <Link to={`/products/${item.product?.slug}`} className="product-card-title">{item.product?.name}</Link>
               <div className="price-container">
-                <span className="current-price" style={{ color: 'var(--color-primary)' }}>₹{item.product?.discount_price || item.product?.price}</span>
+                <span className="current-price text-[var(--color-primary)]">₹{item.product?.discount_price || item.product?.price}</span>
               </div>
-              <div className="card-actions" style={{ marginTop: 'auto' }}>
-                <button className="btn btn-primary btn-sm" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
-                  <ShoppingCart size={14} style={{ marginRight: '6px' }} />
+              <div className="card-actions mt-auto">
+                <button className="btn btn-primary btn-sm flex items-center justify-center gap-1.5 w-full" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
+                  <ShoppingCart size={14} />
                   Add to Cart
                 </button>
               </div>
