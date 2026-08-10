@@ -159,36 +159,36 @@ export default function ProductDetail() {
     }
   };
 
-  if (loading) return <div className="loading-state container">Loading collection details...</div>;
-  if (!product) return <div className="container empty-state">Product not found.</div>;
+  if (loading) return <div className="text-center py-[60px] text-[var(--color-text-muted)] container">Loading collection details...</div>;
+  if (!product) return <div className="container text-center py-[80px] bg-[var(--alt-bg)] rounded-[var(--border-radius-lg)] border border-dashed border-[var(--border-color)] mt-10">Product not found.</div>;
 
   // Gather all images (thumbnail + gallery images)
   const allImages = [product.thumbnail, ...(product.images || []).map(img => img.image)].filter(Boolean);
 
   return (
     <div className="container animate-fade-in">
-      <div className="back-navigation">
-        <Link to="/products" className="btn-back">
+      <div className="mb-6 mt-2.5">
+        <Link to="/products" className="inline-flex items-center gap-2 text-[var(--color-text-muted)] no-underline text-sm font-medium transition-all duration-300 hover:text-[var(--color-primary)] hover:-translate-x-1">
           <ArrowLeft size={16} /> Back to Collection
         </Link>
       </div>
 
-      <div className="product-detail-layout">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[30px] md:gap-[50px] mb-[100px] md:mb-20">
         
         {/* Images Column */}
-        <div className="gallery-column">
-          <div className="main-image-container">
-            <img src={activeImage || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=600'} alt={product.name} className="main-image" />
+        <div className="flex flex-col">
+          <div className="bg-[var(--alt-bg)] h-[480px] rounded-[var(--border-radius-lg)] border border-[var(--border-color)] overflow-hidden flex items-center justify-center p-6">
+            <img src={activeImage || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=600'} alt={product.name} className="max-w-full max-h-full w-auto h-auto object-contain" />
           </div>
           {allImages.length > 1 && (
-            <div className="thumbnails-row">
+            <div className="flex gap-3 mt-4 overflow-x-auto">
               {allImages.map((imgUrl, i) => (
                 <button
                   key={i}
-                  className={`thumbnail-btn ${(activeImage === imgUrl || (!activeImage && i === 0)) ? 'active' : ''}`}
+                  className={`border ${activeImage === imgUrl || (!activeImage && i === 0) ? 'border-[var(--color-primary)] -translate-y-0.5' : 'border-[var(--border-color)]'} bg-[var(--alt-bg)] w-20 h-20 rounded-[var(--border-radius-md)] overflow-hidden cursor-pointer transition-all duration-300 shrink-0 p-1.5 flex items-center justify-center hover:border-[var(--color-primary)] hover:-translate-y-0.5`}
                   onClick={() => setActiveImage(imgUrl)}
                 >
-                  <img src={imgUrl} alt={`Thumbnail ${i}`} className="thumbnail-img" />
+                  <img src={imgUrl} alt={`Thumbnail ${i}`} className="max-w-full max-h-full w-auto h-auto object-contain" />
                 </button>
               ))}
             </div>
@@ -196,33 +196,33 @@ export default function ProductDetail() {
         </div>
 
         {/* Info Column */}
-        <div className="info-column">
-          <span className="product-category">{product.category_name}</span>
-          <h1 className="product-title">{product.name}</h1>
+        <div className="flex flex-col justify-center">
+          <span className="text-[var(--color-primary)] text-[13px] uppercase font-semibold tracking-wider mb-2">{product.category_name}</span>
+          <h1 className="text-4xl leading-[1.2] mb-3">{product.name}</h1>
           
-          <div className="rating-row-detail">
-            <div className="stars-row">
+          <div className="flex items-center gap-2.5 mb-6">
+            <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={16} fill="var(--color-primary)" color="var(--color-primary)" />
+                <Star key={i} size={16} className="fill-[var(--color-primary)] text-[var(--color-primary)]" />
               ))}
             </div>
-            <span className="rating-text">({reviews.length} Customer Reviews)</span>
+            <span className="text-[13px] text-[var(--color-text-dim)]">({reviews.length} Customer Reviews)</span>
           </div>
 
-          <div className="price-tag-detail">
+          <div className="mb-4">
             {product.discount_price ? (
               <>
-                <span className="current-price-detail">₹{product.discount_price}</span>
-                <span className="original-price-detail">₹{product.price}</span>
+                <span className="text-3xl font-bold text-[var(--color-primary)]">₹{product.discount_price}</span>
+                <span className="text-lg text-[var(--color-text-dim)] line-through ml-3">₹{product.price}</span>
               </>
             ) : (
-              <span className="current-price-detail">₹{product.price}</span>
+              <span className="text-3xl font-bold text-[var(--color-primary)]">₹{product.price}</span>
             )}
           </div>
 
-          <div className="sku-tag">SKU: {product.sku}</div>
+          <div className="text-[13px] text-[var(--color-text-dim)] mb-3">SKU: {product.sku}</div>
 
-          <div className="stock-info">
+          <div className="text-sm text-[var(--color-text-muted)] mb-[30px] flex items-center">
             Availability: &nbsp;
             {product.stock_status === 'In Stock' ? (
               <span className="badge badge-success">In Stock ({product.quantity} left)</span>
@@ -231,30 +231,30 @@ export default function ProductDetail() {
             )}
           </div>
 
-          <div className="product-description">
-            <h3>Description</h3>
-            <p>{product.description || 'No description available for this accessory.'}</p>
+          <div className="border-t border-[var(--border-color)] pt-6 mb-[30px]">
+            <h3 className="text-base uppercase tracking-wider mb-3">Description</h3>
+            <p className="text-[var(--color-text-muted)] text-[15px]">{product.description || 'No description available for this accessory.'}</p>
           </div>
 
           {/* Actions */}
           {product.stock_status === 'In Stock' && (
-            <div className="action-row">
-              <div className="quantity-selector">
-                <button className="qty-btn" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                <span className="qty-val">{quantity}</span>
-                <button className="qty-btn" onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}>+</button>
+            <div className="flex gap-4 items-center flex-wrap">
+              <div className="flex items-center border border-[var(--border-color)] rounded-[var(--border-radius-md)] bg-[rgba(22,16,13,0.5)] overflow-hidden">
+                <button className="border-none bg-transparent text-[var(--color-text-bright)] w-10 h-11 cursor-pointer text-lg hover:bg-[rgba(212,175,55,0.1)]" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                <span className="px-3 font-semibold text-[15px] text-[var(--color-text-bright)]">{quantity}</span>
+                <button className="border-none bg-transparent text-[var(--color-text-bright)] w-10 h-11 cursor-pointer text-lg hover:bg-[rgba(212,175,55,0.1)]" onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}>+</button>
               </div>
 
-              <button className="btn btn-secondary btn-add-cart" onClick={handleAddToCart}>
+              <button className="btn btn-secondary grow h-12 text-black text-[15px] rounded-full flex justify-center items-center gap-2" onClick={handleAddToCart}>
                 <ShoppingCart size={18} /> Add to Cart
               </button>
 
-              <button className="btn btn-primary btn-buy-now" onClick={handleBuyNow} style={{ backgroundColor: '#f59e0b', borderColor: '#f59e0b' }}>
+              <button className="btn btn-primary grow h-12 text-black text-[15px] rounded-full flex justify-center items-center gap-2 bg-[#f59e0b] border-[#f59e0b] hover:bg-[#d97706]" onClick={handleBuyNow}>
                 Buy Now
               </button>
 
               <button
-                className={`btn btn-secondary wishlist-toggle-btn ${inWishlist ? 'active' : ''}`}
+                className={`btn btn-secondary h-[46px] w-[46px] p-0 flex items-center justify-center rounded-md ${inWishlist ? 'border-[var(--color-primary)]' : ''}`}
                 onClick={handleWishlistToggle}
                 disabled={wishlistLoading}
                 title={inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
@@ -263,7 +263,7 @@ export default function ProductDetail() {
               </button>
 
               <button
-                className="btn btn-secondary wishlist-toggle-btn"
+                className="btn btn-secondary h-[46px] w-[46px] p-0 flex items-center justify-center rounded-md"
                 onClick={handleShare}
                 title="Share via Device"
               >
@@ -274,13 +274,12 @@ export default function ProductDetail() {
                 href={`https://wa.me/?text=Check out this amazing product: ${encodeURIComponent(window.location.href)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary wishlist-toggle-btn"
+                className="btn btn-secondary h-[46px] w-[46px] p-0 flex items-center justify-center rounded-md bg-[#25D366] border-[#25D366] text-white hover:bg-[#1da851]"
                 title="Share on WhatsApp"
-                style={{ backgroundColor: '#25D366', borderColor: '#25D366', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
+              </svg>
               </a>
             </div>
           )}
@@ -288,48 +287,48 @@ export default function ProductDetail() {
       </div>
 
       {/* Reviews & Feedback Section */}
-      <section className="reviews-section">
-        <h2>Customer Reviews</h2>
+      <section className="border-t border-[var(--border-color)] pt-[60px] mb-20">
+        <h2 className="mb-10 text-3xl font-[var(--font-heading)]">Customer Reviews</h2>
 
-        <div className="reviews-grid-layout">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 lg:gap-[50px]">
           {/* Review List */}
-          <div className="reviews-list-col">
+          <div className="flex flex-col">
             {reviews.length === 0 ? (
-              <p className="no-reviews-msg">No reviews yet for this selection. Be the first to share your thoughts!</p>
+              <p className="text-[var(--color-text-dim)] italic">No reviews yet for this selection. Be the first to share your thoughts!</p>
             ) : (
-              <div className="review-cards-list">
+              <div className="flex flex-col gap-5">
                 {reviews.map((rev) => (
-                  <div key={rev.id} className="review-item-card">
-                    <div className="review-item-header">
-                      <div className="reviewer-info">
-                        <div className="reviewer-avatar">
+                  <div key={rev.id} className="bg-[rgba(22,16,13,0.3)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-6">
+                    <div className="flex justify-between mb-3 items-start flex-wrap gap-2.5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full overflow-hidden bg-[var(--color-primary)] flex items-center justify-center border-2 border-[var(--border-color)]">
                           {rev.user?.profile_image ? (
-                            <img src={rev.user.profile_image} alt={rev.user.first_name || 'User'} />
+                            <img src={rev.user.profile_image} alt={rev.user.first_name || 'User'} className="w-full h-full object-cover" />
                           ) : (
-                            <div className="avatar-placeholder">
+                            <div className="text-black font-bold text-base">
                               {(rev.user?.first_name || rev.user?.email || 'V').charAt(0).toUpperCase()}
                             </div>
                           )}
                         </div>
                         <div>
-                          <h4 className="reviewer-name">{rev.user?.first_name || 'Verified Buyer'}</h4>
-                          <div className="review-stars">
+                          <h4 className="text-[15px] font-[var(--font-body)] m-0">{rev.user?.first_name || 'Verified Buyer'}</h4>
+                          <div className="flex gap-0.5 mt-1">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} size={12} fill={i < rev.rating ? 'var(--color-primary)' : 'none'} color="var(--color-primary)" />
+                              <Star key={i} size={12} className={i < rev.rating ? "fill-[var(--color-primary)] text-[var(--color-primary)]" : "text-[var(--color-primary)]"} />
                             ))}
                           </div>
                         </div>
                       </div>
-                      <div className="review-badges">
+                      <div className="flex items-center gap-3">
                         {rev.verified_purchase && (
-                          <span className="badge badge-success verified-badge">
+                          <span className="badge badge-success text-[9px] font-bold px-1.5 py-0.5 inline-flex items-center gap-1">
                             <Award size={10} /> Verified Purchase
                           </span>
                         )}
-                        <span className="review-date">{new Date(rev.created_at).toLocaleDateString()}</span>
+                        <span className="text-xs text-[var(--color-text-dim)]">{new Date(rev.created_at).toLocaleDateString()}</span>
                       </div>
                     </div>
-                    {rev.comment && <p className="review-comment-text">{rev.comment}</p>}
+                    {rev.comment && <p className="text-sm text-[var(--color-text-muted)] mt-0">{rev.comment}</p>}
                   </div>
                 ))}
               </div>
@@ -337,18 +336,18 @@ export default function ProductDetail() {
           </div>
 
           {/* Write a Review */}
-          <div className="reviews-form-col">
+          <div className="flex flex-col">
             {isAuthenticated ? (
-              <div className="write-review-card">
-                <h3>Write a Review</h3>
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-8">
+                <h3 className="mb-6 text-lg m-0">Write a Review</h3>
                 <form onSubmit={handleReviewSubmit}>
-                  {submitError && <div className="error-banner">{submitError}</div>}
-                  {submitSuccess && <div className="success-banner">{submitSuccess}</div>}
+                  {submitError && <div className="bg-[rgba(219,68,55,0.15)] border border-[var(--color-error)] text-[var(--color-error)] p-3 rounded-[var(--border-radius-md)] mb-4 text-[13px]">{submitError}</div>}
+                  {submitSuccess && <div className="bg-[rgba(82,164,71,0.15)] border border-[var(--color-success)] text-[var(--color-success)] p-3 rounded-[var(--border-radius-md)] mb-4 text-[13px]">{submitSuccess}</div>}
 
-                  <div className="form-group">
-                    <label className="form-label">Rating</label>
+                  <div className="mb-4">
+                    <label className="form-label block mb-2">Rating</label>
                     <select
-                      className="form-input"
+                      className="form-input w-full"
                       value={rating}
                       onChange={(e) => setRating(Number(e.target.value))}
                     >
@@ -360,11 +359,11 @@ export default function ProductDetail() {
                     </select>
                   </div>
 
-                  <div className="form-group">
-                    <label className="form-label">Comment</label>
+                  <div className="mb-4">
+                    <label className="form-label block mb-2">Comment</label>
                     <textarea
                       rows="4"
-                      className="form-input"
+                      className="form-input w-full"
                       placeholder="Share details of your experience with this accessory..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
@@ -372,16 +371,16 @@ export default function ProductDetail() {
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                  <button type="submit" className="btn btn-primary w-full mt-2">
                     Submit Review
                   </button>
                 </form>
               </div>
             ) : (
-              <div className="review-login-prompt">
-                <ShieldAlert size={28} />
-                <p>Please log in to write a review and share your feedback.</p>
-                <Link to="/login" className="btn btn-secondary">Sign In</Link>
+              <div className="text-center bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-10 text-[var(--color-text-muted)] flex flex-col items-center">
+                <ShieldAlert size={28} className="mb-2" />
+                <p className="my-3 text-sm">Please log in to write a review and share your feedback.</p>
+                <Link to="/login" className="btn btn-secondary mt-2">Sign In</Link>
               </div>
             )}
           </div>
@@ -389,376 +388,14 @@ export default function ProductDetail() {
       </section>
 
       {/* Sticky Mobile Buy Bar for Quick Checkout */}
-      <div className="mobile-sticky-actions">
-        <button className="btn btn-secondary" onClick={handleAddToCart} style={{ flex: 1, padding: '12px' }}>
+      <div className="flex md:hidden fixed bottom-0 left-0 right-0 bg-[var(--bg-card)] border-t border-[var(--border-color)] p-3 px-5 gap-3 z-[100] shadow-[0_-4px_10px_rgba(0,0,0,0.1)]">
+        <button className="btn btn-secondary flex-1 py-3 text-[15px]" onClick={handleAddToCart}>
           Add to Cart
         </button>
-        <button className="btn btn-primary" onClick={handleBuyNow} style={{ flex: 1, padding: '12px', backgroundColor: '#f59e0b', borderColor: '#f59e0b', color: '#000' }}>
+        <button className="btn btn-primary flex-1 py-3 text-[15px] bg-[#f59e0b] border-[#f59e0b] text-black" onClick={handleBuyNow}>
           Buy Now
         </button>
       </div>
-
-      <style>{`
-        .back-navigation {
-          margin-bottom: 24px;
-          margin-top: 10px;
-        }
-        .btn-back {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          color: var(--color-text-muted);
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: 500;
-          transition: var(--transition-smooth);
-        }
-        .btn-back:hover {
-          color: var(--color-primary);
-          transform: translateX(-4px);
-        }
-        .product-detail-layout {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 50px;
-          margin-bottom: 80px;
-        }
-        @media (max-width: 768px) {
-          .product-detail-layout {
-            grid-template-columns: 1fr;
-            gap: 30px;
-          }
-        }
-        .main-image-container {
-          background: var(--alt-bg);
-          height: 480px;
-          border-radius: var(--border-radius-lg);
-          border: 1px solid var(--border-color);
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-        }
-        .main-image {
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-        }
-        .thumbnails-row {
-          display: flex;
-          gap: 12px;
-          margin-top: 16px;
-          overflow-x: auto;
-        }
-        .thumbnail-btn {
-          border: 1px solid var(--border-color);
-          background: var(--alt-bg);
-          width: 80px;
-          height: 80px;
-          border-radius: var(--border-radius-md);
-          overflow: hidden;
-          cursor: pointer;
-          transition: var(--transition-smooth);
-          flex-shrink: 0;
-          padding: 6px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .thumbnail-btn.active, .thumbnail-btn:hover {
-          border-color: var(--color-primary);
-          transform: translateY(-2px);
-        }
-        .thumbnail-img {
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-        }
-        .info-column {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        .product-category {
-          color: var(--color-primary);
-          font-size: 13px;
-          text-transform: uppercase;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-          margin-bottom: 8px;
-        }
-        .product-title {
-          font-size: 36px;
-          line-height: 1.2;
-          margin-bottom: 12px;
-        }
-        .rating-row-detail {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 24px;
-        }
-        .stars-row {
-          display: flex;
-          gap: 2px;
-        }
-        .rating-text {
-          font-size: 13px;
-          color: var(--color-text-dim);
-        }
-        .price-tag-detail {
-          margin-bottom: 16px;
-        }
-        .current-price-detail {
-          font-size: 28px;
-          font-weight: 700;
-          color: var(--color-primary);
-        }
-        .original-price-detail {
-          font-size: 18px;
-          color: var(--color-text-dim);
-          text-decoration: line-through;
-          margin-left: 12px;
-        }
-        .sku-tag {
-          font-size: 13px;
-          color: var(--color-text-dim);
-          margin-bottom: 12px;
-        }
-        .stock-info {
-          font-size: 14px;
-          color: var(--color-text-muted);
-          margin-bottom: 30px;
-          display: flex;
-          align-items: center;
-        }
-        .product-description {
-          border-top: 1px solid var(--border-color);
-          padding-top: 24px;
-          margin-bottom: 30px;
-        }
-        .product-description h3 {
-          font-size: 16px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 12px;
-        }
-        .product-description p {
-          color: var(--color-text-muted);
-          font-size: 15px;
-        }
-        .action-row {
-          display: flex;
-          gap: 16px;
-          align-items: center;
-        }
-        .quantity-selector {
-          display: flex;
-          align-items: center;
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-md);
-          background: rgba(22, 16, 13, 0.5);
-          overflow: hidden;
-        }
-        .qty-btn {
-          border: none;
-          background: none;
-          color: var(--color-text-bright);
-          width: 40px;
-          height: 44px;
-          cursor: pointer;
-          font-size: 18px;
-        }
-        .qty-btn:hover {
-          background: rgba(212, 175, 55, 0.1);
-        }
-        .qty-val {
-          padding: 0 12px;
-          font-weight: 600;
-          font-size: 15px;
-          color: var(--color-text-bright);
-        }
-        .btn-add-cart, .btn-buy-now {
-          flex-grow: 1;
-          height: 48px;
-          color: #000;
-          font-size: 15px;
-          border-radius: 24px;
-        }
-        .wishlist-toggle-btn {
-          height: 46px;
-          width: 46px;
-          padding: 0;
-        }
-        .wishlist-toggle-btn.active {
-          border-color: var(--color-primary);
-        }
-        .reviews-section {
-          border-top: 1px solid var(--border-color);
-          padding-top: 60px;
-          margin-bottom: 80px;
-        }
-        .reviews-section h2 {
-          margin-bottom: 40px;
-        }
-        .reviews-grid-layout {
-          display: grid;
-          grid-template-columns: 1fr 380px;
-          gap: 50px;
-        }
-        @media (max-width: 992px) {
-          .reviews-grid-layout {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-        }
-        .no-reviews-msg {
-          color: var(--color-text-dim);
-          font-style: italic;
-        }
-        .review-cards-list {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-        .review-item-card {
-          background: rgba(22,16,13,0.3);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-lg);
-          padding: 24px;
-        }
-        .review-item-header {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 12px;
-          align-items: flex-start;
-          flex-wrap: wrap;
-          gap: 10px;
-        }
-        .reviewer-info {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .reviewer-avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          overflow: hidden;
-          background: var(--color-primary);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: 2px solid var(--border-color);
-        }
-        .reviewer-avatar img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .avatar-placeholder {
-          color: #000;
-          font-weight: bold;
-          font-size: 16px;
-        }
-        .reviewer-name {
-          font-size: 15px;
-          font-family: var(--font-body);
-        }
-        .review-stars {
-          display: flex;
-          gap: 2px;
-          margin-top: 4px;
-        }
-        .review-badges {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .verified-badge {
-          font-size: 9px;
-          font-weight: 700;
-          padding: 2px 6px;
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-        }
-        .review-date {
-          font-size: 12px;
-          color: var(--color-text-dim);
-        }
-        .review-comment-text {
-          font-size: 14px;
-          color: var(--color-text-muted);
-        }
-        .write-review-card {
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-lg);
-          padding: 32px;
-        }
-        .write-review-card h3 {
-          margin-bottom: 24px;
-          font-size: 18px;
-        }
-        .review-login-prompt {
-          text-align: center;
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-lg);
-          padding: 40px;
-          color: var(--color-text-muted);
-        }
-        .review-login-prompt p {
-          margin: 12px 0 24px 0;
-          font-size: 14px;
-        }
-        .error-banner {
-          background: rgba(219, 68, 55, 0.15);
-          border: 1px solid var(--color-error);
-          color: var(--color-error);
-          padding: 12px;
-          border-radius: var(--border-radius-md);
-          margin-bottom: 16px;
-          font-size: 13px;
-        }
-        .success-banner {
-          background: rgba(82, 164, 71, 0.15);
-          border: 1px solid var(--color-success);
-          color: var(--color-success);
-          padding: 12px;
-          border-radius: var(--border-radius-md);
-          margin-bottom: 16px;
-          font-size: 13px;
-        }
-
-        .mobile-sticky-actions {
-          display: none;
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: var(--bg-card);
-          border-top: 1px solid var(--border-color);
-          padding: 12px 20px;
-          gap: 12px;
-          z-index: 100;
-          box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-        }
-        @media (max-width: 768px) {
-          .mobile-sticky-actions {
-            display: flex;
-          }
-          .product-detail-layout {
-            margin-bottom: 100px; /* Space for sticky bar */
-          }
-        }
-      `}</style>
     </div>
   );
 }

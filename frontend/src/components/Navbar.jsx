@@ -50,22 +50,29 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="container navbar-inner">
-        <Link to="/" className="logo-text" style={{ fontSize: '24px' }}>
+    <nav className="navbar relative z-50">
+      <div className="container navbar-inner flex justify-between items-center h-full">
+        <Link to="/" className="logo-text text-2xl font-bold no-underline text-[var(--color-primary)]">
           KDM
         </Link>
 
         {/* Mobile Menu Toggle */}
-        <button className="btn btn-icon d-mobile-only" onClick={() => setIsOpen(!isOpen)} style={{ border: 'none', background: 'none', color: 'var(--color-text-bright)' }}>
+        <button 
+          className="btn btn-icon md:hidden block border-none bg-transparent text-[var(--color-text-bright)] p-0" 
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Navigation Links */}
-        <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <button onClick={toggleTheme} className="nav-link theme-toggle-btn" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', display: 'flex' }}>
+        <div className={`nav-links ${isOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 right-0 bg-[#120c0a] md:bg-transparent border-b border-[var(--border-color)] md:border-none p-6 md:p-0 gap-5 shadow-[0_10px_20px_rgba(0,0,0,0.5)] md:shadow-none`}>
+          <button 
+            onClick={toggleTheme} 
+            className="nav-link theme-toggle-btn bg-transparent border-none cursor-pointer p-0 flex items-center text-[var(--color-text-bright)] hover:text-[var(--color-primary)]"
+          >
             {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
           </button>
+          
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
             Home
           </NavLink>
@@ -86,54 +93,27 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               {(user?.is_staff || user?.is_superuser) && (
-                <NavLink to="/admin-dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
-                  <Landmark size={18} style={{ color: '#fbbf24' }} />
-                  <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>Admin</span>
+                <NavLink to="/admin-dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''} text-[#fbbf24] font-bold hover:text-[#f59e0b]`} onClick={() => setIsOpen(false)}>
+                  <Landmark size={18} className="text-[#fbbf24]" />
+                  <span>Admin</span>
                 </NavLink>
               )}
               <NavLink to="/profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
                 <User size={18} />
                 <span>Profile</span>
               </NavLink>
-              <button onClick={handleLogout} className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+              <button onClick={handleLogout} className="nav-link bg-transparent border-none cursor-pointer flex items-center gap-2 text-[var(--color-text-bright)] hover:text-[var(--color-primary)]">
                 <LogOut size={18} />
                 <span>Logout</span>
               </button>
             </>
           ) : (
-            <NavLink to="/login" className="btn btn-primary" onClick={() => setIsOpen(false)} style={{ padding: '8px 20px', color: '#000' }}>
+            <NavLink to="/login" className="btn btn-primary px-5 py-2 text-black" onClick={() => setIsOpen(false)}>
               Sign In
             </NavLink>
           )}
         </div>
       </div>
-
-      <style>{`
-        .d-mobile-only {
-          display: none;
-        }
-        @media (max-width: 768px) {
-          .d-mobile-only {
-            display: block;
-          }
-          .nav-links {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #120c0a;
-            border-bottom: 1px solid var(--border-color);
-            flex-direction: column;
-            padding: 24px;
-            gap: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-          }
-          .nav-links.active {
-            display: flex;
-          }
-        }
-      `}</style>
     </nav>
   );
 }
