@@ -122,6 +122,7 @@ export default function Products() {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchProducts();
   }, [selectedCategory, ordering, page]);
 
@@ -147,24 +148,31 @@ export default function Products() {
   };
 
   return (
-    <div className="container animate-fade-in">
-      <div className="shop-layout">
+    <div className="container animate-fade-in pt-[100px] mb-20">
+      
+      {/* Page Title */}
+      <div className="mb-8 border-b border-[var(--border-color)] pb-6">
+        <h1 className="text-4xl font-black text-[var(--color-text-bright)] mb-2">Shop Accessories</h1>
+        <p className="text-[var(--color-text-muted)] text-lg">Browse our premium collection of automotive upgrades.</p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
         
-        {/* Sidebar Filters */}
-        <aside className="shop-sidebar">
-          <div className="sidebar-header">
-            <h3><Filter size={16} /> Filters</h3>
-            <button className="reset-btn" onClick={resetFilters}>
+        {/* Sidebar Filters - Sticky */}
+        <aside className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-6 h-fit lg:sticky lg:top-[100px] shadow-xl">
+          <div className="flex justify-between items-center border-b border-[var(--border-color)] pb-4 mb-6">
+            <h3 className="text-lg font-bold text-[var(--color-text-bright)] flex items-center gap-2 m-0"><Filter size={18} className="text-[var(--color-primary)]"/> Filters</h3>
+            <button className="bg-transparent border-none text-[var(--color-primary)] cursor-pointer text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:text-[var(--color-primary-hover)] transition-colors p-0" onClick={resetFilters}>
               <RotateCcw size={12} /> Reset
             </button>
           </div>
 
           {/* Category Filter */}
-          <div className="filter-group">
-            <h4>Category</h4>
-            <div className="category-list">
+          <div className="mb-8">
+            <h4 className="text-xs uppercase tracking-widest text-[var(--color-text-dim)] mb-4 font-bold">Category</h4>
+            <div className="flex flex-col gap-2">
               <button
-                className={`category-filter-item ${selectedCategory === '' ? 'active' : ''}`}
+                className={`text-left bg-transparent border-none text-sm cursor-pointer transition-all duration-300 py-1.5 px-2 rounded-md ${selectedCategory === '' ? 'text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)] hover:bg-[var(--alt-bg)]'}`}
                 onClick={() => { setSelectedCategory(''); setPage(1); }}
               >
                 All Categories
@@ -172,7 +180,7 @@ export default function Products() {
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  className={`category-filter-item ${selectedCategory === cat.slug ? 'active' : ''}`}
+                  className={`text-left bg-transparent border-none text-sm cursor-pointer transition-all duration-300 py-1.5 px-2 rounded-md ${selectedCategory === cat.slug ? 'text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)] hover:bg-[var(--alt-bg)]'}`}
                   onClick={() => { setSelectedCategory(cat.slug); setPage(1); }}
                 >
                   {cat.name}
@@ -182,143 +190,144 @@ export default function Products() {
           </div>
 
           {/* Price Filter */}
-          <div className="filter-group">
-            <h4>Price Range (₹)</h4>
-            <form onSubmit={handlePriceFilterSubmit} className="price-filter-form">
-              <input
-                type="number"
-                placeholder="Min"
-                className="form-input price-input"
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
-              />
-              <span className="price-separator">-</span>
-              <input
-                type="number"
-                placeholder="Max"
-                className="form-input price-input"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
-              />
-              <button type="submit" className="btn btn-secondary btn-apply-price">
-                Apply
+          <div className="mb-4">
+            <h4 className="text-xs uppercase tracking-widest text-[var(--color-text-dim)] mb-4 font-bold">Price Range (₹)</h4>
+            <form onSubmit={handlePriceFilterSubmit} className="flex flex-col gap-3">
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  placeholder="Min"
+                  className="form-input flex-1 min-w-[60px] px-3 py-2 text-sm"
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                />
+                <span className="text-[var(--color-text-dim)]">-</span>
+                <input
+                  type="number"
+                  placeholder="Max"
+                  className="form-input flex-1 min-w-[60px] px-3 py-2 text-sm"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
+              </div>
+              <button type="submit" className="btn btn-secondary w-full py-2.5 text-xs">
+                Apply Filter
               </button>
             </form>
           </div>
         </aside>
 
         {/* Products Display Area */}
-        <main className="shop-main">
+        <main>
           {/* Top Control Bar */}
-          <div className="shop-controls">
-            <form onSubmit={handleSearchSubmit} className="search-form">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 bg-[var(--bg-card)] p-4 rounded-[var(--border-radius-lg)] border border-[var(--border-color)] shadow-sm">
+            <form onSubmit={handleSearchSubmit} className="flex relative grow w-full md:max-w-[400px]">
               <input
                 type="text"
-                placeholder="Search accessories, exhausts, alloys..."
-                className="form-input search-input"
+                placeholder="Search products..."
+                className="form-input pr-12 w-full"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button type="submit" className="search-btn">
-                <Search size={18} />
+              <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 bg-[var(--color-primary)] text-white border-none w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-[var(--color-primary-hover)] transition-colors">
+                <Search size={16} />
               </button>
             </form>
 
-            <div className="sort-wrapper">
-              <label htmlFor="sort-select">Sort By:</label>
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <label htmlFor="sort-select" className="text-sm font-semibold text-[var(--color-text-dim)] uppercase tracking-wider hidden md:block">Sort:</label>
               <select
                 id="sort-select"
-                className="form-input sort-select"
+                className="form-input py-2.5 px-4 min-w-[180px] w-full md:w-auto font-medium"
                 value={ordering}
                 onChange={(e) => { setOrdering(e.target.value); setPage(1); }}
               >
-                <option value="-created_at">Newest First</option>
+                <option value="-created_at">Newest Arrivals</option>
                 <option value="price">Price: Low to High</option>
                 <option value="-price">Price: High to Low</option>
-                <option value="name">Alphabetical</option>
+                <option value="name">Name: A to Z</option>
               </select>
             </div>
           </div>
 
-          <div className="results-info">
-            Showing {products.length} of {count} products
+          <div className="text-[13px] font-medium text-[var(--color-text-dim)] mb-6 tracking-wide">
+            SHOWING <span className="text-[var(--color-text-bright)] font-bold">{products.length}</span> OF <span className="text-[var(--color-text-bright)] font-bold">{count}</span> PRODUCTS
           </div>
 
           {/* Products Grid */}
           {loading ? (
-            <div className="loading-state">Loading catalog...</div>
+            <div className="min-h-[400px] flex flex-col items-center justify-center gap-4 text-[var(--color-text-muted)]">
+              <div className="w-10 h-10 border-4 border-[var(--border-color)] border-t-[var(--color-primary)] rounded-full animate-spin"></div>
+              <p className="font-semibold tracking-widest uppercase text-sm">Loading catalog...</p>
+            </div>
           ) : products.length === 0 ? (
-            <div className="empty-state">
-              <h3>No products found</h3>
-              <p>Try resetting filters or adjusting search parameters.</p>
+            <div className="text-center py-24 px-6 bg-[var(--alt-bg)] rounded-[var(--border-radius-lg)] border border-dashed border-[var(--border-color)] shadow-inner">
+              <div className="w-16 h-16 bg-[var(--bg-card)] rounded-full flex items-center justify-center mx-auto mb-4 border border-[var(--border-color)] shadow-sm">
+                <Search size={24} className="text-[var(--color-text-dim)]" />
+              </div>
+              <h3 className="mb-2 font-black text-2xl text-[var(--color-text-bright)]">No products found</h3>
+              <p className="text-[var(--color-text-muted)] mb-6">We couldn't find anything matching your current filters.</p>
+              <button onClick={resetFilters} className="btn btn-primary">Clear All Filters</button>
             </div>
           ) : (
             <>
-              <div className="grid-cols-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {products.map((product) => (
-                  <div key={product.id} className="card product-card">
-                    <div className="product-image-wrapper">
-                      <Link to={`/products/${product.slug}`} style={{ display: 'block', height: '100%', width: '100%' }}>
+                  <div key={product.id} className="flex flex-col h-full bg-transparent group/card">
+                    <div className="relative h-[240px] bg-[var(--bg-card)] rounded-[var(--border-radius-lg)] border border-[var(--border-color)] flex items-center justify-center p-6 mb-4 overflow-hidden transition-all duration-500 group-hover/card:border-[var(--color-primary)] group-hover/card:shadow-[0_0_30px_rgba(220,38,38,0.15)] group/img">
+                      <Link to={`/products/${product.slug}`} className="block h-full w-full flex items-center justify-center">
                         <img
                           src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'}
                           alt={product.name}
-                          className="product-thumbnail"
+                          className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-xl"
                         />
                         {product.discount_price && (
-                          <span className="discount-tag">Sale</span>
+                          <span className="absolute top-4 left-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Sale</span>
                         )}
                       </Link>
-                      <button 
-                        className="quick-wishlist-btn" 
-                        onClick={(e) => handleAddToWishlist(e, product.id)}
-                        title="Toggle Wishlist"
-                      >
-                        <Heart 
-                          size={16} 
-                          fill={wishlistIds.has(product.id) ? '#cc0c39' : 'none'} 
-                          color={wishlistIds.has(product.id) ? '#cc0c39' : 'currentColor'} 
-                        />
-                      </button>
+                      
+                      {/* Hover Actions overlay */}
+                      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center gap-3 opacity-0 group-hover/img:opacity-100 transition-all duration-300">
+                        <button 
+                          className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-[var(--color-primary)] hover:text-white hover:scale-110 transition-all duration-300 shadow-xl"
+                          onClick={() => addToCart(product.id, 1)}
+                          title="Add to Cart"
+                        >
+                          <ShoppingBag size={20} />
+                        </button>
+                        <button 
+                          className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-[var(--color-primary)] hover:text-white hover:scale-110 transition-all duration-300 shadow-xl"
+                          onClick={(e) => handleAddToWishlist(e, product.id)}
+                          title="Toggle Wishlist"
+                        >
+                          <Heart 
+                            size={20} 
+                            fill={wishlistIds.has(product.id) ? 'currentColor' : 'none'} 
+                            className={wishlistIds.has(product.id) ? 'text-[var(--color-primary)]' : ''}
+                          />
+                        </button>
+                      </div>
                     </div>
-                    <div className="product-card-body">
-                      <span className="product-card-category">{product.category_name}</span>
-                      <Link to={`/products/${product.slug}`} className="product-card-title" title={product.name}>
+                    
+                    <div className="flex flex-col grow px-2 text-center">
+                      <div className="text-[10px] text-[var(--color-text-dim)] uppercase tracking-widest font-bold mb-1.5">{product.category_name}</div>
+                      <div className="flex justify-center gap-1 mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={12} className="fill-[var(--color-warning)] text-[var(--color-warning)]" />
+                        ))}
+                      </div>
+                      <Link to={`/products/${product.slug}`} className="text-[15px] font-bold text-[var(--color-text-bright)] no-underline mb-2 line-clamp-1 hover:text-[var(--color-primary)] transition-colors" title={product.name}>
                         {product.name}
                       </Link>
-
-                      <div className="rating-row">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={12} className="star-filled" fill="var(--color-primary)" color="var(--color-primary)" />
-                        ))}
-                        <span className="rating-count">842</span>
-                      </div>
-
-                      <div className="price-container">
+                      <div className="flex items-center justify-center gap-2 mt-auto">
                         {product.discount_price ? (
                           <>
-                            <span className="current-price">₹{product.discount_price}</span>
-                            <span className="original-price">₹{product.price}</span>
+                            <span className="text-[17px] font-black text-[var(--color-text-bright)]">₹{product.discount_price}</span>
+                            <span className="text-[12px] font-medium text-[var(--color-text-dim)] line-through">₹{product.price}</span>
                           </>
                         ) : (
-                          <span className="current-price">₹{product.price}</span>
+                          <span className="text-[17px] font-black text-[var(--color-text-bright)]">₹{product.price}</span>
                         )}
-                      </div>
-
-                      <div className="card-actions">
-                        <button
-                          className="btn btn-secondary btn-sm"
-                          onClick={() => addToCart(product.id, 1)}
-                          disabled={product.stock_status === 'Out of Stock'}
-                        >
-                          {product.stock_status === 'Out of Stock' ? 'Sold Out' : 'Add to Cart'}
-                        </button>
-                        <button
-                          className="btn btn-primary btn-sm"
-                          onClick={() => handleBuyNow(product.id)}
-                          disabled={product.stock_status === 'Out of Stock'}
-                        >
-                          <ShoppingBag size={12} style={{ marginRight: '4px' }} /> Buy Now
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -327,23 +336,23 @@ export default function Products() {
 
               {/* Pagination Controls */}
               {totalPages > 1 && (
-                <div className="pagination-bar">
+                <div className="flex justify-center items-center gap-4 mt-16 mb-8">
                   <button
-                    className="btn btn-secondary pagination-btn"
+                    className="btn btn-secondary px-5 py-2.5 text-[13px] flex items-center gap-2 rounded-full border-2"
                     disabled={page === 1}
                     onClick={() => setPage(page - 1)}
                   >
-                    <ArrowLeft size={14} /> Prev
+                    <ArrowLeft size={16} /> Prev
                   </button>
-                  <span className="pagination-label">
-                    Page {page} of {totalPages}
+                  <span className="text-sm font-bold text-[var(--color-text-muted)] bg-[var(--bg-card)] px-4 py-2 rounded-full border border-[var(--border-color)] shadow-sm">
+                    {page} <span className="text-[var(--color-text-dim)] font-medium mx-1">of</span> {totalPages}
                   </span>
                   <button
-                    className="btn btn-secondary pagination-btn"
+                    className="btn btn-secondary px-5 py-2.5 text-[13px] flex items-center gap-2 rounded-full border-2"
                     disabled={page === totalPages}
                     onClick={() => setPage(page + 1)}
                   >
-                    Next <ArrowRight size={14} />
+                    Next <ArrowRight size={16} />
                   </button>
                 </div>
               )}
@@ -351,310 +360,6 @@ export default function Products() {
           )}
         </main>
       </div>
-
-      <style>{`
-        .shop-layout {
-          display: grid;
-          grid-template-columns: 280px 1fr;
-          gap: 40px;
-          margin-top: 20px;
-        }
-        @media (max-width: 992px) {
-          .shop-layout {
-            grid-template-columns: 1fr;
-          }
-        }
-        .shop-sidebar {
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-lg);
-          padding: 24px;
-          height: fit-content;
-        }
-        .sidebar-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 16px;
-          margin-bottom: 24px;
-        }
-        .reset-btn {
-          background: none;
-          border: none;
-          color: var(--color-primary);
-          cursor: pointer;
-          font-size: 12px;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
-        .filter-group {
-          margin-bottom: 32px;
-        }
-        .filter-group h4 {
-          font-size: 14px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-text-bright);
-          margin-bottom: 16px;
-        }
-        .category-list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        .category-filter-item {
-          text-align: left;
-          background: none;
-          border: none;
-          color: var(--color-text-muted);
-          font-size: 14px;
-          cursor: pointer;
-          transition: var(--transition-smooth);
-          padding: 4px 0;
-        }
-        .category-filter-item:hover, .category-filter-item.active {
-          color: var(--color-primary);
-          padding-left: 6px;
-        }
-        .price-filter-form {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-        .price-input {
-          flex: 1;
-          min-width: 60px;
-          padding: 8px 12px;
-        }
-        .price-separator {
-          color: var(--color-text-dim);
-        }
-        .btn-apply-price {
-          width: 100%;
-          padding: 8px;
-          font-size: 12px;
-          margin-top: 8px;
-        }
-        .shop-controls {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 20px;
-          margin-bottom: 20px;
-          flex-wrap: wrap;
-        }
-        .search-form {
-          display: flex;
-          position: relative;
-          flex-grow: 1;
-          max-width: 480px;
-        }
-        .search-input {
-          padding-right: 48px;
-        }
-        .search-btn {
-          position: absolute;
-          right: 4px;
-          top: 4px;
-          bottom: 4px;
-          background: none;
-          border: none;
-          color: var(--color-text-muted);
-          cursor: pointer;
-          padding: 0 16px;
-        }
-        .search-btn:hover {
-          color: var(--color-primary);
-        }
-        .sort-wrapper {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .sort-wrapper label {
-          font-size: 14px;
-          color: var(--color-text-muted);
-          white-space: nowrap;
-        }
-        .sort-select {
-          padding: 10px 16px;
-          min-width: 180px;
-        }
-        .results-info {
-          font-size: 13px;
-          color: var(--color-text-dim);
-          margin-bottom: 24px;
-        }
-        .grid-cols-3 {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 20px;
-        }
-        .product-card {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-md);
-          overflow: hidden;
-        }
-        .product-image-wrapper {
-          position: relative;
-          height: 200px;
-          background: var(--bg-card);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 16px;
-          border-bottom: 1px solid var(--border-color);
-        }
-        .product-thumbnail {
-          max-width: 100%;
-          max-height: 100%;
-          object-fit: contain;
-          transition: transform 0.2s;
-        }
-        .product-image-wrapper:hover .product-thumbnail {
-          transform: scale(1.05);
-        }
-        .quick-wishlist-btn {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          background: rgba(22, 16, 13, 0.7);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #fff;
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          z-index: 5;
-        }
-        .quick-wishlist-btn:hover {
-          background: var(--color-primary);
-          color: #000;
-          transform: scale(1.1);
-        }
-        .discount-tag {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          background: #cc0c39;
-          color: #fff;
-          font-weight: bold;
-          font-size: 11px;
-          padding: 4px 8px;
-          border-radius: 2px;
-        }
-        .product-card-body {
-          padding: 16px;
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-        .product-card-category {
-          font-size: 11px;
-          text-transform: uppercase;
-          color: var(--color-text-dim);
-          letter-spacing: 0.05em;
-          margin-bottom: 4px;
-        }
-        .product-card-title {
-          font-size: 14px;
-          color: var(--color-text-bright);
-          text-decoration: none;
-          margin-bottom: 6px;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          line-height: 1.4;
-        }
-        .product-card-title:hover {
-          color: var(--color-primary);
-        }
-        .rating-row {
-          display: flex;
-          align-items: center;
-          gap: 2px;
-          margin-bottom: 8px;
-        }
-        .rating-count {
-          color: #60a5fa;
-          font-size: 12px;
-          margin-left: 4px;
-        }
-        .price-container {
-          display: flex;
-          align-items: baseline;
-          gap: 8px;
-          margin-bottom: 16px;
-        }
-        .current-price {
-          font-size: 22px;
-          font-weight: bold;
-          color: var(--color-text-bright);
-        }
-        .original-price {
-          font-size: 13px;
-          color: var(--color-text-dim);
-          text-decoration: line-through;
-        }
-        .card-actions {
-          margin-top: auto;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-        .btn-sm {
-          width: 100%;
-          padding: 8px;
-          font-size: 13px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 20px;
-        }
-        .empty-state {
-          text-align: center;
-          padding: 80px 24px;
-          background: var(--alt-bg);
-          border-radius: var(--border-radius-lg);
-          border: 1px dashed var(--border-color);
-        }
-        .empty-state h3 {
-          margin-bottom: 8px;
-        }
-        .pagination-bar {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 16px;
-          margin-top: 48px;
-        }
-        .pagination-btn {
-          padding: 8px 16px;
-          font-size: 13px;
-        }
-        .pagination-label {
-          font-size: 13px;
-          color: var(--color-text-muted);
-        }
-        .loading-state {
-          text-align: center;
-          padding: 100px;
-          font-size: 16px;
-        }
-      `}</style>
     </div>
   );
 }
