@@ -370,6 +370,8 @@ export default function Products() {
           border-radius: var(--border-radius-lg);
           padding: 24px;
           height: fit-content;
+          position: sticky;
+          top: 100px;
         }
         .sidebar-header {
           display: flex;
