@@ -137,30 +137,30 @@ export default function Home() {
   return (
     <div className="pb-20 bg-transparent animate-fade-in pt-[80px]">
       {/* Cinematic Hero Banner */}
-      <div className="relative w-full h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden mb-20">
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+      <div className="relative w-full h-[60vh] md:h-[70vh] min-h-[450px] md:min-h-[500px] flex items-center justify-center overflow-hidden mb-16 md:mb-24">
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
         <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=1920&q=80" alt="Hero Background" className="absolute inset-0 w-full h-full object-cover transform scale-105 animate-[zoom-in_20s_infinite_alternate]" />
         
-        <div className="container relative z-20 text-center flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-semibold mb-6">
-            <Sparkles size={16} className="text-[var(--color-primary)]" />
-            <span>Premium Automotive Upgrades</span>
+        <div className="container relative z-20 text-center flex flex-col items-center px-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-[var(--color-primary)]/50 text-[var(--color-primary)] text-xs md:text-sm font-semibold mb-6 shadow-lg shadow-red-500/20">
+            <Sparkles size={14} className="text-[var(--color-primary)]" />
+            <span className="tracking-widest uppercase">Premium Automotive Upgrades</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-6 leading-tight max-w-4xl drop-shadow-2xl">
-            ELEVATE YOUR <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[#fca5a5]">DRIVING EXPERIENCE</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter mb-6 leading-tight max-w-4xl drop-shadow-2xl">
+            ELEVATE YOUR <br className="hidden sm:block"/> <span className="text-[var(--color-primary)] drop-shadow-[0_0_15px_rgba(204,12,57,0.5)]">DRIVING EXPERIENCE</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl drop-shadow-lg font-light">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 max-w-2xl drop-shadow-lg font-medium leading-relaxed">
             Discover the ultimate collection of KDM modification accessories. High-performance exhausts, premium alloys, and custom aero parts.
           </p>
           <div className="flex gap-4">
-            <Link to="/products" className="btn btn-primary !px-10 !py-4 !text-base shadow-[0_0_40px_rgba(220,38,38,0.5)]">
-              Explore Collection
+            <Link to="/products" className="btn btn-primary !px-8 md:!px-10 !py-3 md:!py-4 !text-sm md:!text-base shadow-[0_0_30px_rgba(204,12,57,0.4)]">
+              Explore Collection <ArrowRight size={18} />
             </Link>
           </div>
         </div>
         
         {/* Sleek bottom fade transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--bg-main)] to-transparent z-10"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-t from-[var(--bg-main)] to-transparent z-10"></div>
       </div>
 
       {/* Categories Row */}

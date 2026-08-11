@@ -63,52 +63,52 @@ export default function Navbar() {
         </button>
 
         {/* Navigation Links */}
-        <div className={`md:flex ${isOpen ? 'flex' : 'hidden'} flex-col md:flex-row md:items-center absolute md:static top-full left-0 right-0 bg-[var(--bg-card)] md:bg-transparent border-b border-[var(--border-color)] md:border-none p-6 md:p-0 gap-6 md:gap-8 shadow-2xl md:shadow-none`}>
+        <div className={`md:flex ${isOpen ? 'flex' : 'hidden'} flex-col md:flex-row md:items-center absolute md:static top-full left-0 right-0 bg-[var(--bg-card)]/95 md:bg-transparent backdrop-blur-2xl md:backdrop-blur-none border-b border-[var(--border-color)] md:border-none p-6 md:p-0 gap-6 md:gap-8 shadow-2xl md:shadow-none transition-all duration-300 z-50`}>
           <button 
             onClick={toggleTheme} 
-            className="flex items-center gap-2 text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors bg-transparent border-none cursor-pointer p-0"
+            className="flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors bg-transparent border-none cursor-pointer p-0"
           >
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            <span className="md:hidden font-medium">Toggle Theme</span>
+            <span className="md:hidden font-semibold uppercase tracking-widest text-sm">Toggle Theme</span>
           </button>
           
-          <NavLink to="/" className={({ isActive }) => `text-[15px] font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
+          <NavLink to="/" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
             Home
           </NavLink>
-          <NavLink to="/products" className={({ isActive }) => `text-[15px] font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
+          <NavLink to="/products" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
             Shop
           </NavLink>
-          <NavLink to="/wishlist" className={({ isActive }) => `text-[15px] font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors relative ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
+          <NavLink to="/wishlist" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors relative ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
             <Heart size={20} />
             <span className="md:hidden">Wishlist</span>
             {wishlistCount > 0 && <span className="absolute -top-2.5 -right-3 md:-right-2 bg-[var(--color-primary)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{wishlistCount}</span>}
           </NavLink>
-          <NavLink to="/cart" className={({ isActive }) => `text-[15px] font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors relative ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
+          <NavLink to="/cart" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors relative ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
             <ShoppingBag size={20} />
             <span className="md:hidden">Cart</span>
             {totalItemsCount > 0 && <span className="absolute -top-2.5 -right-3 md:-right-2 bg-[var(--color-primary)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{totalItemsCount}</span>}
           </NavLink>
 
           {isAuthenticated ? (
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-4 md:ml-4 md:pl-4 md:border-l border-[var(--border-color)]">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-5 md:ml-4 md:pl-6 md:border-l border-[var(--border-color)] pt-4 md:pt-0 mt-2 md:mt-0 border-t md:border-t-0">
               {(user?.is_staff || user?.is_superuser) && (
-                <NavLink to="/admin-dashboard" className={({ isActive }) => `text-[13px] font-bold uppercase tracking-widest flex items-center gap-2 transition-colors px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 ${isActive ? 'text-amber-400 border-amber-400' : 'text-amber-500 hover:text-amber-400 hover:border-amber-400'}`} onClick={() => setIsOpen(false)}>
+                <NavLink to="/admin-dashboard" className={({ isActive }) => `text-[12px] font-black uppercase tracking-widest flex items-center gap-2 transition-colors px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 ${isActive ? 'text-amber-400 border-amber-400' : 'text-amber-500 hover:text-amber-400 hover:border-amber-400'}`} onClick={() => setIsOpen(false)}>
                   <Landmark size={16} />
                   <span>Admin</span>
                 </NavLink>
               )}
-              <NavLink to="/profile" className={({ isActive }) => `text-[15px] font-semibold flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
+              <NavLink to="/profile" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-3 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
                 <User size={20} />
                 <span className="md:hidden">Profile</span>
               </NavLink>
-              <button onClick={handleLogout} className="bg-transparent border-none cursor-pointer flex items-center gap-2 text-[var(--color-text-muted)] hover:text-red-500 transition-colors p-0">
+              <button onClick={handleLogout} className="bg-transparent border-none cursor-pointer flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-error)] transition-colors p-0 mt-2 md:mt-0">
                 <LogOut size={20} />
-                <span className="md:hidden font-semibold">Logout</span>
+                <span className="md:hidden font-bold uppercase tracking-widest text-sm">Logout</span>
               </button>
             </div>
           ) : (
-            <div className="mt-4 md:mt-0 md:ml-4">
-              <NavLink to="/login" className="btn btn-primary !py-2.5 !px-6" onClick={() => setIsOpen(false)}>
+            <div className="mt-6 md:mt-0 md:ml-4 w-full md:w-auto">
+              <NavLink to="/login" className="btn btn-primary w-full md:w-auto !py-2.5 !px-8 justify-center text-sm" onClick={() => setIsOpen(false)}>
                 Sign In
               </NavLink>
             </div>
