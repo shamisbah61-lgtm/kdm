@@ -96,35 +96,35 @@ export default function Home() {
         <div className="flex-1 min-w-0">
           
           {/* Main Hero Banner */}
-          <div className="bg-[#111] text-white rounded overflow-hidden relative h-[350px] md:h-[400px] mb-6 flex items-center">
+          <div className="bg-[#111] text-white overflow-hidden relative h-[350px] md:h-[420px] mb-8 flex items-center shadow-md">
             <div className="absolute inset-0 z-0">
-              <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80" className="w-full h-full object-cover opacity-40" alt="Cars" />
+              <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80" className="w-full h-full object-cover opacity-30" alt="Cars" />
             </div>
-            <div className="relative z-10 p-10 md:p-16 max-w-lg">
-              <div className="text-[#ff3333] font-bold text-sm tracking-widest uppercase mb-2">New Generation</div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Covers Deflectors<br/>Car Mats</h1>
-              <Link to="/products" className="inline-block bg-[#ff3333] hover:bg-[#e60000] text-white px-6 py-3 font-bold uppercase text-sm transition-colors rounded">
+            <div className="relative z-10 p-10 md:p-16 max-w-xl">
+              <div className="text-[#ff3333] font-black text-sm tracking-[0.2em] uppercase mb-3">New Generation</div>
+              <h1 className="text-4xl md:text-6xl font-black mb-6 leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg">Covers<br/>Deflectors<br/>Car Mats</h1>
+              <Link to="/products" className="inline-block bg-[#ff3333] hover:bg-white hover:text-black text-white px-8 py-3.5 font-bold uppercase text-sm transition-colors border border-transparent shadow-lg">
                 Shop Now
               </Link>
             </div>
           </div>
 
           {/* Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
-              <Truck size={32} className="text-[#ff3333] shrink-0" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
+              <Truck size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
               <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Easy to buy & return</h4><p className="text-[11px] text-gray-500 leading-tight">Single click to buy</p></div>
             </div>
-            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
-              <ShieldCheck size={32} className="text-[#ff3333] shrink-0" />
+            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
+              <ShieldCheck size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
               <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Secure Payments</h4><p className="text-[11px] text-gray-500 leading-tight">100% payment security</p></div>
             </div>
-            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
-              <PhoneCall size={32} className="text-[#ff3333] shrink-0" />
+            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
+              <PhoneCall size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
               <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">24x7 Support</h4><p className="text-[11px] text-gray-500 leading-tight">Support 24 hours a day</p></div>
             </div>
-            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
-              <Smartphone size={32} className="text-[#ff3333] shrink-0" />
+            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
+              <Smartphone size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
               <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Shop with our App</h4><p className="text-[11px] text-gray-500 leading-tight">Download app & get offers</p></div>
             </div>
           </div>
@@ -149,12 +149,12 @@ export default function Home() {
           </div>
 
           {/* Trending Products */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center mb-6 border-b-2 border-gray-200 pb-2">
-              <h2 className="text-2xl font-bold text-gray-800 m-0">Trending Products</h2>
-              <div className="flex gap-2">
-                <button className="bg-[#ff3333] text-white px-4 py-1.5 text-sm font-bold rounded-sm">New Products</button>
-                <button className="bg-gray-200 text-gray-700 px-4 py-1.5 text-sm font-bold rounded-sm hover:bg-gray-300">Best Selling</button>
+          <div className="mb-12">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 border-b border-gray-300">
+              <h2 className="text-xl md:text-2xl font-black text-gray-800 m-0 uppercase border-b-2 border-[#ff3333] pb-2 inline-block -mb-[1px]">Trending Products</h2>
+              <div className="flex gap-2 mt-3 sm:mt-0 pb-2 sm:pb-0">
+                <button className="bg-[#ff3333] text-white px-4 py-1.5 text-xs font-bold uppercase transition-colors hover:bg-black shadow-sm">New Products</button>
+                <button className="bg-transparent text-gray-500 px-4 py-1.5 text-xs font-bold uppercase transition-colors hover:text-[#ff3333]">Best Selling</button>
               </div>
             </div>
 
@@ -163,27 +163,27 @@ export default function Home() {
             ) : (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                 {featuredProducts.slice(0, 8).map(product => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group rounded hover:shadow-lg transition-shadow flex flex-col h-full">
-                    {product.discount_price && <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 rounded z-10">SALE</span>}
-                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0">
-                      <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain" />
+                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[#ff3333] transition-all duration-300 flex flex-col h-full">
+                    {product.discount_price && <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 z-10 shadow-sm uppercase tracking-wider">Sale</span>}
+                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-44 flex items-center justify-center mb-4 shrink-0 p-2">
+                      <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                     </Link>
                     <div className="flex flex-col flex-grow">
                       <div className="flex gap-1 mb-2 mt-auto">
                         {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
                       </div>
-                      <Link to={`/products/${product.slug}`} className="text-xs md:text-sm font-medium text-gray-600 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[32px] md:min-h-[40px]">{product.name}</Link>
-                      <div className="flex items-center gap-2 mb-3">
+                      <Link to={`/products/${product.slug}`} className="text-sm font-bold text-gray-700 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[40px] leading-snug">{product.name}</Link>
+                      <div className="flex items-center gap-2 mb-4">
                         {product.discount_price ? (
                           <>
-                            <span className="font-bold text-gray-900 text-base md:text-lg">₹{product.discount_price}</span>
-                            <span className="text-[10px] md:text-xs text-gray-400 line-through">₹{product.price}</span>
+                            <span className="font-black text-[#ff3333] text-lg md:text-xl">₹{product.discount_price}</span>
+                            <span className="text-[10px] md:text-xs text-gray-400 line-through font-medium">₹{product.price}</span>
                           </>
                         ) : (
-                          <span className="font-bold text-gray-900 text-base md:text-lg">₹{product.price}</span>
+                          <span className="font-black text-gray-900 text-lg md:text-xl">₹{product.price}</span>
                         )}
                       </div>
-                      <button className="w-full bg-[#333] hover:bg-[#ff3333] text-white py-2 px-1 text-[10px] md:text-xs font-bold uppercase transition-colors rounded flex items-center justify-center gap-1 md:gap-2 mt-auto" onClick={() => handleBuyNow(product.id)}>
+                      <button className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-2.5 px-2 text-[11px] md:text-xs font-bold uppercase transition-colors flex items-center justify-center gap-2 mt-auto shadow-sm" onClick={() => handleBuyNow(product.id)}>
                         <ShoppingCart size={14} /> Add to Cart
                       </button>
                     </div>
@@ -214,30 +214,33 @@ export default function Home() {
           </div>
 
           {/* Special Products */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center mb-6 border-b-2 border-gray-200 pb-2">
-              <h2 className="text-2xl font-bold text-gray-800 m-0">Special Products</h2>
+          <div className="mb-12">
+            <div className="flex items-center mb-6 border-b border-gray-300">
+              <h2 className="text-xl md:text-2xl font-black text-gray-800 m-0 uppercase border-b-2 border-[#ff3333] pb-2 inline-block -mb-[1px]">Special Products</h2>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                 {deals.slice(0, 4).map(product => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group rounded hover:shadow-lg transition-shadow flex flex-col h-full">
-                    <span className="absolute top-2 right-2 text-[#ff3333] text-[10px] font-bold z-10">HOT</span>
-                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0">
-                      <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain" />
+                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[#ff3333] transition-all duration-300 flex flex-col h-full">
+                    <span className="absolute top-2 right-2 bg-yellow-400 text-black text-[10px] font-black z-10 px-2 py-0.5 shadow-sm uppercase tracking-wider">HOT</span>
+                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-44 flex items-center justify-center mb-4 shrink-0 p-2">
+                      <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                     </Link>
                     <div className="flex flex-col flex-grow">
-                      <div className="flex justify-center gap-1 md:gap-2 text-[9px] md:text-[10px] font-bold text-gray-500 mb-3 bg-gray-50 py-1.5 rounded w-full">
-                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-gray-800">204</span>Days</span>
-                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-gray-800">13</span>Hrs</span>
-                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-gray-800">46</span>Min</span>
+                      <div className="flex justify-center gap-1 md:gap-2 text-[9px] md:text-[10px] font-bold text-gray-600 mb-3 bg-[#f8f9fa] border border-gray-200 py-1.5 w-full shadow-inner">
+                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-[#ff3333]">204</span>Days</span>
+                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-[#ff3333]">13</span>Hrs</span>
+                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-[#ff3333]">46</span>Min</span>
                       </div>
                       <div className="flex gap-1 mb-2 mt-auto">
                         {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
                       </div>
-                      <Link to={`/products/${product.slug}`} className="text-xs md:text-sm font-medium text-gray-600 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[32px] md:min-h-[40px]">{product.name}</Link>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-bold text-gray-900 text-base md:text-lg">₹{product.price}</span>
+                      <Link to={`/products/${product.slug}`} className="text-sm font-bold text-gray-700 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[40px] leading-snug">{product.name}</Link>
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="font-black text-[#ff3333] text-lg md:text-xl">₹{product.price}</span>
                       </div>
+                      <button className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-2.5 px-2 text-[11px] md:text-xs font-bold uppercase transition-colors flex items-center justify-center gap-2 mt-auto shadow-sm" onClick={() => handleBuyNow(product.id)}>
+                        <ShoppingCart size={14} /> Add to Cart
+                      </button>
                     </div>
                   </div>
                 ))}
