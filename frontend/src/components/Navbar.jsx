@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Heart, User, LogOut, Menu, Search, Phone, Mail, ChevronDown } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
+import logo from '../assets/logo.png';
 
 export default function Navbar() {
   const { isAuthenticated, logout, user } = useContext(AuthContext);
@@ -35,7 +36,7 @@ export default function Navbar() {
       <div className="max-w-[1400px] mx-auto px-4 py-4 md:py-5 flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 no-underline shrink-0">
-          <img src="/logo.png" alt="KDM Logo" className="h-10 md:h-12 object-contain" />
+          <img src={logo} alt="KDM Logo" className="h-10 md:h-12 object-contain" />
         </Link>
 
         {/* Mobile Toggle */}
