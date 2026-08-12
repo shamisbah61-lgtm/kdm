@@ -155,10 +155,10 @@ export default function Products() {
         <h1 className="text-3xl font-black text-gray-800 uppercase tracking-wide">Shop Accessories</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8">
         
         {/* Sidebar Filters - Sticky */}
-        <aside className="bg-white border border-gray-200 p-6 h-fit lg:sticky lg:top-4">
+        <aside className="bg-white border border-gray-200 p-8 h-fit lg:sticky lg:top-4 rounded-2xl shadow-sm">
           <div className="flex justify-between items-center border-b border-[var(--border-color)] pb-4 mb-6">
             <h3 className="text-lg font-bold text-[var(--color-text-bright)] flex items-center gap-2 m-0"><Filter size={18} className="text-[var(--color-primary)]"/> Filters</h3>
             <button className="bg-transparent border-none text-[var(--color-primary)] cursor-pointer text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:text-[var(--color-primary-hover)] transition-colors p-0" onClick={resetFilters}>
@@ -168,10 +168,10 @@ export default function Products() {
 
           {/* Category Filter */}
           <div className="mb-8">
-            <h4 className="text-xs uppercase tracking-widest text-[var(--color-text-dim)] mb-4 font-bold">Category</h4>
+            <h4 className="text-[13px] uppercase tracking-widest text-gray-400 mb-4 font-bold border-b border-gray-100 pb-2">Category</h4>
             <div className="flex flex-col gap-2">
               <button
-                className={`text-left bg-transparent border-none text-sm cursor-pointer transition-all duration-300 py-1.5 px-2 rounded-md ${selectedCategory === '' ? 'text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)] hover:bg-[var(--alt-bg)]'}`}
+                className={`text-left bg-transparent border-none text-[15px] font-medium cursor-pointer transition-all duration-300 py-2.5 px-3 rounded-xl ${selectedCategory === '' ? 'text-[#ff3333] font-bold bg-[#ff3333]/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
                 onClick={() => { setSelectedCategory(''); setPage(1); }}
               >
                 All Categories
@@ -179,7 +179,7 @@ export default function Products() {
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  className={`text-left bg-transparent border-none text-sm cursor-pointer transition-all duration-300 py-1.5 px-2 rounded-md ${selectedCategory === cat.slug ? 'text-[var(--color-primary)] font-bold bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)] hover:bg-[var(--alt-bg)]'}`}
+                  className={`text-left bg-transparent border-none text-[15px] font-medium cursor-pointer transition-all duration-300 py-2.5 px-3 rounded-xl ${selectedCategory === cat.slug ? 'text-[#ff3333] font-bold bg-[#ff3333]/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
                   onClick={() => { setSelectedCategory(cat.slug); setPage(1); }}
                 >
                   {cat.name}
@@ -190,26 +190,26 @@ export default function Products() {
 
           {/* Price Filter */}
           <div className="mb-4">
-            <h4 className="text-xs uppercase tracking-widest text-[var(--color-text-dim)] mb-4 font-bold">Price Range (₹)</h4>
-            <form onSubmit={handlePriceFilterSubmit} className="flex flex-col gap-3">
-              <div className="flex items-center gap-2">
+            <h4 className="text-[13px] uppercase tracking-widest text-gray-400 mb-4 font-bold border-b border-gray-100 pb-2">Price Range (₹)</h4>
+            <form onSubmit={handlePriceFilterSubmit} className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
                 <input
                   type="number"
                   placeholder="Min"
-                  className="form-input flex-1 min-w-[60px] px-3 py-2 text-sm"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ff3333] transition-colors"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
                 />
-                <span className="text-[var(--color-text-dim)]">-</span>
+                <span className="text-gray-300 font-bold">-</span>
                 <input
                   type="number"
                   placeholder="Max"
-                  className="form-input flex-1 min-w-[60px] px-3 py-2 text-sm"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ff3333] transition-colors"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
                 />
               </div>
-              <button type="submit" className="btn btn-secondary w-full py-2.5 text-xs">
+              <button type="submit" className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-3.5 rounded-xl font-bold uppercase text-xs tracking-wider transition-colors">
                 Apply Filter
               </button>
             </form>
