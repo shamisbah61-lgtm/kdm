@@ -1,68 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Roboto', system-ui, sans-serif;
+  --font-body: 'Roboto', system-ui, sans-serif;
 
-  /* Midnight Purple - Light Mode */
-  --bg-main: #f8f6fb;
+  /* Classic Auto Parts Theme */
+  --bg-main: #f4f5f7;
   --bg-card: #ffffff;
-  --bg-card-hover: #f1eef6;
-  --border-color: rgba(75, 42, 115, 0.15);
-  --border-hover: rgba(75, 42, 115, 0.4);
+  --bg-card-hover: #f9f9f9;
+  --border-color: #e5e7eb;
+  --border-hover: #d1d5db;
 
-  --color-primary: #2B1B3D;
-  --color-primary-hover: #1e122b;
-  --color-accent: #4B2A73;
-  --color-text-bright: #150d1e; 
-  --color-text-muted: #3a2852; 
-  --color-text-dim: #6c5a87;    
+  --color-primary: #ff3333;
+  --color-primary-hover: #e60000;
+  --color-accent: #cc0000;
+  --color-text-bright: #111827; 
+  --color-text-muted: #4b5563; 
+  --color-text-dim: #9ca3af;    
 
-  --color-success: #15803d;
-  --color-error: #dc2626;
-  --color-warning: #d97706;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
 
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(75, 42, 115, 0.1);
-  --glass-shadow: 0 10px 40px -10px rgba(43, 27, 61, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 
-  --alt-bg: #f1edf7;
+  --alt-bg: #f9fafb;
   --form-bg: #ffffff;
-  --footer-bg: #eae3f2;
-  --hero-gradient: linear-gradient(135deg, rgba(248,246,251,0.9), rgba(241,237,247,0.8));
+  --footer-bg: #1f2937;
+  --hero-gradient: linear-gradient(to right, #111827, #374151);
 }
 
 [data-theme="dark"] {
-  /* Midnight Purple - Dark Mode */
-  --bg-main: #0b0710; 
-  --bg-card: rgba(22, 14, 31, 0.9); 
-  --bg-card-hover: rgba(33, 20, 46, 1);
-  --border-color: rgba(108, 61, 166, 0.25); 
-  --border-hover: rgba(108, 61, 166, 0.6);
+  --bg-main: #111827; 
+  --bg-card: #1f2937; 
+  --bg-card-hover: #374151;
+  --border-color: #374151; 
+  --border-hover: #4b5563;
 
-  --color-primary: #8a58d6; 
-  --color-primary-hover: #a178e0; 
-  --color-accent: #6C3DA6;  
-  --color-text-bright: #ffffff; 
-  --color-text-muted: #d5c8e6;  
-  --color-text-dim: #9b89b3;    
+  --color-primary: #ff4444; 
+  --color-primary-hover: #ff6666; 
+  --color-accent: #ff3333;  
+  --color-text-bright: #f9fafb; 
+  --color-text-muted: #d1d5db;  
+  --color-text-dim: #9ca3af;    
 
-  --glass-bg: rgba(11, 7, 16, 0.9);
-  --glass-border: rgba(108, 61, 166, 0.2);
-  --glass-shadow: 0 15px 50px -15px rgba(0, 0, 0, 0.9);
+  --glass-bg: rgba(31, 41, 55, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 
-  --alt-bg: rgba(22, 14, 31, 0.8);
-  --form-bg: rgba(17, 11, 26, 0.9);
-  --footer-bg: #050308;
-  --hero-gradient: linear-gradient(135deg, rgba(11,7,16,0.95), rgba(22,14,31,0.85));
+  --alt-bg: #111827;
+  --form-bg: #374151;
+  --footer-bg: #0f172a;
+  --hero-gradient: linear-gradient(to right, #000000, #1f2937);
 }
 
 :root {
-  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --border-radius-sm: 8px;
-  --border-radius-md: 16px;
-  --border-radius-lg: 24px;
+  --transition-smooth: all 0.3s ease;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
 }
 
 * {
