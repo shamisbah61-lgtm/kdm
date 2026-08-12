@@ -1,6 +1,6 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Heart, User, LogOut, Menu, X, Landmark, Sun, Moon } from 'lucide-react';
+import { ShoppingCart, Heart, User, LogOut, Menu, Search, Phone, Mail, ChevronDown } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 
@@ -8,39 +8,7 @@ export default function Navbar() {
   const { isAuthenticated, logout, user } = useContext(AuthContext);
   const { totalItemsCount, wishlistCount } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = (e) => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    
-    if (!document.startViewTransition) {
-      setTheme(nextTheme);
-      return;
-    }
-
-    const x = e.clientX ?? window.innerWidth / 2;
-    const y = e.clientY ?? window.innerHeight / 2;
-    
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
-
-    document.documentElement.style.setProperty('--x', `${x}px`);
-    document.documentElement.style.setProperty('--y', `${y}px`);
-    document.documentElement.style.setProperty('--r', `${endRadius}px`);
-
-    document.startViewTransition(() => {
-      document.documentElement.setAttribute('data-theme', nextTheme);
-      setTheme(nextTheme);
-    });
-  };
 
   const handleLogout = async () => {
     await logout();
@@ -48,73 +16,128 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-card)]/80 backdrop-blur-2xl border-b border-[var(--border-color)] transition-all duration-300 py-4">
-      <div className="container flex justify-between items-center h-full">
-        <Link to="/" className="text-3xl font-extrabold font-[var(--font-heading)] tracking-tighter no-underline bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-transparent bg-clip-text hover:opacity-80 transition-opacity">
-          KDM
-        </Link>
-
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-[var(--bg-card-hover)] border border-[var(--border-color)] text-[var(--color-text-bright)] transition-colors hover:bg-[var(--color-primary)] hover:text-white"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-
-        {/* Navigation Links */}
-        <div className={`md:flex ${isOpen ? 'flex' : 'hidden'} flex-col md:flex-row md:items-center absolute md:static top-full left-0 right-0 bg-[var(--bg-card)]/95 md:bg-transparent backdrop-blur-2xl md:backdrop-blur-none border-b border-[var(--border-color)] md:border-none p-6 md:p-0 gap-6 md:gap-8 shadow-2xl md:shadow-none transition-all duration-300 z-50`}>
-          <button 
-            onClick={toggleTheme} 
-            className="flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors bg-transparent border-none cursor-pointer p-0"
-          >
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-            <span className="md:hidden font-semibold uppercase tracking-widest text-sm">Toggle Theme</span>
-          </button>
-          
-          <NavLink to="/" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
-            Home
-          </NavLink>
-          <NavLink to="/products" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
-            Shop
-          </NavLink>
-          <NavLink to="/wishlist" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors relative ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
-            <Heart size={20} />
-            <span className="md:hidden">Wishlist</span>
-            {wishlistCount > 0 && <span className="absolute -top-2.5 -right-3 md:-right-2 bg-[var(--color-primary)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{wishlistCount}</span>}
-          </NavLink>
-          <NavLink to="/cart" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors relative ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
-            <ShoppingBag size={20} />
-            <span className="md:hidden">Cart</span>
-            {totalItemsCount > 0 && <span className="absolute -top-2.5 -right-3 md:-right-2 bg-[var(--color-primary)] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{totalItemsCount}</span>}
-          </NavLink>
-
-          {isAuthenticated ? (
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-5 md:ml-4 md:pl-6 md:border-l border-[var(--border-color)] pt-4 md:pt-0 mt-2 md:mt-0 border-t md:border-t-0">
-              {(user?.is_staff || user?.is_superuser) && (
-                <NavLink to="/admin-dashboard" className={({ isActive }) => `text-[12px] font-black uppercase tracking-widest flex items-center gap-2 transition-colors px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 ${isActive ? 'text-amber-400 border-amber-400' : 'text-amber-500 hover:text-amber-400 hover:border-amber-400'}`} onClick={() => setIsOpen(false)}>
-                  <Landmark size={16} />
-                  <span>Admin</span>
-                </NavLink>
-              )}
-              <NavLink to="/profile" className={({ isActive }) => `text-sm font-bold uppercase tracking-widest flex items-center gap-3 transition-colors ${isActive ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-bright)]'}`} onClick={() => setIsOpen(false)}>
-                <User size={20} />
-                <span className="md:hidden">Profile</span>
-              </NavLink>
-              <button onClick={handleLogout} className="bg-transparent border-none cursor-pointer flex items-center gap-3 text-[var(--color-text-muted)] hover:text-[var(--color-error)] transition-colors p-0 mt-2 md:mt-0">
-                <LogOut size={20} />
-                <span className="md:hidden font-bold uppercase tracking-widest text-sm">Logout</span>
-              </button>
-            </div>
-          ) : (
-            <div className="mt-6 md:mt-0 md:ml-4 w-full md:w-auto">
-              <NavLink to="/login" className="btn btn-primary w-full md:w-auto !py-2.5 !px-8 justify-center text-sm" onClick={() => setIsOpen(false)}>
-                Sign In
-              </NavLink>
-            </div>
-          )}
+    <header className="bg-white w-full border-b border-gray-200">
+      {/* Top Header - Contact & Currency (Hidden on Mobile) */}
+      <div className="hidden lg:block bg-gray-50 border-b border-gray-200 py-2 text-xs text-gray-500">
+        <div className="max-w-[1400px] mx-auto px-4 flex justify-between items-center">
+          <div className="flex gap-6">
+            <span className="flex items-center gap-2"><Phone size={14} className="text-[#ff3333]" /> Call us: (+00) 012 345 67 89</span>
+            <span className="flex items-center gap-2"><Mail size={14} className="text-[#ff3333]" /> Email us: demo@gmail.com</span>
+          </div>
+          <div className="flex gap-4">
+            <span className="flex items-center gap-1 cursor-pointer hover:text-gray-800">English <ChevronDown size={12}/></span>
+            <span className="flex items-center gap-1 cursor-pointer hover:text-gray-800">$ Currency <ChevronDown size={12}/></span>
+          </div>
         </div>
       </div>
-    </nav>
+
+      {/* Main Header - Logo, Search, Icons */}
+      <div className="max-w-[1400px] mx-auto px-4 py-4 md:py-6 flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2 no-underline shrink-0">
+          <div className="text-3xl font-black text-[#ff3333] tracking-tighter flex items-center">
+            <span className="text-gray-900">AUTO</span>PART
+          </div>
+        </Link>
+
+        {/* Mobile Toggle */}
+        <button 
+          className="lg:hidden p-2 text-gray-600 hover:text-[#ff3333]"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <Menu size={24} />
+        </button>
+
+        {/* Search Bar (Hidden on very small screens, visible on md+) */}
+        <div className="hidden md:flex flex-1 max-w-2xl mx-8 border-2 border-[#ff3333] rounded overflow-hidden h-10 items-center bg-white">
+          <div className="px-4 text-xs font-bold text-gray-500 border-r border-gray-200 h-full flex items-center bg-gray-50 shrink-0 cursor-pointer">
+            All Categories <ChevronDown size={14} className="ml-1"/>
+          </div>
+          <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-700" />
+          <button className="bg-[#222] hover:bg-black text-white h-full px-6 flex items-center justify-center transition-colors">
+            <Search size={16} /> <span className="ml-2 font-bold text-sm">Search</span>
+          </button>
+        </div>
+
+        {/* Icons (Wishlist, Account, Cart) */}
+        <div className="flex items-center gap-4 md:gap-6 shrink-0">
+          <Link to="/wishlist" className="flex items-center gap-2 text-gray-700 hover:text-[#ff3333] relative">
+            <Heart size={22} />
+            {wishlistCount > 0 && <span className="absolute -top-1.5 -right-2 bg-[#ff3333] text-white text-[10px] font-bold px-1.5 py-0 rounded-full">{wishlistCount}</span>}
+          </Link>
+          
+          {isAuthenticated ? (
+            <div className="group relative">
+              <Link to="/profile" className="flex items-center gap-2 text-gray-700 hover:text-[#ff3333]">
+                <User size={22} />
+              </Link>
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                {(user?.is_staff || user?.is_superuser) && (
+                  <Link to="/admin-dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#ff3333]">Admin Panel</Link>
+                )}
+                <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#ff3333]">My Profile</Link>
+                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Logout</button>
+              </div>
+            </div>
+          ) : (
+            <Link to="/login" className="flex items-center gap-2 text-gray-700 hover:text-[#ff3333]">
+              <User size={22} />
+            </Link>
+          )}
+
+          <Link to="/cart" className="flex items-center gap-3 bg-[#ff3333] hover:bg-[#e60000] text-white px-4 py-2 rounded transition-colors">
+            <div className="relative">
+              <ShoppingCart size={20} />
+              {totalItemsCount > 0 && <span className="absolute -top-2 -right-2 bg-white text-[#ff3333] text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">{totalItemsCount}</span>}
+            </div>
+            <div className="hidden sm:block">
+              <div className="text-[10px] uppercase font-medium leading-tight">Checkout</div>
+              <div className="text-sm font-bold leading-tight">{totalItemsCount} Items</div>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* Navigation Menu (Red Background) */}
+      <div className={`lg:block ${isOpen ? 'block' : 'hidden'} bg-[#ff3333] w-full`}>
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-center">
+          
+          {/* Mobile Search (Visible only on small screens) */}
+          <div className="md:hidden p-4 bg-white border-b border-gray-200">
+            <div className="flex border-2 border-[#ff3333] rounded overflow-hidden h-10 items-center">
+              <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-700" />
+              <button className="bg-[#222] text-white h-full px-4 flex items-center justify-center">
+                <Search size={16} />
+              </button>
+            </div>
+          </div>
+
+          <div className="hidden lg:flex items-center gap-2 bg-[#222] text-white px-6 py-3.5 font-bold uppercase text-sm w-[280px] shrink-0">
+            <Menu size={18} /> Shop Categories
+          </div>
+
+          <nav className="flex flex-col lg:flex-row lg:items-center lg:gap-8 px-4 lg:px-8 py-2 lg:py-0 w-full">
+            <NavLink to="/" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+              Best in offer
+            </NavLink>
+            <NavLink to="/products" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+              Home
+            </NavLink>
+            <NavLink to="/brands" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+              Brands
+            </NavLink>
+            <NavLink to="/specials" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+              Specials
+            </NavLink>
+            <NavLink to="/contact" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+              Contact Us
+            </NavLink>
+            <NavLink to="/blogs" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+              Blogs
+            </NavLink>
+          </nav>
+        </div>
+      </div>
+    </header>
   );
 }

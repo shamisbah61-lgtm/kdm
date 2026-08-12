@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#f4f5f7] min-h-screen pt-[100px] md:pt-[120px] pb-10">
+    <div className="bg-[#f4f5f7] min-h-screen pt-6 pb-10">
       <div className="max-w-[1400px] mx-auto px-4 flex flex-col lg:flex-row gap-6">
         
         {/* Left Sidebar */}

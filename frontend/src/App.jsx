@@ -38,12 +38,6 @@ function MainAppLayout() {
 
   return (
     <div className="app-container">
-      {/* Drifting Luxury Blobs */}
-      <div className="bg-blobs">
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-      </div>
-      
       {!isAdminRoute && <Navbar />}
       
       <div className="content-wrapper">
