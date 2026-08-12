@@ -71,21 +71,21 @@ export default function Home() {
           {loading ? (
             <div className="py-20 flex justify-center"><div className="w-12 h-12 border-4 border-white/10 border-t-purple-500 rounded-full animate-spin"></div></div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {featuredProducts.slice(0, 8).map(product => (
-                <div key={product.id} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 flex flex-col h-full group hover:-translate-y-2 hover:bg-white/10 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+                <div key={product.id} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col h-full group hover:-translate-y-2 hover:bg-white/10 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
                   {product.discount_price && <span className="absolute top-4 right-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 tracking-widest uppercase shadow-[0_0_15px_rgba(239,68,68,0.5)]">Sale</span>}
                   
-                  <Link to={`/products/${product.slug}`} className="relative h-56 mb-6 flex items-center justify-center p-4">
+                  <Link to={`/products/${product.slug}`} className="relative h-64 mb-8 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400'} alt={product.name} className="max-w-full max-h-full object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-500 relative z-10" />
                   </Link>
                   
                   <div className="flex flex-col flex-grow">
-                    <div className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">{product.category_name}</div>
-                    <Link to={`/products/${product.slug}`} className="text-base font-bold text-gray-200 line-clamp-2 mb-3 hover:text-white transition-colors">{product.name}</Link>
+                    <div className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">{product.category_name}</div>
+                    <Link to={`/products/${product.slug}`} className="text-lg font-bold text-gray-200 line-clamp-2 mb-4 hover:text-white transition-colors">{product.name}</Link>
                     
-                    <div className="flex gap-1 mb-4">
+                    <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-purple-500 text-purple-500" />)}
                     </div>
                     
