@@ -32,7 +32,7 @@ export default function Wishlist() {
   };
 
   if (loading) return (
-    <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4 text-[var(--color-text-muted)] pt-[100px]">
+    <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4 text-[var(--color-text-muted)] pt-10">
       <div className="w-12 h-12 border-4 border-[var(--border-color)] border-t-[var(--color-primary)] rounded-full animate-spin"></div>
       <p className="font-bold tracking-widest uppercase text-sm">Loading wishlist...</p>
     </div>
@@ -40,7 +40,7 @@ export default function Wishlist() {
 
   if (!wishlist || wishlist.length === 0) {
     return (
-      <div className="container min-h-[70vh] flex items-center justify-center pt-[100px]">
+      <div className="container min-h-[70vh] flex items-center justify-center pt-10">
         <div className="text-center py-20 px-10 bg-[var(--alt-bg)] rounded-[var(--border-radius-lg)] border border-dashed border-[var(--border-color)] w-full max-w-2xl shadow-inner">
           <div className="w-24 h-24 bg-[var(--bg-card)] rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--border-color)] shadow-sm">
             <Heart size={40} className="text-[var(--color-text-dim)]" />
@@ -56,7 +56,7 @@ export default function Wishlist() {
   }
 
   return (
-    <div className="container animate-fade-in pb-24 pt-[120px]">
+    <div className="container animate-fade-in pb-24 pt-10">
       <div className="flex items-end justify-between mb-10 border-b border-[var(--border-color)] pb-6">
         <div>
           <h1 className="text-4xl md:text-5xl font-black text-[var(--color-text-bright)] tracking-tight m-0">My Wishlist</h1>

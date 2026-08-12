@@ -117,22 +117,19 @@ export default function Navbar() {
 
           <nav className="flex flex-col lg:flex-row lg:items-center lg:gap-8 px-4 lg:px-8 py-2 lg:py-0 w-full">
             <NavLink to="/" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
-              Best in offer
-            </NavLink>
-            <NavLink to="/products" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Home
             </NavLink>
-            <NavLink to="/brands" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
-              Brands
+            <NavLink to="/products" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
+              Shop Auto Parts
             </NavLink>
-            <NavLink to="/specials" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
-              Specials
+            <NavLink to="/products?sort=-created_at" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
+              New Arrivals
             </NavLink>
-            <NavLink to="/contact" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
-              Contact Us
+            <NavLink to="/products?sort=price" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
+              Best Deals
             </NavLink>
-            <NavLink to="/blogs" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
-              Blogs
+            <NavLink to="/wishlist" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
+              My Wishlist
             </NavLink>
           </nav>
         </div>

@@ -94,7 +94,7 @@ export default function ProductDetail() {
   const allImages = [product.thumbnail, ...(product.images || []).map(img => img.image)].filter(Boolean);
 
   return (
-    <div className="animate-fade-in pt-[80px]">
+    <div className="animate-fade-in pt-10">
       
       {/* Breadcrumb */}
       <div className="bg-[var(--bg-card)] border-b border-[var(--border-color)] py-4 mb-10">

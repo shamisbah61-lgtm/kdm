@@ -61,7 +61,7 @@ export default function Login() {
   };
 
   return (
-    <div className="container min-h-[85vh] flex items-center justify-center py-20 pt-[120px] animate-fade-in relative">
+    <div className="container min-h-[85vh] flex items-center justify-center py-20 pt-10 animate-fade-in relative">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
       

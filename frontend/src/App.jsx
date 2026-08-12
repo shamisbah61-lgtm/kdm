@@ -97,9 +97,13 @@ function MainAppLayout() {
       </main>
 
       {!isAdminRoute && (
-        <footer className="footer">
-          <div className="container">
-            <p>© {new Date().getFullYear()} KDM | Kerala Domestic Market. All rights reserved.</p>
+        <footer className="bg-[#111] border-t-4 border-[#ff3333] text-gray-400 py-10 mt-auto">
+          <div className="container max-w-[1400px] mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-col items-center md:items-start">
+              <h2 className="text-white font-black text-xl mb-1 uppercase tracking-wider">KDM Premium Garage</h2>
+              <p className="text-sm m-0">Kerala Domestic Market - Premium Auto Parts</p>
+            </div>
+            <p className="text-sm font-bold m-0">© {new Date().getFullYear()} KDM. All rights reserved.</p>
           </div>
         </footer>
       )}

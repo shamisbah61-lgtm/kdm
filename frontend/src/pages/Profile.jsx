@@ -136,7 +136,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="container animate-fade-in pt-[120px] pb-24">
+    <div className="container animate-fade-in pt-10 pb-24">
       <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10">
         
         {/* Sidebar Profile Card */}
