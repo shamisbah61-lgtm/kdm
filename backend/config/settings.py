@@ -146,7 +146,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
+    "https://kdm-git-main-misbahs-projects-2a9b14ff.vercel.app",
 ]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
+]
+
 if os.getenv("FRONTEND_URL"):
     CORS_ALLOWED_ORIGINS.append(os.getenv("FRONTEND_URL"))
 
