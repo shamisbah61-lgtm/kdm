@@ -148,18 +148,17 @@ export default function Products() {
   };
 
   return (
-    <div className="container animate-fade-in pt-[100px] mb-20">
+    <div className="container animate-fade-in pt-6 mb-20">
       
       {/* Page Title */}
-      <div className="mb-8 border-b border-[var(--border-color)] pb-6">
-        <h1 className="text-4xl font-black text-[var(--color-text-bright)] mb-2">Shop Accessories</h1>
-        <p className="text-[var(--color-text-muted)] text-lg">Browse our premium collection of automotive upgrades.</p>
+      <div className="mb-8 border-b-2 border-gray-200 pb-4">
+        <h1 className="text-3xl font-black text-gray-800 uppercase tracking-wide">Shop Accessories</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
         
         {/* Sidebar Filters - Sticky */}
-        <aside className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-6 h-fit lg:sticky lg:top-[100px] shadow-xl">
+        <aside className="bg-white border border-gray-200 p-6 h-fit lg:sticky lg:top-4">
           <div className="flex justify-between items-center border-b border-[var(--border-color)] pb-4 mb-6">
             <h3 className="text-lg font-bold text-[var(--color-text-bright)] flex items-center gap-2 m-0"><Filter size={18} className="text-[var(--color-primary)]"/> Filters</h3>
             <button className="bg-transparent border-none text-[var(--color-primary)] cursor-pointer text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:text-[var(--color-primary-hover)] transition-colors p-0" onClick={resetFilters}>
@@ -220,16 +219,16 @@ export default function Products() {
         {/* Products Display Area */}
         <main>
           {/* Top Control Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 bg-[var(--bg-card)] p-4 rounded-[var(--border-radius-lg)] border border-[var(--border-color)] shadow-sm">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 bg-gray-50 p-3 border border-gray-200">
             <form onSubmit={handleSearchSubmit} className="flex relative grow w-full md:max-w-[400px]">
               <input
                 type="text"
                 placeholder="Search products..."
-                className="form-input pr-12 w-full"
+                className="form-input pr-12 w-full border-gray-300"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 bg-[var(--color-primary)] text-white border-none w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:bg-[var(--color-primary-hover)] transition-colors">
+              <button type="submit" className="absolute right-0 top-0 bottom-0 bg-[#333] text-white border-none px-4 flex items-center justify-center cursor-pointer hover:bg-[#ff3333] transition-colors">
                 <Search size={16} />
               </button>
             </form>
@@ -271,64 +270,62 @@ export default function Products() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="flex flex-col h-full bg-transparent group/card">
-                    <div className="relative h-[240px] bg-[var(--bg-card)] rounded-[var(--border-radius-lg)] border border-[var(--border-color)] flex items-center justify-center p-6 mb-4 overflow-hidden transition-all duration-500 group-hover/card:border-[var(--color-primary)] group-hover/card:shadow-[0_0_30px_rgba(220,38,38,0.15)] group/img">
-                      <Link to={`/products/${product.slug}`} className="block h-full w-full flex items-center justify-center">
-                        <img
-                          src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'}
-                          alt={product.name}
-                          className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-xl"
+                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[#ff3333] transition-all duration-300 flex flex-col h-full">
+                    {product.discount_price && (
+                      <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 z-10 shadow-sm uppercase tracking-wider">Sale</span>
+                    )}
+                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0 p-2">
+                      <img
+                        src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400'}
+                        alt={product.name}
+                        className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </Link>
+                    
+                    {/* Hover Actions overlay (Wishlist/Cart shortcuts on desktop) */}
+                    <div className="absolute top-2 left-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button 
+                        className="w-8 h-8 bg-white border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-[#ff3333] hover:text-white hover:border-[#ff3333] transition-colors shadow-sm"
+                        onClick={(e) => handleAddToWishlist(e, product.id)}
+                        title="Toggle Wishlist"
+                      >
+                        <Heart 
+                          size={14} 
+                          fill={wishlistIds.has(product.id) ? 'currentColor' : 'none'} 
+                          className={wishlistIds.has(product.id) ? 'text-[#ff3333] hover:text-white' : ''}
                         />
-                        {product.discount_price && (
-                          <span className="absolute top-4 left-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Sale</span>
-                        )}
-                      </Link>
-                      
-                      {/* Hover Actions overlay */}
-                      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center gap-3 opacity-0 group-hover/img:opacity-100 transition-all duration-300">
-                        <button 
-                          className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-[var(--color-primary)] hover:text-white hover:scale-110 transition-all duration-300 shadow-xl"
-                          onClick={() => addToCart(product.id, 1)}
-                          title="Add to Cart"
-                        >
-                          <ShoppingBag size={20} />
-                        </button>
-                        <button 
-                          className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-[var(--color-primary)] hover:text-white hover:scale-110 transition-all duration-300 shadow-xl"
-                          onClick={(e) => handleAddToWishlist(e, product.id)}
-                          title="Toggle Wishlist"
-                        >
-                          <Heart 
-                            size={20} 
-                            fill={wishlistIds.has(product.id) ? 'currentColor' : 'none'} 
-                            className={wishlistIds.has(product.id) ? 'text-[var(--color-primary)]' : ''}
-                          />
-                        </button>
-                      </div>
+                      </button>
                     </div>
                     
-                    <div className="flex flex-col grow px-2 text-center">
-                      <div className="text-[10px] text-[var(--color-text-dim)] uppercase tracking-widest font-bold mb-1.5">{product.category_name}</div>
-                      <div className="flex justify-center gap-1 mb-2">
+                    <div className="flex flex-col flex-grow">
+                      <div className="text-[10px] text-gray-500 uppercase font-bold mb-1">{product.category_name}</div>
+                      <div className="flex gap-1 mb-2">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={12} className="fill-[var(--color-warning)] text-[var(--color-warning)]" />
+                          <Star key={i} size={10} className="fill-[#f59e0b] text-[#f59e0b]" />
                         ))}
                       </div>
-                      <Link to={`/products/${product.slug}`} className="text-[15px] font-bold text-[var(--color-text-bright)] no-underline mb-2 line-clamp-1 hover:text-[var(--color-primary)] transition-colors" title={product.name}>
+                      <Link to={`/products/${product.slug}`} className="text-xs md:text-sm font-bold text-gray-700 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[32px] md:min-h-[40px] leading-snug">
                         {product.name}
                       </Link>
-                      <div className="flex items-center justify-center gap-2 mt-auto">
+                      <div className="flex items-center gap-2 mb-4">
                         {product.discount_price ? (
                           <>
-                            <span className="text-[17px] font-black text-[var(--color-text-bright)]">₹{product.discount_price}</span>
-                            <span className="text-[12px] font-medium text-[var(--color-text-dim)] line-through">₹{product.price}</span>
+                            <span className="font-black text-[#ff3333] text-base md:text-lg">₹{product.discount_price}</span>
+                            <span className="text-[10px] md:text-xs font-medium text-gray-400 line-through">₹{product.price}</span>
                           </>
                         ) : (
-                          <span className="text-[17px] font-black text-[var(--color-text-bright)]">₹{product.price}</span>
+                          <span className="font-black text-gray-900 text-base md:text-lg">₹{product.price}</span>
                         )}
                       </div>
+                      
+                      <button 
+                        className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-2 px-2 text-[11px] md:text-xs font-bold uppercase transition-colors flex items-center justify-center gap-2 mt-auto shadow-sm"
+                        onClick={() => addToCart(product.id, 1)}
+                      >
+                        <ShoppingBag size={14} /> Add to Cart
+                      </button>
                     </div>
                   </div>
                 ))}
