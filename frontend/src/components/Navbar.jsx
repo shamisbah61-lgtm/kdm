@@ -33,10 +33,10 @@ export default function Navbar() {
       </div>
 
       {/* Main Header - Logo, Search, Icons */}
-      <div className="max-w-[1400px] mx-auto px-4 py-4 md:py-5 flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
+      <div className="max-w-[1400px] mx-auto px-4 py-6 md:py-8 flex flex-wrap lg:flex-nowrap items-center justify-between gap-6 md:gap-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 no-underline shrink-0">
-          <img src={logo} alt="KDM Logo" className="h-10 md:h-12 object-contain" />
+          <img src={logo} alt="KDM Logo" className="h-16 md:h-20 lg:h-24 object-contain" />
         </Link>
 
         {/* Mobile Toggle */}
@@ -48,13 +48,13 @@ export default function Navbar() {
         </button>
 
         {/* Search Bar (Hidden on very small screens, visible on md+) */}
-        <div className="hidden md:flex flex-1 max-w-2xl mx-8 border border-[#333] rounded overflow-hidden h-10 items-center bg-[#111]">
-          <div className="px-4 text-xs font-bold text-gray-400 border-r border-[#333] h-full flex items-center bg-[#1a1a1a] shrink-0 cursor-pointer hover:text-white transition-colors">
-            All Categories <ChevronDown size={14} className="ml-1"/>
+        <div className="hidden md:flex flex-1 max-w-2xl mx-8 border border-[#333] rounded overflow-hidden h-12 items-center bg-[#111]">
+          <div className="px-5 text-sm font-bold text-gray-400 border-r border-[#333] h-full flex items-center bg-[#1a1a1a] shrink-0 cursor-pointer hover:text-white transition-colors">
+            All Categories <ChevronDown size={16} className="ml-2"/>
           </div>
-          <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-200 bg-[#111] placeholder-gray-500" />
-          <button className="bg-[#ff3333] hover:bg-[#e60000] text-white h-full px-6 flex items-center justify-center transition-colors">
-            <Search size={16} /> <span className="ml-2 font-bold text-sm">Search</span>
+          <input type="text" placeholder="Search..." className="flex-1 h-full px-5 outline-none text-base text-gray-200 bg-[#111] placeholder-gray-500" />
+          <button className="bg-[#ff3333] hover:bg-[#e60000] text-white h-full px-8 flex items-center justify-center transition-colors">
+            <Search size={20} /> <span className="ml-2 font-bold text-base">Search</span>
           </button>
         </div>
 
