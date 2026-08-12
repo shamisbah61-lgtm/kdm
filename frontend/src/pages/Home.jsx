@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#f4f5f7] min-h-screen pt-[120px] pb-10">
+    <div className="bg-[#f4f5f7] min-h-screen pt-[100px] md:pt-[120px] pb-10">
       <div className="max-w-[1400px] mx-auto px-4 flex flex-col lg:flex-row gap-6">
         
         {/* Left Sidebar */}
@@ -110,22 +110,22 @@ export default function Home() {
           </div>
 
           {/* Info Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 rounded">
-              <Truck size={32} className="text-[#ff3333]" />
-              <div><h4 className="font-bold text-sm text-gray-800">Easy to buy & return</h4><p className="text-[11px] text-gray-500">Single click to buy & return</p></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
+              <Truck size={32} className="text-[#ff3333] shrink-0" />
+              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Easy to buy & return</h4><p className="text-[11px] text-gray-500 leading-tight">Single click to buy</p></div>
             </div>
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 rounded">
-              <ShieldCheck size={32} className="text-[#ff3333]" />
-              <div><h4 className="font-bold text-sm text-gray-800">Secure Payments</h4><p className="text-[11px] text-gray-500">100% payment security</p></div>
+            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
+              <ShieldCheck size={32} className="text-[#ff3333] shrink-0" />
+              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Secure Payments</h4><p className="text-[11px] text-gray-500 leading-tight">100% payment security</p></div>
             </div>
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 rounded">
-              <PhoneCall size={32} className="text-[#ff3333]" />
-              <div><h4 className="font-bold text-sm text-gray-800">24x7 Support Available</h4><p className="text-[11px] text-gray-500">Support 24 hours a day</p></div>
+            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
+              <PhoneCall size={32} className="text-[#ff3333] shrink-0" />
+              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">24x7 Support</h4><p className="text-[11px] text-gray-500 leading-tight">Support 24 hours a day</p></div>
             </div>
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 rounded">
-              <Smartphone size={32} className="text-[#ff3333]" />
-              <div><h4 className="font-bold text-sm text-gray-800">Shop with our App</h4><p className="text-[11px] text-gray-500">Download app & get offers</p></div>
+            <div className="bg-white p-3 md:p-4 flex items-center gap-3 md:gap-4 border border-gray-200 rounded">
+              <Smartphone size={32} className="text-[#ff3333] shrink-0" />
+              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Shop with our App</h4><p className="text-[11px] text-gray-500 leading-tight">Download app & get offers</p></div>
             </div>
           </div>
 
@@ -161,30 +161,32 @@ export default function Home() {
             {loading ? (
               <div className="py-10 text-center text-gray-500">Loading products...</div>
             ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                 {featuredProducts.slice(0, 8).map(product => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group rounded hover:shadow-lg transition-shadow">
-                    {product.discount_price && <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 rounded">SALE</span>}
-                    <Link to={`/products/${product.slug}`} className="block h-40 flex items-center justify-center mb-4">
+                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group rounded hover:shadow-lg transition-shadow flex flex-col h-full">
+                    {product.discount_price && <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 rounded z-10">SALE</span>}
+                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0">
                       <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain" />
                     </Link>
-                    <div className="flex gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
+                    <div className="flex flex-col flex-grow">
+                      <div className="flex gap-1 mb-2 mt-auto">
+                        {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
+                      </div>
+                      <Link to={`/products/${product.slug}`} className="text-xs md:text-sm font-medium text-gray-600 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[32px] md:min-h-[40px]">{product.name}</Link>
+                      <div className="flex items-center gap-2 mb-3">
+                        {product.discount_price ? (
+                          <>
+                            <span className="font-bold text-gray-900 text-base md:text-lg">₹{product.discount_price}</span>
+                            <span className="text-[10px] md:text-xs text-gray-400 line-through">₹{product.price}</span>
+                          </>
+                        ) : (
+                          <span className="font-bold text-gray-900 text-base md:text-lg">₹{product.price}</span>
+                        )}
+                      </div>
+                      <button className="w-full bg-[#333] hover:bg-[#ff3333] text-white py-2 px-1 text-[10px] md:text-xs font-bold uppercase transition-colors rounded flex items-center justify-center gap-1 md:gap-2 mt-auto" onClick={() => handleBuyNow(product.id)}>
+                        <ShoppingCart size={14} /> Add to Cart
+                      </button>
                     </div>
-                    <Link to={`/products/${product.slug}`} className="text-sm font-medium text-gray-600 line-clamp-1 mb-2 hover:text-[#ff3333]">{product.name}</Link>
-                    <div className="flex items-center gap-2 mb-3">
-                      {product.discount_price ? (
-                        <>
-                          <span className="font-bold text-gray-900 text-lg">₹{product.discount_price}</span>
-                          <span className="text-xs text-gray-400 line-through">₹{product.price}</span>
-                        </>
-                      ) : (
-                        <span className="font-bold text-gray-900 text-lg">₹{product.price}</span>
-                      )}
-                    </div>
-                    <button className="w-full bg-[#333] hover:bg-[#ff3333] text-white py-2 text-xs font-bold uppercase transition-colors rounded flex items-center justify-center gap-2" onClick={() => handleBuyNow(product.id)}>
-                      <ShoppingCart size={14} /> Add to Cart
-                    </button>
                   </div>
                 ))}
               </div>
@@ -192,22 +194,22 @@ export default function Home() {
           </div>
 
           {/* Promo Banners Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <div className="bg-[#f8f9fa] border border-gray-200 p-8 rounded flex items-center justify-between relative overflow-hidden h-[200px]">
-              <div className="relative z-10 max-w-[60%]">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Get Flat 15% Off</h3>
-                <p className="text-xs text-gray-500 mb-4">Tyre inflators, Car tyres, Pressure Washer...</p>
-                <Link to="/products" className="bg-[#ff3333] text-white px-5 py-2 text-xs font-bold uppercase rounded inline-block">Shop Now</Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10">
+            <div className="bg-[#f8f9fa] border border-gray-200 p-6 md:p-8 rounded flex items-center justify-between relative overflow-hidden h-[180px] md:h-[200px]">
+              <div className="relative z-10 w-full md:max-w-[65%]">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">Get Flat 15% Off</h3>
+                <p className="text-[11px] md:text-xs text-gray-500 mb-4 line-clamp-2">Tyre inflators, Car tyres, Pressure Washer...</p>
+                <Link to="/products" className="bg-[#ff3333] hover:bg-[#e60000] text-white px-4 md:px-5 py-2 text-[10px] md:text-xs font-bold uppercase rounded inline-block transition-colors shadow-sm">Shop Now</Link>
               </div>
-              <img src="https://images.unsplash.com/photo-1600705722908-bab1e6191b1a?auto=format&fit=crop&w=300" className="absolute right-[-20px] bottom-[-20px] h-full object-contain mix-blend-multiply opacity-80" alt="Promo" />
+              <img src="https://images.unsplash.com/photo-1600705722908-bab1e6191b1a?auto=format&fit=crop&w=300" className="absolute right-[-30px] md:right-[-20px] bottom-[-20px] h-[120%] md:h-full object-contain mix-blend-multiply opacity-50 md:opacity-80" alt="Promo" />
             </div>
-            <div className="bg-[#f8f9fa] border border-gray-200 p-8 rounded flex items-center justify-between relative overflow-hidden h-[200px]">
-              <div className="relative z-10 max-w-[60%]">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Oldest Autoparts</h3>
-                <p className="text-xs text-gray-500 mb-4">10 Autoparts You Need For Car</p>
-                <Link to="/products" className="bg-[#333] text-white px-5 py-2 text-xs font-bold uppercase rounded inline-block">Shop Now</Link>
+            <div className="bg-[#f8f9fa] border border-gray-200 p-6 md:p-8 rounded flex items-center justify-between relative overflow-hidden h-[180px] md:h-[200px]">
+              <div className="relative z-10 w-full md:max-w-[65%]">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">Oldest Autoparts</h3>
+                <p className="text-[11px] md:text-xs text-gray-500 mb-4 line-clamp-2">10 Autoparts You Need For Car</p>
+                <Link to="/products" className="bg-[#333] hover:bg-black text-white px-4 md:px-5 py-2 text-[10px] md:text-xs font-bold uppercase rounded inline-block transition-colors shadow-sm">Shop Now</Link>
               </div>
-              <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=300" className="absolute right-[-20px] bottom-[-20px] h-full object-contain mix-blend-multiply opacity-80" alt="Promo" />
+              <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=300" className="absolute right-[-30px] md:right-[-20px] bottom-[-20px] h-[120%] md:h-full object-contain mix-blend-multiply opacity-50 md:opacity-80" alt="Promo" />
             </div>
           </div>
 
@@ -216,24 +218,26 @@ export default function Home() {
             <div className="flex justify-between items-center mb-6 border-b-2 border-gray-200 pb-2">
               <h2 className="text-2xl font-bold text-gray-800 m-0">Special Products</h2>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                 {deals.slice(0, 4).map(product => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group rounded hover:shadow-lg transition-shadow">
-                    <span className="absolute top-2 right-2 text-[#ff3333] text-[10px] font-bold">HOT</span>
-                    <Link to={`/products/${product.slug}`} className="block h-40 flex items-center justify-center mb-4">
+                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group rounded hover:shadow-lg transition-shadow flex flex-col h-full">
+                    <span className="absolute top-2 right-2 text-[#ff3333] text-[10px] font-bold z-10">HOT</span>
+                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0">
                       <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain" />
                     </Link>
-                    <div className="flex justify-center gap-2 text-[10px] font-bold text-gray-500 mb-3 bg-gray-50 py-1 rounded">
-                      <span className="flex items-center gap-1"><span className="text-gray-800">204</span>Days</span>
-                      <span className="flex items-center gap-1"><span className="text-gray-800">13</span>Hrs</span>
-                      <span className="flex items-center gap-1"><span className="text-gray-800">46</span>Min</span>
-                    </div>
-                    <div className="flex gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
-                    </div>
-                    <Link to={`/products/${product.slug}`} className="text-sm font-medium text-gray-600 line-clamp-1 mb-2 hover:text-[#ff3333]">{product.name}</Link>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="font-bold text-gray-900 text-lg">₹{product.price}</span>
+                    <div className="flex flex-col flex-grow">
+                      <div className="flex justify-center gap-1 md:gap-2 text-[9px] md:text-[10px] font-bold text-gray-500 mb-3 bg-gray-50 py-1.5 rounded w-full">
+                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-gray-800">204</span>Days</span>
+                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-gray-800">13</span>Hrs</span>
+                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-gray-800">46</span>Min</span>
+                      </div>
+                      <div className="flex gap-1 mb-2 mt-auto">
+                        {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
+                      </div>
+                      <Link to={`/products/${product.slug}`} className="text-xs md:text-sm font-medium text-gray-600 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[32px] md:min-h-[40px]">{product.name}</Link>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900 text-base md:text-lg">₹{product.price}</span>
+                      </div>
                     </div>
                   </div>
                 ))}
