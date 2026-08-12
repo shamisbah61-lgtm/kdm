@@ -168,10 +168,10 @@ export default function Products() {
 
           {/* Category Filter */}
           <div className="mb-8">
-            <h4 className="text-[13px] uppercase tracking-widest text-gray-400 mb-4 font-bold border-b border-gray-100 pb-2">Category</h4>
+            <h4 className="text-[13px] uppercase tracking-widest text-gray-400 mb-4 font-bold border-b border-gray-100 pb-2 text-center">Category</h4>
             <div className="flex flex-col gap-2">
               <button
-                className={`text-left bg-transparent border-none text-[15px] font-medium cursor-pointer transition-all duration-300 py-2.5 px-3 rounded-xl ${selectedCategory === '' ? 'text-[#ff3333] font-bold bg-[#ff3333]/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
+                className={`text-center bg-transparent border-none text-[15px] font-medium cursor-pointer transition-all duration-300 py-2.5 px-3 rounded-xl ${selectedCategory === '' ? 'text-[#ff3333] font-bold bg-[#ff3333]/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
                 onClick={() => { setSelectedCategory(''); setPage(1); }}
               >
                 All Categories
@@ -179,7 +179,7 @@ export default function Products() {
               {categories.map((cat) => (
                 <button
                   key={cat.id}
-                  className={`text-left bg-transparent border-none text-[15px] font-medium cursor-pointer transition-all duration-300 py-2.5 px-3 rounded-xl ${selectedCategory === cat.slug ? 'text-[#ff3333] font-bold bg-[#ff3333]/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
+                  className={`text-center bg-transparent border-none text-[15px] font-medium cursor-pointer transition-all duration-300 py-2.5 px-3 rounded-xl ${selectedCategory === cat.slug ? 'text-[#ff3333] font-bold bg-[#ff3333]/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
                   onClick={() => { setSelectedCategory(cat.slug); setPage(1); }}
                 >
                   {cat.name}
@@ -190,7 +190,7 @@ export default function Products() {
 
           {/* Price Filter */}
           <div className="mb-4">
-            <h4 className="text-[13px] uppercase tracking-widest text-gray-400 mb-4 font-bold border-b border-gray-100 pb-2">Price Range (₹)</h4>
+            <h4 className="text-[13px] uppercase tracking-widest text-gray-400 mb-4 font-bold border-b border-gray-100 pb-2 text-center">Price Range (₹)</h4>
             <form onSubmit={handlePriceFilterSubmit} className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <input
