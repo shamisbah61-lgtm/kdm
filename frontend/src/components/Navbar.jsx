@@ -16,71 +16,69 @@ export default function Navbar() {
   };
 
   return (
-    <header className="bg-white w-full border-b border-gray-200">
+    <header className="bg-[#0a0a0a] w-full border-b border-[#222]">
       {/* Top Header - Contact & Currency (Hidden on Mobile) */}
-      <div className="hidden lg:block bg-gray-50 border-b border-gray-200 py-2 text-xs text-gray-500">
+      <div className="hidden lg:block bg-[#111] border-b border-[#222] py-2 text-xs text-gray-400">
         <div className="max-w-[1400px] mx-auto px-4 flex justify-between items-center">
           <div className="flex gap-6">
             <span className="flex items-center gap-2"><Phone size={14} className="text-[#ff3333]" /> Call us: (+00) 012 345 67 89</span>
             <span className="flex items-center gap-2"><Mail size={14} className="text-[#ff3333]" /> Email us: demo@gmail.com</span>
           </div>
           <div className="flex gap-4">
-            <span className="flex items-center gap-1 cursor-pointer hover:text-gray-800">English <ChevronDown size={12}/></span>
-            <span className="flex items-center gap-1 cursor-pointer hover:text-gray-800">$ Currency <ChevronDown size={12}/></span>
+            <span className="flex items-center gap-1 cursor-pointer hover:text-white">English <ChevronDown size={12}/></span>
+            <span className="flex items-center gap-1 cursor-pointer hover:text-white">$ Currency <ChevronDown size={12}/></span>
           </div>
         </div>
       </div>
 
       {/* Main Header - Logo, Search, Icons */}
-      <div className="max-w-[1400px] mx-auto px-4 py-4 md:py-6 flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
+      <div className="max-w-[1400px] mx-auto px-4 py-4 md:py-5 flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 no-underline shrink-0">
-          <div className="text-3xl font-black text-[#ff3333] tracking-tighter flex items-center">
-            <span className="text-gray-900">AUTO</span>PART
-          </div>
+          <img src="/logo.png" alt="KDM Logo" className="h-10 md:h-12 object-contain" />
         </Link>
 
         {/* Mobile Toggle */}
         <button 
-          className="lg:hidden p-2 text-gray-600 hover:text-[#ff3333]"
+          className="lg:hidden p-2 text-gray-300 hover:text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
           <Menu size={24} />
         </button>
 
         {/* Search Bar (Hidden on very small screens, visible on md+) */}
-        <div className="hidden md:flex flex-1 max-w-2xl mx-8 border-2 border-[#ff3333] rounded overflow-hidden h-10 items-center bg-white">
-          <div className="px-4 text-xs font-bold text-gray-500 border-r border-gray-200 h-full flex items-center bg-gray-50 shrink-0 cursor-pointer">
+        <div className="hidden md:flex flex-1 max-w-2xl mx-8 border border-[#333] rounded overflow-hidden h-10 items-center bg-[#111]">
+          <div className="px-4 text-xs font-bold text-gray-400 border-r border-[#333] h-full flex items-center bg-[#1a1a1a] shrink-0 cursor-pointer hover:text-white transition-colors">
             All Categories <ChevronDown size={14} className="ml-1"/>
           </div>
-          <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-700" />
-          <button className="bg-[#222] hover:bg-black text-white h-full px-6 flex items-center justify-center transition-colors">
+          <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-200 bg-[#111] placeholder-gray-500" />
+          <button className="bg-[#ff3333] hover:bg-[#e60000] text-white h-full px-6 flex items-center justify-center transition-colors">
             <Search size={16} /> <span className="ml-2 font-bold text-sm">Search</span>
           </button>
         </div>
 
         {/* Icons (Wishlist, Account, Cart) */}
         <div className="flex items-center gap-4 md:gap-6 shrink-0">
-          <Link to="/wishlist" className="flex items-center gap-2 text-gray-700 hover:text-[#ff3333] relative">
+          <Link to="/wishlist" className="flex items-center gap-2 text-gray-300 hover:text-white relative transition-colors">
             <Heart size={22} />
             {wishlistCount > 0 && <span className="absolute -top-1.5 -right-2 bg-[#ff3333] text-white text-[10px] font-bold px-1.5 py-0 rounded-full">{wishlistCount}</span>}
           </Link>
           
           {isAuthenticated ? (
             <div className="group relative">
-              <Link to="/profile" className="flex items-center gap-2 text-gray-700 hover:text-[#ff3333]">
+              <Link to="/profile" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
                 <User size={22} />
               </Link>
-              <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+              <div className="absolute right-0 top-full mt-2 w-48 bg-[#111] border border-[#333] rounded shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                 {(user?.is_staff || user?.is_superuser) && (
-                  <Link to="/admin-dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#ff3333]">Admin Panel</Link>
+                  <Link to="/admin-dashboard" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#222] hover:text-white">Admin Panel</Link>
                 )}
-                <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#ff3333]">My Profile</Link>
-                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Logout</button>
+                <Link to="/profile" className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#222] hover:text-white">My Profile</Link>
+                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-[#ff3333] hover:bg-[#222]">Logout</button>
               </div>
             </div>
           ) : (
-            <Link to="/login" className="flex items-center gap-2 text-gray-700 hover:text-[#ff3333]">
+            <Link to="/login" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
               <User size={22} />
             </Link>
           )}
@@ -98,41 +96,41 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Navigation Menu (Red Background) */}
-      <div className={`lg:block ${isOpen ? 'block' : 'hidden'} bg-[#ff3333] w-full`}>
+      {/* Navigation Menu (Black Background) */}
+      <div className={`lg:block ${isOpen ? 'block' : 'hidden'} bg-[#111] border-t border-[#222] w-full`}>
         <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-center">
           
           {/* Mobile Search (Visible only on small screens) */}
-          <div className="md:hidden p-4 bg-white border-b border-gray-200">
-            <div className="flex border-2 border-[#ff3333] rounded overflow-hidden h-10 items-center">
-              <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-700" />
-              <button className="bg-[#222] text-white h-full px-4 flex items-center justify-center">
+          <div className="md:hidden p-4 bg-[#0a0a0a] border-b border-[#222]">
+            <div className="flex border border-[#333] rounded overflow-hidden h-10 items-center bg-[#111]">
+              <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-gray-200 bg-transparent" />
+              <button className="bg-[#ff3333] text-white h-full px-4 flex items-center justify-center">
                 <Search size={16} />
               </button>
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 bg-[#222] text-white px-6 py-3.5 font-bold uppercase text-sm w-[280px] shrink-0">
+          <div className="hidden lg:flex items-center gap-2 bg-[#222] text-white px-6 py-3.5 font-bold uppercase text-sm w-[280px] shrink-0 border-r border-[#333]">
             <Menu size={18} /> Shop Categories
           </div>
 
           <nav className="flex flex-col lg:flex-row lg:items-center lg:gap-8 px-4 lg:px-8 py-2 lg:py-0 w-full">
-            <NavLink to="/" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+            <NavLink to="/" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Best in offer
             </NavLink>
-            <NavLink to="/products" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+            <NavLink to="/products" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Home
             </NavLink>
-            <NavLink to="/brands" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+            <NavLink to="/brands" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Brands
             </NavLink>
-            <NavLink to="/specials" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+            <NavLink to="/specials" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Specials
             </NavLink>
-            <NavLink to="/contact" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+            <NavLink to="/contact" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Contact Us
             </NavLink>
-            <NavLink to="/blogs" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`}>
+            <NavLink to="/blogs" className={({ isActive }) => `block py-2 lg:py-3.5 text-sm font-bold uppercase transition-colors ${isActive ? 'text-[#ff3333]' : 'text-gray-300 hover:text-[#ff3333]'}`}>
               Blogs
             </NavLink>
           </nav>
