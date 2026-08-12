@@ -180,19 +180,18 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   background: var(--form-bg);
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  padding: 14px 20px;
+  border-radius: 2px;
+  padding: 12px 16px;
   color: var(--color-text-bright);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   transition: var(--transition-smooth);
 }
 
 .form-input:focus {
   outline: none;
-  background: var(--bg-card-hover);
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(108, 61, 166, 0.15);
+  box-shadow: 0 0 0 1px var(--color-primary);
 }
 
 /* Buttons */
@@ -200,40 +199,42 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px 28px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 100px; /* Pill shaped buttons for modern look */
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 2px; /* Sharp corners for industrial look */
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: all 0.2s ease;
   border: 1px solid transparent;
   font-family: var(--font-body);
   text-decoration: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: var(--color-primary);
   color: #fff;
-  box-shadow: 0 8px 20px -6px rgba(108, 61, 166, 0.4);
+  border-color: var(--color-primary);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px -6px rgba(108, 61, 166, 0.6);
-  filter: brightness(1.1);
+  background: #111;
+  border-color: #111;
+  color: #fff;
 }
 
 .btn-secondary {
-  background-color: var(--bg-card);
-  border-color: var(--border-color);
-  color: var(--color-text-bright);
+  background-color: transparent;
+  border-color: #111;
+  color: #111;
 }
 
 .btn-secondary:hover {
+  background-color: var(--color-primary);
   border-color: var(--color-primary);
-  background-color: var(--bg-card-hover);
-  transform: translateY(-2px);
+  color: #fff;
 }
 
 /* Badges */
