@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Star, ShoppingCart, Truck, ShieldCheck, PhoneCall, Smartphone, ArrowRight, ChevronRight, Menu } from 'lucide-react';
+import { Star, ShoppingCart, ShieldCheck, Zap, Gauge, Wrench, ChevronRight, Menu, ArrowRight } from 'lucide-react';
 import { apiRequest } from '../utils/api';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
@@ -11,7 +11,6 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
-  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,209 +45,188 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#f4f5f7] min-h-screen pt-6 pb-10">
-      <div className="max-w-[1400px] mx-auto px-4 flex flex-col lg:flex-row gap-6">
+    <div className="bg-[#050505] min-h-screen text-gray-200 font-sans selection:bg-[#ff3333] selection:text-white">
+      {/* Dynamic Hero Section */}
+      <section className="relative w-full h-[80vh] md:h-[600px] flex items-center justify-center overflow-hidden border-b border-[#222]">
+        <div className="absolute inset-0 z-0">
+          <img src="https://images.unsplash.com/photo-1610444558231-1e309ccf3b33?auto=format&fit=crop&q=80" alt="KDM Tuning Car" className="w-full h-full object-cover opacity-40 scale-105 animate-pulse-slow" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]"></div>
+        </div>
         
-        {/* Left Sidebar */}
-        <aside className="hidden lg:block w-[280px] shrink-0">
-          <div className="bg-white border border-gray-200 shadow-sm mb-6">
-            <div className="bg-[#222222] text-white p-4 flex items-center gap-2 font-bold uppercase">
-              <Menu size={20} /> Shop Categories
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 bg-[#ff3333]/10 border border-[#ff3333]/30 px-3 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-[#ff3333] animate-ping"></span>
+              <span className="text-[#ff3333] text-[10px] font-black uppercase tracking-[0.2em]">KDM Performance Parts</span>
             </div>
-            <ul className="flex flex-col">
-              {categories.slice(0, 10).map((cat, idx) => (
-                <li key={cat.id} className="border-b border-gray-100 last:border-0">
-                  <Link to={`/products?category=${cat.slug}`} className="flex items-center justify-between p-3.5 text-gray-600 hover:text-[#ff3333] hover:bg-gray-50 transition-colors text-sm font-medium">
-                    {cat.name} <ChevronRight size={16} className="text-gray-400" />
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6 drop-shadow-2xl">
+              Unleash <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3333] to-[#880000]">Power</span>
+            </h1>
+            <p className="text-gray-400 text-sm md:text-base lg:text-lg mb-10 max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed border-l-2 border-[#ff3333] pl-4">
+              Premium tuning components for Hyundai, Kia, and Genesis. Upgrade your ride with track-tested aerodynamics, exhaust systems, and forged internals.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link to="/products" className="group relative inline-flex items-center justify-center px-8 py-4 font-black text-white uppercase tracking-wider bg-[#ff3333] overflow-hidden rounded-md shadow-[0_0_20px_rgba(255,51,51,0.3)] hover:shadow-[0_0_30px_rgba(255,51,51,0.6)] transition-all duration-300">
+                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                <span className="relative flex items-center gap-2">Explore Catalog <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /></span>
+              </Link>
+              <Link to="/categories" className="group inline-flex items-center justify-center px-8 py-4 font-bold text-gray-300 uppercase tracking-wider bg-transparent border border-[#333] hover:border-[#ff3333] hover:text-[#ff3333] rounded-md transition-all duration-300">
+                View Brands
+              </Link>
+            </div>
+          </div>
+          
+          {/* Animated decorative graphic on right */}
+          <div className="hidden lg:block relative w-[400px] h-[400px]">
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#333] rounded-full animate-[spin_10s_linear_infinite]"></div>
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-dashed border-[#ff3333]/30 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
+             <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&q=80" alt="Turbo" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 object-cover rounded-full mix-blend-screen shadow-[0_0_50px_rgba(255,51,51,0.4)] opacity-80" />
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Features */}
+      <section className="bg-[#0a0a0a] border-b border-[#222]">
+        <div className="max-w-[1400px] mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { icon: Gauge, title: "Dyno Tested", desc: "Proven performance gains" },
+            { icon: ShieldCheck, title: "KDM Certified", desc: "Genuine fitment" },
+            { icon: Zap, title: "Fast Shipping", desc: "Express delivery worldwide" },
+            { icon: Wrench, title: "Pro Support", desc: "Expert tuning advice" }
+          ].map((feature, idx) => (
+            <div key={idx} className="flex flex-col items-center text-center group cursor-default">
+              <div className="w-12 h-12 rounded-lg bg-[#111] border border-[#222] flex items-center justify-center text-[#ff3333] mb-4 group-hover:scale-110 group-hover:bg-[#ff3333] group-hover:text-white group-hover:shadow-[0_0_15px_rgba(255,51,51,0.4)] transition-all duration-300">
+                <feature.icon size={24} />
+              </div>
+              <h3 className="text-white font-black uppercase tracking-wider text-sm mb-1">{feature.title}</h3>
+              <p className="text-gray-500 text-xs font-medium">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Main Content Area */}
+      <div className="max-w-[1400px] mx-auto px-6 py-16 flex flex-col lg:flex-row gap-10">
+        
+        {/* Categories Sidebar */}
+        <aside className="hidden lg:block w-[280px] shrink-0">
+          <div className="sticky top-28">
+            <h3 className="text-white font-black text-xl uppercase tracking-widest mb-6 flex items-center gap-2">
+              <Menu size={24} className="text-[#ff3333]" /> Categories
+            </h3>
+            <ul className="flex flex-col gap-2">
+              {categories.slice(0, 8).map((cat) => (
+                <li key={cat.id}>
+                  <Link to={`/products?category=${cat.slug}`} className="group flex items-center justify-between p-4 bg-[#111] rounded-lg border border-[#222] hover:border-[#ff3333] hover:shadow-[0_0_20px_rgba(255,51,51,0.1)] transition-all duration-300">
+                    <span className="text-sm font-bold text-gray-300 group-hover:text-white uppercase tracking-wider">{cat.name}</span>
+                    <ChevronRight size={16} className="text-[#ff3333] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-          
-          {/* Promo Side Banner */}
-          <div className="bg-[#ff3333] text-white p-6 text-center border border-[#e60000] mb-6">
-            <h4 className="font-medium text-sm mb-2 uppercase tracking-wide">Explore Our Limited</h4>
-            <h3 className="font-bold text-2xl uppercase mb-3">Weekend Deal</h3>
-            <div className="w-10 h-0.5 bg-white mx-auto mb-3"></div>
-            <p className="text-sm mb-4">Hurry Up before Offer Will end</p>
-            <div className="flex justify-center gap-2 mb-4">
-              <div className="bg-[#cc0000] p-2 rounded w-12"><div className="font-bold">000</div><div className="text-[10px]">days</div></div>
-              <div className="bg-[#cc0000] p-2 rounded w-12"><div className="font-bold">5</div><div className="text-[10px]">hrs</div></div>
-              <div className="bg-[#cc0000] p-2 rounded w-12"><div className="font-bold">24</div><div className="text-[10px]">min</div></div>
-            </div>
-            <Link to="/products" className="text-sm underline font-bold hover:text-gray-200">View All Details</Link>
-          </div>
 
-          {/* Testimonial */}
-          <div className="bg-white border border-gray-200 shadow-sm">
-            <div className="bg-[#ff3333] text-white p-3 font-bold uppercase">Testimonial</div>
-            <div className="p-5 text-center">
-              <img src="https://i.pravatar.cc/100?img=11" alt="John Duff" className="w-16 h-16 rounded-full mx-auto mb-3 border-2 border-gray-100" />
-              <h4 className="font-bold text-gray-800">John Duff</h4>
-              <p className="text-xs text-gray-400 mb-3">Producer</p>
-              <p className="text-sm text-gray-500 italic">"Excellent quality auto parts. Delivery was fast and the products were exactly as described."</p>
+            {/* Special Ad */}
+            <div className="mt-8 relative rounded-xl overflow-hidden group cursor-pointer border border-[#222] shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+              <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=300" className="w-full h-64 object-cover opacity-40 group-hover:scale-110 transition-transform duration-700" alt="Brakes" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-6 w-full">
+                <span className="bg-[#ff3333] text-white text-[10px] font-black uppercase px-2 py-1 rounded tracking-widest mb-2 inline-block shadow-md">Up to 20% Off</span>
+                <h4 className="text-2xl font-black text-white uppercase tracking-tight leading-none mb-3">Big Brake<br/>Kits</h4>
+                <span className="text-xs font-bold text-[#ff3333] flex items-center gap-1 group-hover:text-white transition-colors">Shop Now <ArrowRight size={12} /></span>
+              </div>
             </div>
           </div>
         </aside>
 
-        {/* Main Content */}
+        {/* Products Grid */}
         <div className="flex-1 min-w-0">
-          
-          {/* Main Hero Banner */}
-          <div className="bg-[#111] text-white overflow-hidden relative h-[350px] md:h-[420px] mb-8 flex items-center shadow-md">
-            <div className="absolute inset-0 z-0">
-              <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80" className="w-full h-full object-cover opacity-30" alt="Cars" />
+          <div className="flex items-end justify-between mb-8 border-b border-[#222] pb-4">
+            <div>
+              <span className="text-[#ff3333] text-xs font-black uppercase tracking-[0.2em]">Top Tier</span>
+              <h2 className="text-3xl font-black text-white uppercase tracking-tighter mt-1">Featured Parts</h2>
             </div>
-            <div className="relative z-10 p-10 md:p-16 max-w-xl">
-              <div className="text-[#ff3333] font-black text-sm tracking-[0.2em] uppercase mb-3">New Generation</div>
-              <h1 className="text-4xl md:text-6xl font-black mb-6 leading-[1.1] uppercase tracking-tight text-white drop-shadow-lg">Covers<br/>Deflectors<br/>Car Mats</h1>
-              <Link to="/products" className="inline-block bg-[#ff3333] hover:bg-white hover:text-black text-white px-8 py-3.5 font-bold uppercase text-sm transition-colors border border-transparent shadow-lg">
-                Shop Now
-              </Link>
-            </div>
+            <Link to="/products" className="hidden sm:flex items-center gap-1 text-xs font-bold text-gray-400 hover:text-[#ff3333] uppercase tracking-wider transition-colors">
+              View All <ArrowRight size={14} />
+            </Link>
           </div>
 
-          {/* Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
-              <Truck size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
-              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Easy to buy & return</h4><p className="text-[11px] text-gray-500 leading-tight">Single click to buy</p></div>
+          {loading ? (
+            <div className="py-20 flex justify-center items-center">
+              <div className="w-12 h-12 border-4 border-[#222] border-t-[#ff3333] rounded-full animate-spin shadow-[0_0_15px_rgba(255,51,51,0.5)]"></div>
             </div>
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
-              <ShieldCheck size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
-              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Secure Payments</h4><p className="text-[11px] text-gray-500 leading-tight">100% payment security</p></div>
-            </div>
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
-              <PhoneCall size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
-              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">24x7 Support</h4><p className="text-[11px] text-gray-500 leading-tight">Support 24 hours a day</p></div>
-            </div>
-            <div className="bg-white p-4 flex items-center gap-4 border border-gray-200 shadow-sm transition-all hover:border-[#ff3333] group">
-              <Smartphone size={36} className="text-gray-400 group-hover:text-[#ff3333] transition-colors shrink-0" />
-              <div><h4 className="font-bold text-sm text-gray-800 leading-tight mb-1">Shop with our App</h4><p className="text-[11px] text-gray-500 leading-tight">Download app & get offers</p></div>
-            </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+              {featuredProducts.slice(0, 8).map(product => (
+                <div key={product.id} className="bg-[#0a0a0a] rounded-xl border border-[#222] p-5 group hover:border-[#ff3333]/50 hover:shadow-[0_0_30px_rgba(255,51,51,0.1)] transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                  
+                  {/* Hover Light Effect */}
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#ff3333] blur-[80px] rounded-full opacity-0 group-hover:opacity-15 transition-opacity duration-500 pointer-events-none"></div>
 
-          {/* Sub Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            {categories.slice(0, 3).map(cat => (
-              <div key={cat.id} className="bg-white border border-gray-200 p-6 flex items-center gap-4 rounded">
-                <div className="w-20 h-20 shrink-0 bg-gray-50 rounded p-2">
-                  {cat.image ? <img src={cat.image} alt={cat.name} className="w-full h-full object-cover mix-blend-multiply" /> : <div className="w-full h-full bg-gray-200"></div>}
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-800 mb-1">{cat.name}</h4>
-                  <ul className="text-xs text-gray-500 space-y-1 mb-2">
-                    <li>Body Shell</li>
-                    <li>Bonnet Grill</li>
-                  </ul>
-                  <Link to={`/products?category=${cat.slug}`} className="text-xs font-bold text-gray-800 uppercase hover:text-[#ff3333]">View All</Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Trending Products */}
-          <div className="mb-12">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 border-b border-gray-300">
-              <h2 className="text-xl md:text-2xl font-black text-gray-800 m-0 uppercase border-b-2 border-[#ff3333] pb-2 inline-block -mb-[1px]">Trending Products</h2>
-              <div className="flex gap-2 mt-3 sm:mt-0 pb-2 sm:pb-0">
-                <button className="bg-[#ff3333] text-white px-4 py-1.5 text-xs font-bold uppercase transition-colors hover:bg-black shadow-sm">New Products</button>
-                <button className="bg-transparent text-gray-500 px-4 py-1.5 text-xs font-bold uppercase transition-colors hover:text-[#ff3333]">Best Selling</button>
-              </div>
-            </div>
-
-            {loading ? (
-              <div className="py-10 text-center text-gray-500">Loading products...</div>
-            ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-                {featuredProducts.slice(0, 8).map(product => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[#ff3333] transition-all duration-300 flex flex-col h-full">
-                    {product.discount_price && <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 z-10 shadow-sm uppercase tracking-wider">Sale</span>}
-                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-44 flex items-center justify-center mb-4 shrink-0 p-2">
-                      <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
-                    </Link>
-                    <div className="flex flex-col flex-grow">
-                      <div className="flex gap-1 mb-2 mt-auto">
-                        {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
-                      </div>
-                      <Link to={`/products/${product.slug}`} className="text-sm font-bold text-gray-700 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[40px] leading-snug">{product.name}</Link>
-                      <div className="flex items-center gap-2 mb-4">
-                        {product.discount_price ? (
-                          <>
-                            <span className="font-black text-[#ff3333] text-lg md:text-xl">₹{product.discount_price}</span>
-                            <span className="text-[10px] md:text-xs text-gray-400 line-through font-medium">₹{product.price}</span>
-                          </>
-                        ) : (
-                          <span className="font-black text-gray-900 text-lg md:text-xl">₹{product.price}</span>
-                        )}
-                      </div>
-                      <button className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-2.5 px-2 text-[11px] md:text-xs font-bold uppercase transition-colors flex items-center justify-center gap-2 mt-auto shadow-sm" onClick={() => handleBuyNow(product.id)}>
-                        <ShoppingCart size={14} /> Add to Cart
-                      </button>
+                  <Link to={`/products/${product.slug}`} className="block h-48 flex items-center justify-center mb-6 p-4 relative z-10 bg-[#111] rounded-lg border border-[#1a1a1a]">
+                    <img src={product.thumbnail || 'https://images.unsplash.com/photo-1563223771-5fe4038fbfc9?w=300&q=80'} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 drop-shadow-2xl mix-blend-screen" />
+                    {product.discount_price && (
+                      <span className="absolute top-2 left-2 bg-[#ff3333] text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider shadow-lg">Sale</span>
+                    )}
+                  </Link>
+                  
+                  <div className="flex flex-col flex-grow relative z-10">
+                    <div className="flex gap-1 mb-3">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={12} className={`fill-current ${i < 4 ? 'text-yellow-500' : 'text-gray-700'}`} />)}
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Promo Banners Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10">
-            <div className="bg-[#f8f9fa] border border-gray-200 p-6 md:p-8 rounded flex items-center justify-between relative overflow-hidden h-[180px] md:h-[200px]">
-              <div className="relative z-10 w-full md:max-w-[65%]">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">Get Flat 15% Off</h3>
-                <p className="text-[11px] md:text-xs text-gray-500 mb-4 line-clamp-2">Tyre inflators, Car tyres, Pressure Washer...</p>
-                <Link to="/products" className="bg-[#ff3333] hover:bg-[#e60000] text-white px-4 md:px-5 py-2 text-[10px] md:text-xs font-bold uppercase rounded inline-block transition-colors shadow-sm">Shop Now</Link>
-              </div>
-              <img src="https://images.unsplash.com/photo-1600705722908-bab1e6191b1a?auto=format&fit=crop&w=300" className="absolute right-[-30px] md:right-[-20px] bottom-[-20px] h-[120%] md:h-full object-contain mix-blend-multiply opacity-50 md:opacity-80" alt="Promo" />
-            </div>
-            <div className="bg-[#f8f9fa] border border-gray-200 p-6 md:p-8 rounded flex items-center justify-between relative overflow-hidden h-[180px] md:h-[200px]">
-              <div className="relative z-10 w-full md:max-w-[65%]">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">Oldest Autoparts</h3>
-                <p className="text-[11px] md:text-xs text-gray-500 mb-4 line-clamp-2">10 Autoparts You Need For Car</p>
-                <Link to="/products" className="bg-[#333] hover:bg-black text-white px-4 md:px-5 py-2 text-[10px] md:text-xs font-bold uppercase rounded inline-block transition-colors shadow-sm">Shop Now</Link>
-              </div>
-              <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=300" className="absolute right-[-30px] md:right-[-20px] bottom-[-20px] h-[120%] md:h-full object-contain mix-blend-multiply opacity-50 md:opacity-80" alt="Promo" />
-            </div>
-          </div>
-
-          {/* Special Products */}
-          <div className="mb-12">
-            <div className="flex items-center mb-6 border-b border-gray-300">
-              <h2 className="text-xl md:text-2xl font-black text-gray-800 m-0 uppercase border-b-2 border-[#ff3333] pb-2 inline-block -mb-[1px]">Special Products</h2>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-                {deals.slice(0, 4).map(product => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[#ff3333] transition-all duration-300 flex flex-col h-full">
-                    <span className="absolute top-2 right-2 bg-yellow-400 text-black text-[10px] font-black z-10 px-2 py-0.5 shadow-sm uppercase tracking-wider">HOT</span>
-                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-44 flex items-center justify-center mb-4 shrink-0 p-2">
-                      <img src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=200'} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+                    
+                    <Link to={`/products/${product.slug}`} className="text-sm font-bold text-gray-300 line-clamp-2 mb-4 group-hover:text-white min-h-[40px] leading-relaxed transition-colors">
+                      {product.name}
                     </Link>
-                    <div className="flex flex-col flex-grow">
-                      <div className="flex justify-center gap-1 md:gap-2 text-[9px] md:text-[10px] font-bold text-gray-600 mb-3 bg-[#f8f9fa] border border-gray-200 py-1.5 w-full shadow-inner">
-                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-[#ff3333]">204</span>Days</span>
-                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-[#ff3333]">13</span>Hrs</span>
-                        <span className="flex items-center gap-0.5 md:gap-1"><span className="text-[#ff3333]">46</span>Min</span>
-                      </div>
-                      <div className="flex gap-1 mb-2 mt-auto">
-                        {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#f59e0b] text-[#f59e0b]" />)}
-                      </div>
-                      <Link to={`/products/${product.slug}`} className="text-sm font-bold text-gray-700 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[40px] leading-snug">{product.name}</Link>
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="font-black text-[#ff3333] text-lg md:text-xl">₹{product.price}</span>
-                      </div>
-                      <button className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-2.5 px-2 text-[11px] md:text-xs font-bold uppercase transition-colors flex items-center justify-center gap-2 mt-auto shadow-sm" onClick={() => handleBuyNow(product.id)}>
-                        <ShoppingCart size={14} /> Add to Cart
-                      </button>
+                    
+                    <div className="flex items-center gap-3 mb-6 mt-auto">
+                      {product.discount_price ? (
+                        <>
+                          <span className="font-black text-[#ff3333] text-xl">₹{product.discount_price}</span>
+                          <span className="text-xs text-gray-600 line-through font-bold">₹{product.price}</span>
+                        </>
+                      ) : (
+                        <span className="font-black text-white text-xl">₹{product.price}</span>
+                      )}
                     </div>
+                    
+                    <button 
+                      className="w-full bg-[#111] hover:bg-[#ff3333] text-white border border-[#333] hover:border-[#ff3333] py-3 rounded-md text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-md"
+                      onClick={() => handleBuyNow(product.id)}
+                    >
+                      <ShoppingCart size={16} className="group-hover/btn:-rotate-12 transition-transform" /> Add to Cart
+                    </button>
                   </div>
-                ))}
+                </div>
+              ))}
             </div>
-          </div>
-
+          )}
         </div>
       </div>
+
+      {/* Lower Promo Section */}
+      <section className="border-t border-[#222] bg-[#0a0a0a]">
+        <div className="max-w-[1400px] mx-auto px-6 py-16">
+          <div className="bg-gradient-to-r from-[#111] to-[#050505] rounded-2xl border border-[#333] overflow-hidden relative flex flex-col md:flex-row items-center justify-between min-h-[300px] shadow-2xl">
+            <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiMzMzMiLz48L3N2Zz4=')]"></div>
+            
+            <div className="relative z-10 p-10 md:p-16 max-w-xl">
+              <div className="inline-block bg-[#222] text-gray-300 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded mb-4">Stage 2 Upgrades</div>
+              <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4 leading-none">Complete <span className="text-[#ff3333]">Performance</span> Packages</h2>
+              <p className="text-gray-400 mb-8 font-medium leading-relaxed">Save up to 15% when you bundle intake, exhaust, and tuning modules together. Expertly matched for optimal power gains and reliability.</p>
+              <Link to="/products" className="bg-white text-black px-8 py-4 rounded-md font-black uppercase tracking-widest text-xs hover:bg-[#ff3333] hover:text-white transition-colors duration-300 shadow-[0_10px_20px_rgba(255,255,255,0.1)] hover:shadow-[0_10px_30px_rgba(255,51,51,0.4)] inline-block">
+                View Bundles
+              </Link>
+            </div>
+            
+            <div className="relative z-10 p-10 md:p-0 md:pr-16 w-full md:w-auto flex justify-center">
+               <div className="w-64 h-64 bg-[#ff3333]/20 rounded-full blur-[80px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-slow"></div>
+               <img src="https://images.unsplash.com/photo-1600705722908-bab1e6191b1a?auto=format&fit=crop&w=400" className="relative z-10 drop-shadow-[0_20px_50px_rgba(255,51,51,0.2)] mix-blend-screen scale-110 object-contain hover:scale-125 transition-transform duration-700" alt="Engine Parts" />
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
