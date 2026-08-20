@@ -23,7 +23,7 @@ export default function ProductsTab({ products, setActionModal, deleteItem }) {
             </thead>
             <tbody>
               {products.map(product => (
-                <tr key={product.id} className="border-b border-[rgba(255,255,255,0.05)]">
+                <tr key={product.id} className="border-b border-[var(--border-color)]">
                   <td className="p-3">
                     <img src={product.images?.[0]?.image_url || '/placeholder.png'} alt={product.name} className="w-10 h-10 object-cover rounded bg-[var(--alt-bg)]" />
                   </td>

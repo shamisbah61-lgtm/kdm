@@ -119,7 +119,7 @@ export default function ProductDetail() {
             <div className="bg-gradient-to-br from-[var(--alt-bg)] to-[var(--bg-card)] aspect-square md:aspect-[4/3] lg:aspect-square rounded-[var(--border-radius-lg)] border border-[var(--border-color)] overflow-hidden flex items-center justify-center p-8 lg:p-12 shadow-2xl relative group">
               <img src={activeImage || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80'} alt={product.name} className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105 drop-shadow-2xl" />
               {product.discount_price && (
-                <div className="absolute top-6 left-6 bg-[var(--color-primary)] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-[0_4px_15px_rgba(220,38,38,0.5)]">
+                <div className="absolute top-6 left-6 bg-[var(--color-primary)] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.1)]">
                   Save {Math.round(((product.price - product.discount_price) / product.price) * 100)}%
                 </div>
               )}
@@ -130,7 +130,7 @@ export default function ProductDetail() {
                 {allImages.map((imgUrl, i) => (
                   <button
                     key={i}
-                    className={`aspect-square border-2 rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-300 p-2 flex items-center justify-center bg-[var(--alt-bg)] ${activeImage === imgUrl ? 'border-[var(--color-primary)] shadow-[0_0_15px_rgba(220,38,38,0.3)] scale-[1.02]' : 'border-[var(--border-color)] hover:border-[var(--color-text-muted)] hover:scale-105'}`}
+                    className={`aspect-square border-2 rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-300 p-2 flex items-center justify-center bg-[var(--alt-bg)] ${activeImage === imgUrl ? 'border-[var(--color-primary)] shadow-[0_2px_10px_rgba(0,0,0,0.1)] scale-[1.02]' : 'border-[var(--border-color)] hover:border-[var(--color-text-muted)] hover:scale-105'}`}
                     onClick={() => setActiveImage(imgUrl)}
                   >
                     <img src={imgUrl} alt={`Thumbnail ${i}`} className="w-full h-full object-contain" />
@@ -201,7 +201,7 @@ export default function ProductDetail() {
                 </div>
               )}
               
-              <button className="btn btn-primary w-full h-[60px] text-lg font-bold uppercase tracking-widest shadow-[0_10px_30px_rgba(220,38,38,0.3)] mb-4" onClick={handleBuyNow} disabled={product.stock_status === 'Out of Stock'}>
+              <button className="btn btn-primary w-full h-[60px] text-lg font-bold uppercase tracking-widest shadow-[0_4px_20px_rgba(0,0,0,0.05)] mb-4" onClick={handleBuyNow} disabled={product.stock_status === 'Out of Stock'}>
                 Buy It Now
               </button>
 

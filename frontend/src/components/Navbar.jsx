@@ -1,150 +1,158 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Heart, User, LogOut, Menu, Search, Phone, Mail, ChevronDown, X } from 'lucide-react';
+import { ShoppingBag, Heart, User, Search, Menu, X, ChevronRight, LogOut } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
-import logo from '../assets/logo.png';
 
 export default function Navbar() {
   const { isAuthenticated, logout, user } = useContext(AuthContext);
   const { totalItemsCount, wishlistCount } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLogout = async () => {
     await logout();
     navigate('/login');
   };
 
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Shop', path: '/products' },
+    { name: 'Categories', path: '/categories' },
+    { name: 'New Arrivals', path: '/products?sort=-created_at' },
+    { name: 'Collections', path: '/collections' },
+    { name: 'About', path: '/about' },
+  ];
+
   return (
-    <header className="bg-[#050505] w-full border-b border-[#222] sticky top-0 z-50 font-sans selection:bg-[#ff3333] selection:text-white">
-      {/* Top Header - Contact & Currency (Hidden on Mobile) */}
-      <div className="hidden lg:block bg-[#111] border-b border-[#222] py-2 text-xs text-gray-400 font-medium">
-        <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center">
-          <div className="flex gap-6">
-            <span className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Phone size={14} className="text-[#ff3333]" /> Support: (+91) 987 654 3210</span>
-            <span className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer"><Mail size={14} className="text-[#ff3333]" /> Sales: sales@kdmperformance.com</span>
-          </div>
-          <div className="flex gap-4">
-            <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors group">English <ChevronDown size={12} className="group-hover:rotate-180 transition-transform"/></span>
-            <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors group">₹ INR <ChevronDown size={12} className="group-hover:rotate-180 transition-transform"/></span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header - Logo, Search, Icons */}
-      <div className="max-w-[1400px] mx-auto px-6 py-5 flex flex-wrap lg:flex-nowrap items-center justify-between gap-6 md:gap-8">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 no-underline shrink-0 group">
-          <div className="text-white font-black text-3xl tracking-tighter uppercase flex items-center gap-1 group-hover:scale-105 transition-transform duration-300">
-            <span className="text-[#ff3333]">KDM</span>PERFORMANCE
-          </div>
-        </Link>
-
-        {/* Mobile Toggle */}
+    <header className={`w-full sticky top-0 z-50 transition-all duration-300 bg-white ${scrolled ? 'border-b border-[#EAEAEA] shadow-sm' : 'border-b border-transparent'}`}>
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+        
+        {/* Mobile Hamburger */}
         <button 
-          className="lg:hidden p-2 text-gray-300 hover:text-white hover:bg-[#111] rounded-md transition-colors"
-          onClick={() => setIsOpen(!isOpen)}
+          className="lg:hidden p-2 -ml-2 text-[#111111] hover:text-[#6B6B6B] transition-colors"
+          onClick={() => setIsOpen(true)}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <Menu size={24} strokeWidth={1.5} />
         </button>
 
-        {/* Search Bar (Hidden on very small screens, visible on md+) */}
-        <div className="hidden md:flex flex-1 max-w-2xl mx-8 border border-[#333] hover:border-[#ff3333]/50 focus-within:border-[#ff3333] focus-within:shadow-[0_0_15px_rgba(255,51,51,0.2)] rounded overflow-hidden h-12 items-center bg-[#111] transition-all duration-300">
-          <div className="px-5 text-sm font-bold text-gray-300 border-r border-[#333] h-full flex items-center bg-[#0a0a0a] shrink-0 cursor-pointer hover:text-white hover:bg-[#222] transition-colors">
-            All Parts <ChevronDown size={16} className="ml-2"/>
-          </div>
-          <input type="text" placeholder="Search by vehicle, part number, or keyword..." className="flex-1 h-full px-5 outline-none text-sm text-gray-200 bg-[#111] placeholder-gray-600 font-medium" />
-          <button className="bg-[#ff3333] hover:bg-[#e60000] text-white h-full px-8 flex items-center justify-center transition-colors">
-            <Search size={18} />
-          </button>
-        </div>
+        {/* LEFT: Brand Logo */}
+        <Link to="/" className="flex items-center no-underline shrink-0 z-50">
+          <span className="text-[#111111] font-bold text-2xl tracking-tight uppercase">Maram</span>
+        </Link>
 
-        {/* Icons (Wishlist, Account, Cart) */}
-        <div className="flex items-center gap-4 md:gap-6 shrink-0">
-          <Link to="/wishlist" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#111] border border-[#333] text-gray-400 hover:text-white hover:border-[#ff3333] hover:shadow-[0_0_15px_rgba(255,51,51,0.3)] hover:bg-[#1a1a1a] relative transition-all duration-300 group">
-            <Heart size={18} className="group-hover:scale-110 transition-transform" />
-            {wishlistCount > 0 && <span className="absolute -top-1 -right-1 bg-[#ff3333] text-white text-[10px] font-black px-1.5 py-0.5 rounded-full shadow-md animate-pulse">{wishlistCount}</span>}
+        {/* CENTER: Navigation Links (Desktop) */}
+        <nav className="hidden lg:flex items-center gap-8 xl:gap-12">
+          {navLinks.map((link) => (
+            <NavLink 
+              key={link.name} 
+              to={link.path} 
+              className={({ isActive }) => `text-[13px] font-medium tracking-wide transition-colors ${isActive ? 'text-[#111111]' : 'text-[#6B6B6B] hover:text-[#111111]'}`}
+            >
+              {link.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* RIGHT: Icons */}
+        <div className="flex items-center gap-5 lg:gap-6 shrink-0">
+          <button className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 hidden sm:block">
+            <Search size={20} strokeWidth={1.5} />
+          </button>
+          
+          <Link to="/wishlist" className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 relative hidden sm:block">
+            <Heart size={20} strokeWidth={1.5} />
+            {wishlistCount > 0 && <span className="absolute -top-1 -right-1 bg-[#111111] text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full">{wishlistCount}</span>}
           </Link>
           
           {isAuthenticated ? (
-            <div className="group relative">
-              <Link to="/profile" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#111] border border-[#333] text-gray-400 hover:text-white hover:border-[#ff3333] hover:shadow-[0_0_15px_rgba(255,51,51,0.3)] hover:bg-[#1a1a1a] transition-all duration-300">
-                <User size={18} className="group-hover:scale-110 transition-transform" />
+            <div className="group relative hidden sm:block">
+              <Link to="/profile" className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 block">
+                <User size={20} strokeWidth={1.5} />
               </Link>
-              <div className="absolute right-0 top-full mt-2 w-56 bg-[#111] border border-[#333] rounded-lg shadow-[0_15px_40px_rgba(0,0,0,0.8)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 overflow-hidden">
-                <div className="px-4 py-3 border-b border-[#222] bg-[#0a0a0a]">
-                  <p className="text-xs text-[#ff3333] uppercase tracking-wider font-bold mb-1">Welcome back</p>
-                  <p className="text-sm text-white font-medium truncate">{user?.email || 'Driver'}</p>
+              <div className="absolute right-0 top-full mt-4 w-56 bg-white border border-[#EAEAEA] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 rounded-sm">
+                <div className="px-5 py-3 border-b border-[#EAEAEA] mb-2">
+                  <p className="text-sm font-medium text-[#111111] truncate">{user?.email}</p>
                 </div>
-                <div className="py-2">
-                  {(user?.is_staff || user?.is_superuser) && (
-                    <Link to="/admin-dashboard" className="block px-4 py-2.5 text-sm text-gray-300 hover:bg-[#222] hover:text-[#ff3333] hover:pl-6 transition-all font-medium">Admin Dashboard</Link>
-                  )}
-                  <Link to="/profile" className="block px-4 py-2.5 text-sm text-gray-300 hover:bg-[#222] hover:text-[#ff3333] hover:pl-6 transition-all font-medium">My Garage</Link>
-                  <Link to="/orders" className="block px-4 py-2.5 text-sm text-gray-300 hover:bg-[#222] hover:text-[#ff3333] hover:pl-6 transition-all font-medium">Order History</Link>
-                </div>
-                <div className="border-t border-[#222] py-2">
-                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-[#ff3333] hover:bg-[#222] hover:pl-6 transition-all font-bold tracking-wide">Sign Out</button>
-                </div>
+                {(user?.is_staff || user?.is_superuser) && (
+                  <Link to="/admin-dashboard" className="block px-5 py-2 text-sm text-[#6B6B6B] hover:text-[#111111] hover:bg-[#F8F8F8] transition-colors">Admin Dashboard</Link>
+                )}
+                <Link to="/profile" className="block px-5 py-2 text-sm text-[#6B6B6B] hover:text-[#111111] hover:bg-[#F8F8F8] transition-colors">My Account</Link>
+                <Link to="/orders" className="block px-5 py-2 text-sm text-[#6B6B6B] hover:text-[#111111] hover:bg-[#F8F8F8] transition-colors">Orders</Link>
+                <button onClick={handleLogout} className="w-full text-left px-5 py-2 mt-2 text-sm text-[#111111] font-medium border-t border-[#EAEAEA] hover:bg-[#F8F8F8] transition-colors">Sign Out</button>
               </div>
             </div>
           ) : (
-            <Link to="/login" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#111] border border-[#333] text-gray-400 hover:text-white hover:border-[#ff3333] hover:shadow-[0_0_15px_rgba(255,51,51,0.3)] hover:bg-[#1a1a1a] transition-all duration-300 group">
-              <User size={18} className="group-hover:scale-110 transition-transform" />
+            <Link to="/login" className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 hidden sm:block">
+              <User size={20} strokeWidth={1.5} />
             </Link>
           )}
 
-          <Link to="/cart" className="flex items-center gap-3 bg-transparent border border-[#333] hover:border-[#ff3333] text-gray-300 hover:text-white px-5 py-2.5 rounded hover:bg-[#111] transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,51,51,0.2)] group">
-            <div className="relative text-[#ff3333]">
-              <ShoppingCart size={20} className="group-hover:-rotate-12 transition-transform" />
-              {totalItemsCount > 0 && <span className="absolute -top-2.5 -right-2.5 bg-[#ff3333] text-white text-[10px] font-black w-4.5 h-4.5 flex items-center justify-center rounded-full shadow-md animate-bounce">{totalItemsCount}</span>}
-            </div>
-            <div className="hidden sm:block text-left">
-              <div className="text-[9px] uppercase font-bold tracking-widest text-gray-500 leading-none mb-0.5">My Cart</div>
-              <div className="text-sm font-black leading-none">{totalItemsCount} Items</div>
-            </div>
+          <Link to="/cart" className="flex items-center gap-2 text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 relative group">
+            <ShoppingBag size={20} strokeWidth={1.5} />
+            {totalItemsCount > 0 ? (
+              <span className="absolute -top-1 -right-2 bg-[#111111] text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full group-hover:bg-[#333333] transition-colors">{totalItemsCount}</span>
+            ) : null}
           </Link>
         </div>
       </div>
 
-      {/* Navigation Menu (Black Background) */}
-      <div className={`lg:block ${isOpen ? 'block' : 'hidden'} bg-[#050505] border-t border-[#222] w-full relative z-40 shadow-xl lg:shadow-none transition-all duration-300`}>
-        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row lg:items-center px-2 lg:px-0">
-          
-          {/* Mobile Search (Visible only on small screens) */}
-          <div className="md:hidden p-4 bg-[#111] border-b border-[#222] mb-2 rounded-lg mt-2 mx-2">
-            <div className="flex border border-[#333] rounded overflow-hidden h-12 items-center bg-[#0a0a0a] focus-within:border-[#ff3333] transition-colors">
-              <input type="text" placeholder="Search parts..." className="flex-1 h-full px-4 outline-none text-sm text-gray-200 bg-transparent" />
-              <button className="bg-[#ff3333] text-white h-full px-5 flex items-center justify-center">
-                <Search size={18} />
-              </button>
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] lg:hidden">
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setIsOpen(false)}></div>
+          <div className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white shadow-2xl flex flex-col transform transition-transform duration-300">
+            <div className="px-6 py-6 border-b border-[#EAEAEA] flex justify-between items-center">
+              <span className="text-[#111111] font-bold text-xl tracking-tight uppercase">Maram</span>
+              <button onClick={() => setIsOpen(false)} className="p-1 text-[#6B6B6B] hover:text-[#111111]"><X size={24} strokeWidth={1.5} /></button>
+            </div>
+            
+            <div className="p-6">
+              <div className="flex border border-[#EAEAEA] rounded-sm overflow-hidden h-10 items-center bg-[#F8F8F8] focus-within:border-[#111111] transition-colors mb-8">
+                <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-[#111111] bg-transparent" />
+                <button className="text-[#6B6B6B] h-full px-3 flex items-center justify-center"><Search size={16} /></button>
+              </div>
+
+              <nav className="flex flex-col gap-1">
+                {navLinks.map((link) => (
+                  <NavLink 
+                    key={link.name} 
+                    to={link.path} 
+                    onClick={() => setIsOpen(false)}
+                    className={({ isActive }) => `py-3 text-base flex items-center justify-between border-b border-[#EAEAEA] transition-colors ${isActive ? 'text-[#111111] font-medium' : 'text-[#6B6B6B]'}`}
+                  >
+                    {link.name} <ChevronRight size={16} strokeWidth={1.5} className="text-[#EAEAEA]" />
+                  </NavLink>
+                ))}
+              </nav>
+            </div>
+
+            <div className="mt-auto p-6 bg-[#F8F8F8] border-t border-[#EAEAEA] flex flex-col gap-4">
+              {isAuthenticated ? (
+                <>
+                  <Link to="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-sm font-medium text-[#111111]"><User size={18} strokeWidth={1.5} /> My Account</Link>
+                  <Link to="/orders" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-sm font-medium text-[#111111]"><ShoppingBag size={18} strokeWidth={1.5} /> Orders</Link>
+                  <Link to="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-sm font-medium text-[#111111]"><Heart size={18} strokeWidth={1.5} /> Wishlist ({wishlistCount})</Link>
+                  <button onClick={() => { handleLogout(); setIsOpen(false); }} className="flex items-center gap-3 text-sm font-medium text-[#6B6B6B] mt-2 pt-4 border-t border-[#EAEAEA]"><LogOut size={18} strokeWidth={1.5} /> Sign Out</button>
+                </>
+              ) : (
+                <Link to="/login" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 bg-[#111111] text-white py-3 rounded-sm text-sm font-medium">
+                  <User size={16} /> Sign In / Register
+                </Link>
+              )}
             </div>
           </div>
-
-          <div className="hidden lg:flex items-center gap-3 bg-[#ff3333] hover:bg-[#e60000] transition-colors cursor-pointer text-white px-6 py-3.5 font-black uppercase text-xs tracking-wider w-[280px] shrink-0 group">
-            <Menu size={18} className="group-hover:scale-110 transition-transform" /> Shop Categories
-          </div>
-
-          <nav className="flex flex-col lg:flex-row lg:items-center lg:gap-8 px-4 lg:px-8 py-4 lg:py-0 w-full">
-            <NavLink to="/" className={({ isActive }) => `block py-3 lg:py-4 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b border-[#222] lg:border-none last:border-none ${isActive ? 'text-[#ff3333] lg:border-b-2 lg:border-[#ff3333]' : 'text-gray-400 hover:text-white hover:pl-2 lg:hover:pl-0'}`}>
-              Garage
-            </NavLink>
-            <NavLink to="/products" className={({ isActive }) => `block py-3 lg:py-4 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b border-[#222] lg:border-none last:border-none ${isActive ? 'text-[#ff3333] lg:border-b-2 lg:border-[#ff3333]' : 'text-gray-400 hover:text-white hover:pl-2 lg:hover:pl-0'}`}>
-              Parts Catalog
-            </NavLink>
-            <NavLink to="/products?sort=-created_at" className={({ isActive }) => `block py-3 lg:py-4 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b border-[#222] lg:border-none last:border-none flex items-center gap-2 ${isActive ? 'text-[#ff3333] lg:border-b-2 lg:border-[#ff3333]' : 'text-gray-400 hover:text-white hover:pl-2 lg:hover:pl-0'}`}>
-              New Drops <span className="bg-[#ff3333] text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-black tracking-widest">Hot</span>
-            </NavLink>
-            <NavLink to="/products?sort=price" className={({ isActive }) => `block py-3 lg:py-4 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b border-[#222] lg:border-none last:border-none ${isActive ? 'text-[#ff3333] lg:border-b-2 lg:border-[#ff3333]' : 'text-gray-400 hover:text-white hover:pl-2 lg:hover:pl-0'}`}>
-              Performance Deals
-            </NavLink>
-            <NavLink to="/contact" className={({ isActive }) => `block py-3 lg:py-4 text-xs font-black uppercase tracking-widest transition-all duration-300 border-b border-[#222] lg:border-none last:border-none ${isActive ? 'text-[#ff3333] lg:border-b-2 lg:border-[#ff3333]' : 'text-gray-400 hover:text-white hover:pl-2 lg:hover:pl-0'}`}>
-              Contact Us
-            </NavLink>
-          </nav>
         </div>
-      </div>
+      )}
     </header>
   );
 }

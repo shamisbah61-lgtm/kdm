@@ -21,7 +21,7 @@ export default function CategoriesTab({ categories, setActionModal, deleteItem }
             </thead>
             <tbody>
               {categories.map(cat => (
-                <tr key={cat.id} className="border-b border-[rgba(255,255,255,0.05)]">
+                <tr key={cat.id} className="border-b border-[var(--border-color)]">
                   <td className="p-3 font-bold">{cat.name}</td>
                   <td className="p-3 text-[var(--color-text-muted)]">{cat.slug}</td>
                   <td className="p-3 text-right">

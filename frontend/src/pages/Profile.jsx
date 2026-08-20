@@ -141,7 +141,7 @@ export default function Profile() {
         
         {/* Sidebar Profile Card */}
         <aside className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-8 text-center h-fit lg:sticky lg:top-[120px] shadow-xl">
-          <div className="w-[120px] h-[120px] rounded-full border-4 border-[var(--color-primary)] mx-auto mb-5 overflow-hidden shadow-[0_0_20px_rgba(220,38,38,0.3)] bg-[var(--alt-bg)] relative group">
+          <div className="w-[120px] h-[120px] rounded-full border-4 border-[var(--color-primary)] mx-auto mb-5 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] bg-[var(--alt-bg)] relative group">
             {imagePreview ? (
               <img
                 src={imagePreview}

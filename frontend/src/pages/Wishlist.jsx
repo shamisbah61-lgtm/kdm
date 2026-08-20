@@ -47,7 +47,7 @@ export default function Wishlist() {
           </div>
           <h2 className="text-4xl font-black mb-4 text-[var(--color-text-bright)]">Your Wishlist is Empty</h2>
           <p className="text-lg text-[var(--color-text-muted)] mb-10 max-w-md mx-auto">Save premium items you love here to easily find and buy them later.</p>
-          <Link to="/products" className="btn btn-primary !px-10 !py-4 text-base shadow-[0_10px_30px_rgba(220,38,38,0.3)]">
+          <Link to="/products" className="btn btn-primary !px-10 !py-4 text-base shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
             Explore Collection
           </Link>
         </div>
@@ -71,7 +71,7 @@ export default function Wishlist() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
         {wishlist.map(item => (
           <div key={item.id} className="flex flex-col h-full bg-transparent group/card">
-            <div className="relative h-[280px] bg-[var(--bg-card)] rounded-[var(--border-radius-lg)] border border-[var(--border-color)] flex items-center justify-center p-6 mb-5 overflow-hidden transition-all duration-500 group-hover/card:border-[var(--color-primary)] group-hover/card:shadow-[0_0_30px_rgba(220,38,38,0.15)] group/img">
+            <div className="relative h-[280px] bg-[var(--bg-card)] rounded-[var(--border-radius-lg)] border border-[var(--border-color)] flex items-center justify-center p-6 mb-5 overflow-hidden transition-all duration-500 group-hover/card:border-[var(--color-primary)] group-hover/card:shadow-[0_4px_20px_rgba(0,0,0,0.05)] group/img">
               <Link to={`/products/${item.product?.slug}`} className="block h-full w-full flex items-center justify-center">
                 <img src={item.product?.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'} alt={item.product?.name} className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-2xl" />
               </Link>

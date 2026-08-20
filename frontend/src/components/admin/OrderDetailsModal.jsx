@@ -58,7 +58,7 @@ export default function OrderDetailsModal({ selectedOrder, setSelectedOrder, han
           </thead>
           <tbody>
             {selectedOrder.items?.map(item => (
-              <tr key={item.id} className="border-b border-[rgba(255,255,255,0.05)]">
+              <tr key={item.id} className="border-b border-[var(--border-color)]">
                 <td className="p-3">
                   <div className="flex items-center gap-3">
                     <img src={item.product?.images?.[0]?.image_url || '/placeholder.png'} className="w-10 h-10 object-cover rounded" alt="" />

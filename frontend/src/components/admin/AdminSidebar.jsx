@@ -19,7 +19,7 @@ export default function AdminSidebar({ activeTab, setActiveTab, navigate, logout
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`flex items-center justify-between p-4 rounded-[var(--border-radius-md)] cursor-pointer transition-all duration-300 text-left ${isActive ? 'bg-[rgba(204,12,57,0.1)] border border-[var(--border-color)] text-[var(--color-primary)]' : 'bg-transparent border border-transparent text-[var(--color-text-bright)]'}`}
+            className={`flex items-center justify-between p-4 rounded-[var(--border-radius-md)] cursor-pointer transition-all duration-300 text-left ${isActive ? 'bg-[var(--bg-card-hover)] border border-[var(--border-color)] text-[var(--color-primary)]' : 'bg-transparent border border-transparent text-[var(--color-text-bright)]'}`}
           >
             <div className="flex items-center gap-3">
               <Icon size={20} />

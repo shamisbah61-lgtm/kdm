@@ -23,7 +23,7 @@ export default function CouponsTab({ coupons, setActionModal, deleteItem }) {
             </thead>
             <tbody>
               {coupons.map(coupon => (
-                <tr key={coupon.id} className="border-b border-[rgba(255,255,255,0.05)]">
+                <tr key={coupon.id} className="border-b border-[var(--border-color)]">
                   <td className="p-3 font-bold">{coupon.code}</td>
                   <td className="p-3 text-[var(--color-primary)]">₹{coupon.discount}</td>
                   <td className="p-3">{new Date(coupon.expiry).toLocaleDateString()}</td>

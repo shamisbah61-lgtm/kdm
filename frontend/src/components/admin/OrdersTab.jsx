@@ -21,7 +21,7 @@ export default function OrdersTab({ orders, updateOrderStatus, setSelectedOrder,
             </thead>
             <tbody>
               {orders.map(order => (
-                <tr key={order.id} className="border-b border-[rgba(255,255,255,0.05)]">
+                <tr key={order.id} className="border-b border-[var(--border-color)]">
                   <td className="p-3 font-bold">#{order.id}</td>
                   <td className="p-3">{new Date(order.created_at).toLocaleDateString()}</td>
                   <td className="p-3">{order.full_name}</td>

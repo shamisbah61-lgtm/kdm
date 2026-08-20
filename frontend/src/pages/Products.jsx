@@ -196,7 +196,7 @@ export default function Products() {
                 <input
                   type="number"
                   placeholder="Min"
-                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ff3333] transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-primary)] transition-colors"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
                 />
@@ -204,7 +204,7 @@ export default function Products() {
                 <input
                   type="number"
                   placeholder="Max"
-                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#ff3333] transition-colors"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-primary)] transition-colors"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
                 />
@@ -272,7 +272,7 @@ export default function Products() {
             <>
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[#ff3333] transition-all duration-300 flex flex-col h-full">
+                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[var(--color-primary)] transition-all duration-300 flex flex-col h-full">
                     {product.discount_price && (
                       <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 z-10 shadow-sm uppercase tracking-wider">Sale</span>
                     )}
@@ -287,7 +287,7 @@ export default function Products() {
                     {/* Hover Actions overlay (Wishlist/Cart shortcuts on desktop) */}
                     <div className="absolute top-2 left-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button 
-                        className="w-8 h-8 bg-white border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-[#ff3333] hover:text-white hover:border-[#ff3333] transition-colors shadow-sm"
+                        className="w-8 h-8 bg-white border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-[#ff3333] hover:text-white hover:border-[var(--color-primary)] transition-colors shadow-sm"
                         onClick={(e) => handleAddToWishlist(e, product.id)}
                         title="Toggle Wishlist"
                       >

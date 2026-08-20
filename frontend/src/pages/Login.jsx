@@ -131,7 +131,7 @@ export default function Login() {
             <div className="flex justify-end -mt-2">
               <a href="#" className="text-xs font-semibold text-[var(--color-text-dim)] hover:text-[var(--color-primary)] transition-colors no-underline">Forgot Password?</a>
             </div>
-            <button type="submit" className="btn btn-primary w-full h-[50px] text-base mt-2 shadow-[0_10px_30px_rgba(220,38,38,0.3)]">
+            <button type="submit" className="btn btn-primary w-full h-[50px] text-base mt-2 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
               Sign In to Account
             </button>
           </form>
@@ -212,7 +212,7 @@ export default function Login() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full h-[50px] text-base mt-2 shadow-[0_10px_30px_rgba(220,38,38,0.3)]">
+            <button type="submit" className="btn btn-primary w-full h-[50px] text-base mt-2 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
               Create Account
             </button>
             <p className="text-center text-xs text-[var(--color-text-dim)] mt-2">

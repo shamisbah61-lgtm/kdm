@@ -747,7 +747,7 @@ export default function Checkout() {
           }
         }
         .checkout-section-card {
-          background: rgba(22, 16, 13, 0.3);
+          background: var(--bg-card-hover);
           border: 1px solid var(--border-color);
           border-radius: var(--border-radius-lg);
           padding: 32px;
@@ -807,7 +807,7 @@ export default function Checkout() {
           border: 1px solid var(--border-color);
           border-radius: var(--border-radius-md);
           padding: 16px 20px;
-          background: rgba(22,16,13,0.2);
+          background: var(--bg-card-hover);
           cursor: pointer;
           transition: var(--transition-smooth);
         }
@@ -816,7 +816,7 @@ export default function Checkout() {
         }
         .address-option-label.selected {
           border-color: var(--color-primary);
-          background: rgba(212,175,55,0.05);
+          background: transparent;
         }
         .address-option-details {
           display: flex;
@@ -833,7 +833,7 @@ export default function Checkout() {
         }
         .btn-edit-addr:hover {
           color: var(--color-primary);
-          background: rgba(212,175,55,0.1);
+          background: transparent;
         }
         .addr-recipient {
           font-weight: 600;
@@ -856,13 +856,13 @@ export default function Checkout() {
           border: 1px solid var(--border-color);
           border-radius: var(--border-radius-md);
           padding: 20px;
-          background: rgba(22,16,13,0.2);
+          background: var(--bg-card-hover);
           cursor: pointer;
           transition: var(--transition-smooth);
         }
         .payment-option-label.selected {
           border-color: var(--color-primary);
-          background: rgba(212,175,55,0.05);
+          background: transparent;
         }
         .payment-icon {
           color: var(--color-primary);
@@ -928,7 +928,7 @@ export default function Checkout() {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.85);
+          background: var(--glass-bg);
           backdrop-filter: blur(8px);
           display: flex;
           align-items: center;
@@ -942,7 +942,7 @@ export default function Checkout() {
           width: 100%;
           max-width: 460px;
           padding: 32px;
-          box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.25);
+          box-shadow: var(--glass-shadow);
           position: relative;
         }
         .payment-modal-header {
@@ -984,10 +984,10 @@ export default function Checkout() {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 24px;
-          background: rgba(212, 175, 55, 0.05);
+          background: transparent;
           padding: 12px 18px;
           border-radius: var(--border-radius-md);
-          border: 1px solid rgba(212, 175, 55, 0.15);
+          border: 1px solid var(--border-color);
           color: var(--color-text-muted);
           font-size: 14px;
         }
@@ -1114,7 +1114,7 @@ export default function Checkout() {
         }
         .bank-item:hover {
           border-color: var(--color-primary);
-          background: rgba(212,175,55,0.02);
+          background: transparent;
         }
         .pay-now-btn {
           width: 100%;

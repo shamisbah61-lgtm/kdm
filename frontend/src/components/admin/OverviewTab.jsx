@@ -6,7 +6,7 @@ export default function OverviewTab({ stats, orders, setSelectedOrder }) {
       <h1 className="mb-8">Dashboard Overview</h1>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5 mb-8">
         <div className="card p-6 flex items-center gap-4">
-          <div className="bg-[rgba(204,12,57,0.1)] p-4 rounded-full text-[var(--color-primary)]">
+          <div className="bg-[var(--bg-card-hover)] p-4 rounded-full text-[var(--color-primary)]">
             <DollarSign size={24} />
           </div>
           <div>
@@ -15,7 +15,7 @@ export default function OverviewTab({ stats, orders, setSelectedOrder }) {
           </div>
         </div>
         <div className="card p-6 flex items-center gap-4">
-          <div className="bg-[rgba(21,128,61,0.1)] p-4 rounded-full text-[var(--color-success)]">
+          <div className="bg-[var(--bg-card-hover)] p-4 rounded-full text-[var(--color-success)]">
             <Package size={24} />
           </div>
           <div>
@@ -43,7 +43,7 @@ export default function OverviewTab({ stats, orders, setSelectedOrder }) {
               </thead>
               <tbody>
                 {orders.slice(0,5).map(order => (
-                  <tr key={order.id} className="border-b border-[rgba(255,255,255,0.05)]">
+                  <tr key={order.id} className="border-b border-[var(--border-color)]">
                     <td className="p-3 font-bold">#{order.id}</td>
                     <td className="p-3">{new Date(order.created_at).toLocaleDateString()}</td>
                     <td className="p-3">{order.full_name}</td>
