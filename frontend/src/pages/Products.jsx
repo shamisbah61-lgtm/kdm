@@ -272,9 +272,9 @@ export default function Products() {
             <>
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white border border-gray-200 p-4 relative group hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:border-[var(--color-primary)] transition-all duration-300 flex flex-col h-full">
+                  <div key={product.id} className="bg-white border border-[#F5F5F7] p-5 rounded-[28px] relative group shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full overflow-hidden">
                     {product.discount_price && (
-                      <span className="absolute top-2 right-2 bg-[#ff3333] text-white text-[10px] font-bold px-2 py-0.5 z-10 shadow-sm uppercase tracking-wider">Sale</span>
+                      <span className="absolute top-4 right-4 bg-[#ff3333] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm uppercase tracking-wider">Sale</span>
                     )}
                     <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0 p-2">
                       <img
@@ -285,9 +285,9 @@ export default function Products() {
                     </Link>
                     
                     {/* Hover Actions overlay (Wishlist/Cart shortcuts on desktop) */}
-                    <div className="absolute top-2 left-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute top-4 left-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                       <button 
-                        className="w-8 h-8 bg-white border border-gray-200 text-gray-600 flex items-center justify-center hover:bg-[#ff3333] hover:text-white hover:border-[var(--color-primary)] transition-colors shadow-sm"
+                        className="w-8 h-8 bg-white rounded-full border border-[#E5E5EA] text-gray-600 flex items-center justify-center hover:bg-[#ff3333] hover:text-white transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
                         onClick={(e) => handleAddToWishlist(e, product.id)}
                         title="Toggle Wishlist"
                       >

@@ -97,7 +97,7 @@ export default function Home() {
                 "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600"
               ];
               return (
-                <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block relative overflow-hidden bg-[#F8F8F8] aspect-[4/5]">
+                <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block relative overflow-hidden bg-[#F5F5F7] aspect-[4/5] rounded-[32px] border border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out">
                   <img 
                     src={fallbackImages[idx % fallbackImages.length]} 
                     alt={cat.name} 
@@ -129,8 +129,8 @@ export default function Home() {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
               {featuredProducts.slice(0, 8).map(product => (
-                <Link key={product.id} to={`/products/${product.slug}`} className="group block">
-                  <div className="relative bg-white aspect-[3/4] mb-4 overflow-hidden">
+                <Link key={product.id} to={`/products/${product.slug}`} className="group block bg-white rounded-[28px] p-3 border border-[#F5F5F7] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out overflow-hidden flex flex-col">
+                  <div className="relative bg-[#F5F5F7] aspect-[3/4] mb-4 overflow-hidden rounded-[20px]">
                     <img 
                       src={product.thumbnail || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80'} 
                       alt={product.name} 
@@ -160,7 +160,7 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <div className="flex flex-col">
+                  <div className="flex flex-col px-2 pb-2">
                     <span className="text-xs text-[#6B6B6B] mb-1">{product.category_name || 'Parts'}</span>
                     <h3 className="text-sm font-medium text-[#111111] truncate mb-2">{product.name}</h3>
                     

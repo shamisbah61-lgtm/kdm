@@ -268,14 +268,14 @@ export default function ProductDetail() {
               <div className="grid grid-cols-1 md:grid-cols-[1fr_350px] gap-12">
                 <div className="flex flex-col gap-6">
                   {reviews.length === 0 ? (
-                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-10 text-center">
+                    <div className="bg-white border border-[#F5F5F7] rounded-[28px] p-10 text-center shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)] transition-all duration-400">
                       <Star size={40} className="text-[var(--border-color)] mx-auto mb-4" />
                       <h4 className="text-xl font-bold text-[var(--color-text-bright)] mb-2">No Reviews Yet</h4>
                       <p className="text-[var(--color-text-muted)]">Be the first to share your thoughts on this product.</p>
                     </div>
                   ) : (
                     reviews.map((rev) => (
-                      <div key={rev.id} className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 shadow-sm">
+                      <div key={rev.id} className="bg-white border border-[#F5F5F7] rounded-[28px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)] transition-all duration-400">
                         <div className="flex justify-between items-start mb-4 gap-4 flex-wrap">
                           <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-[var(--color-primary)] to-amber-500 flex items-center justify-center shrink-0">
@@ -302,7 +302,7 @@ export default function ProductDetail() {
 
                 <div className="flex flex-col sticky top-[100px] h-fit">
                   {isAuthenticated ? (
-                    <div className="bg-gradient-to-b from-[var(--bg-card)] to-[var(--alt-bg)] border border-[var(--border-color)] rounded-2xl p-8 shadow-xl">
+                    <div className="bg-white border border-[#F5F5F7] rounded-[28px] p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)] transition-all duration-400">
                       <h3 className="text-xl font-bold mb-6 text-[var(--color-text-bright)] flex items-center gap-2"><Star className="text-[var(--color-primary)]"/> Write a Review</h3>
                       <form onSubmit={handleReviewSubmit}>
                         {submitError && <div className="bg-red-500/10 border border-red-500/30 text-red-500 p-4 rounded-xl mb-6 text-sm font-medium">{submitError}</div>}
@@ -326,7 +326,7 @@ export default function ProductDetail() {
                       </form>
                     </div>
                   ) : (
-                    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-8 text-center shadow-xl">
+                    <div className="bg-white border border-[#F5F5F7] rounded-[28px] p-8 text-center shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)] transition-all duration-400">
                       <div className="w-16 h-16 bg-[var(--alt-bg)] rounded-full flex items-center justify-center mx-auto mb-4 border border-[var(--border-color)]">
                         <ShieldAlert size={28} className="text-[var(--color-primary)]" />
                       </div>

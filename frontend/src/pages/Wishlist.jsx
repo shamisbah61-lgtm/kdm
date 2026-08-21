@@ -70,8 +70,8 @@ export default function Wishlist() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
         {wishlist.map(item => (
-          <div key={item.id} className="flex flex-col h-full bg-transparent group/card">
-            <div className="relative h-[280px] bg-[var(--bg-card)] rounded-[var(--border-radius-lg)] border border-[var(--border-color)] flex items-center justify-center p-6 mb-5 overflow-hidden transition-all duration-500 group-hover/card:border-[var(--color-primary)] group-hover/card:shadow-[0_4px_20px_rgba(0,0,0,0.05)] group/img">
+          <div key={item.id} className="bg-white border border-[#F5F5F7] p-5 rounded-[28px] relative shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full overflow-hidden group/card">
+            <div className="relative h-[280px] bg-[#F5F5F7] rounded-[20px] flex items-center justify-center p-6 mb-5 overflow-hidden transition-all duration-500 group/img">
               <Link to={`/products/${item.product?.slug}`} className="block h-full w-full flex items-center justify-center">
                 <img src={item.product?.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'} alt={item.product?.name} className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-2xl" />
               </Link>
@@ -93,7 +93,7 @@ export default function Wishlist() {
               <div className="flex items-center justify-center gap-3 mt-auto mb-4">
                 <span className="text-[20px] font-black text-[var(--color-text-bright)]">₹{item.product?.discount_price || item.product?.price}</span>
               </div>
-              <button className="btn btn-secondary w-full group-hover/card:bg-[var(--color-primary)] group-hover/card:text-white group-hover/card:border-[var(--color-primary)] transition-all duration-300 shadow-sm" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
+              <button className="btn btn-secondary w-full transition-all duration-300 shadow-sm" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
                 <ShoppingBag size={16} className="mr-2" /> {item.product?.stock_status === 'Out of Stock' ? 'Sold Out' : 'Move to Cart'}
               </button>
             </div>
