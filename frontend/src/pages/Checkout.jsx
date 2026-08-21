@@ -164,7 +164,7 @@ export default function Checkout() {
       key: key_id,
       amount: amount.toString(),
       currency: currency,
-      name: "MaramCraft",
+      name: "KDM Automotive",
       description: `Payment for Order #${order.order_number}`,
       order_id: razorpay_order_id,
       handler: async function (response) {
@@ -195,7 +195,7 @@ export default function Checkout() {
         name: "Customer", // Can be dynamically filled based on user profile
       },
       theme: {
-        color: "#d32f2f" // MaramCraft Red
+        color: "#d32f2f" // KDM Red
       }
     };
 
@@ -280,7 +280,7 @@ export default function Checkout() {
         <h1>Order Placed Successfully!</h1>
         <p className="success-order-num">Order Number: <b>{orderSuccess.order_number}</b></p>
         <p className="success-msg">
-          Thank you for choosing MaramCraft. Your automotive accessories are confirmed and we are preparing them for shipment.
+          Thank you for choosing KDM Automotive. Your automotive accessories are confirmed and we are preparing them for shipment.
         </p>
         <div className="success-actions">
 
@@ -541,7 +541,7 @@ export default function Checkout() {
             {paymentStep === 'input' && (
               <form onSubmit={handlePaymentSubmit} className="payment-modal-form">
                 <div className="modal-amount-row">
-                  <span>Pay MaramCraft</span>
+                  <span>Pay KDM Automotive</span>
                   <span className="modal-amount">₹{calculateFinalAmount()}</span>
                 </div>
 

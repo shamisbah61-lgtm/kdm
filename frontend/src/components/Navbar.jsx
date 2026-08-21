@@ -47,7 +47,7 @@ export default function Navbar() {
 
         {/* LEFT: Brand Logo */}
         <Link to="/" className="flex items-center no-underline shrink-0 z-50">
-          <span className="text-[#111111] font-bold text-2xl tracking-tight uppercase">Maram</span>
+          <span className="text-[#111111] font-bold text-2xl tracking-tight uppercase">KDM</span>
         </Link>
 
         {/* CENTER: Navigation Links (Desktop) */}
@@ -112,7 +112,7 @@ export default function Navbar() {
           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setIsOpen(false)}></div>
           <div className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white shadow-2xl flex flex-col transform transition-transform duration-300">
             <div className="px-6 py-6 border-b border-[#EAEAEA] flex justify-between items-center">
-              <span className="text-[#111111] font-bold text-xl tracking-tight uppercase">Maram</span>
+              <span className="text-[#111111] font-bold text-xl tracking-tight uppercase">KDM</span>
               <button onClick={() => setIsOpen(false)} className="p-1 text-[#6B6B6B] hover:text-[#111111]"><X size={24} strokeWidth={1.5} /></button>
             </div>
             

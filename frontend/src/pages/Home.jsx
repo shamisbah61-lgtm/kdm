@@ -55,7 +55,7 @@ export default function Home() {
       <section className="w-full px-6 md:px-10 py-8 lg:py-12">
         <div className="max-w-[1440px] mx-auto relative rounded-lg overflow-hidden h-[65vh] md:h-[75vh] flex items-center bg-[#F8F8F8]">
           <img 
-            src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80" 
+            src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1440&q=80" 
             alt="Editorial Campaign" 
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
@@ -63,10 +63,10 @@ export default function Home() {
           
           <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-2xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6">
-              Designed for Everyday Living
+              Precision Engineering for the Track
             </h1>
             <p className="text-base md:text-lg text-white/90 font-medium mb-10 max-w-md">
-              Discover our latest collection of premium essentials. Crafted with uncompromising attention to detail and quality.
+              Discover our latest collection of premium KDM aftermarket parts. Engineered with uncompromising attention to performance and quality.
             </p>
             <Link 
               to="/products" 
@@ -91,10 +91,10 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {categories.slice(0, 4).map((cat, idx) => {
               const fallbackImages = [
-                "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1611080962364-07d0f3ebba00?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=600"
+                "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1599818815777-62f7e7f1eab6?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1621215418197-0fc5451eb9dc?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600"
               ];
               return (
                 <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block relative overflow-hidden bg-[#F8F8F8] aspect-[4/5]">
@@ -161,7 +161,7 @@ export default function Home() {
                   </div>
                   
                   <div className="flex flex-col">
-                    <span className="text-xs text-[#6B6B6B] mb-1">{product.category_name || 'Essentials'}</span>
+                    <span className="text-xs text-[#6B6B6B] mb-1">{product.category_name || 'Parts'}</span>
                     <h3 className="text-sm font-medium text-[#111111] truncate mb-2">{product.name}</h3>
                     
                     <div className="flex items-center gap-1 mb-2">
@@ -200,9 +200,9 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-stretch gap-0 border border-[#EAEAEA]">
           <div className="md:w-1/2 p-10 md:p-16 lg:p-24 flex flex-col justify-center bg-white">
             <span className="text-xs font-bold uppercase tracking-[0.1em] text-[#6B6B6B] mb-4">Our Philosophy</span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Elevating the Everyday.</h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Elevating Performance.</h2>
             <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
-              We believe in creating products that stand the test of time. By combining traditional craftsmanship with modern design principles, we deliver essentials that are as beautiful as they are functional.
+              We believe in creating parts that withstand the ultimate test of the track. By combining precision engineering with aggressive styling, we deliver aftermarket solutions that dominate the competition.
             </p>
             <Link to="/about" className="inline-flex items-center text-sm font-medium border-b border-[#111111] pb-1 w-max hover:text-[#6B6B6B] hover:border-[#6B6B6B] transition-colors">
               Discover Our Story
@@ -210,8 +210,8 @@ export default function Home() {
           </div>
           <div className="md:w-1/2 min-h-[400px] bg-[#F8F8F8]">
             <img 
-              src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80" 
-              alt="Craftsmanship" 
+              src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80" 
+              alt="Performance Engineering" 
               className="w-full h-full object-cover grayscale-[20%]"
             />
           </div>

@@ -14,9 +14,9 @@ from django.core.files.base import ContentFile
 import urllib.request
 import json
 
-# Delete the wood products I just added
-wood_products = ['Handcrafted Teak Wood Bowl', 'Carved Wooden Wall Art', 'Minimalist Oak Coffee Table', 'Wooden Spice Box with Glass Lid', 'Rosewood Elephant Figurine', 'Mahogany Bookshelf']
-Product.objects.filter(name__in=wood_products).delete()
+# Delete all existing products and categories to start fresh
+Product.objects.all().delete()
+Category.objects.all().delete()
 
 User = get_user_model()
 admin_user = User.objects.filter(is_superuser=True).first() or User.objects.first()

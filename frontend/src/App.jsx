@@ -119,7 +119,7 @@ function MainAppLayout() {
 
               <div className="flex flex-col gap-4">
                 <h3 className="text-[#111111] font-medium text-sm tracking-widest uppercase mb-2">Company</h3>
-                <Link to="/about" className="text-[#6B6B6B] hover:text-[#111111] transition-colors text-sm">About Maram</Link>
+                <Link to="/about" className="text-[#6B6B6B] hover:text-[#111111] transition-colors text-sm">About KDM</Link>
                 <Link to="/privacy" className="text-[#6B6B6B] hover:text-[#111111] transition-colors text-sm">Privacy Policy</Link>
                 <Link to="/terms" className="text-[#6B6B6B] hover:text-[#111111] transition-colors text-sm">Terms of Service</Link>
                 <Link to="/careers" className="text-[#6B6B6B] hover:text-[#111111] transition-colors text-sm">Careers</Link>
@@ -137,7 +137,7 @@ function MainAppLayout() {
             </div>
             
             <div className="pt-8 border-t border-[#EAEAEA] flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-[#6B6B6B] text-sm">© {new Date().getFullYear()} Maram. All rights reserved.</p>
+              <p className="text-[#6B6B6B] text-sm">© {new Date().getFullYear()} KDM Automotive. All rights reserved.</p>
               <div className="flex gap-4">
                 {/* Dummy Social/Payment Icons space */}
                 <div className="w-8 h-5 bg-[#F8F8F8] border border-[#EAEAEA] rounded-sm"></div>
