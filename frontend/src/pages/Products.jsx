@@ -272,15 +272,15 @@ export default function Products() {
             <>
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white border border-[#F5F5F7] p-5 rounded-[28px] relative group shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full overflow-hidden">
+                  <div key={product.id} className="bg-white rounded-3xl p-5 border border-transparent hover:border-black/5 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full overflow-hidden relative group">
                     {product.discount_price && (
                       <span className="absolute top-4 right-4 bg-[#ff3333] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm uppercase tracking-wider">Sale</span>
                     )}
-                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0 p-2">
+                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0 p-4 bg-[#F5F5F7] rounded-2xl group-hover:bg-white transition-colors duration-500">
                       <img
                         src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400'}
                         alt={product.name}
-                        className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                        className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
                       />
                     </Link>
                     
@@ -321,7 +321,7 @@ export default function Products() {
                       </div>
                       
                       <button 
-                        className="w-full bg-[#222] hover:bg-[#ff3333] text-white py-2 px-2 text-[11px] md:text-xs font-bold uppercase transition-colors flex items-center justify-center gap-2 mt-auto shadow-sm"
+                        className="w-full bg-[#111111] hover:bg-[#333333] text-white py-2.5 px-3 rounded-full text-[12px] font-medium transition-all active:scale-95 flex items-center justify-center gap-2 mt-auto shadow-sm"
                         onClick={() => addToCart(product.id, 1)}
                       >
                         <ShoppingBag size={14} /> Add to Cart

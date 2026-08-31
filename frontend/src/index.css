@@ -13,28 +13,32 @@
 
   --color-primary: #111111;
   --color-primary-hover: #333333;
-  --color-accent: #6B6B6B;
+  --color-accent: #0066CC; /* Apple blue */
   
   --color-text-bright: #111111; 
   --color-text-muted: #6B6B6B; 
   --color-text-dim: #9CA3AF;    
 
-  --color-success: #10B981;
-  --color-error: #EF4444;
-  --color-warning: #F59E0B;
+  --color-success: #34C759; /* Apple green */
+  --color-error: #FF3B30; /* Apple red */
+  --color-warning: #FFCC00; /* Apple yellow */
 
-  --glass-bg: rgba(255, 255, 255, 0.98);
+  --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(0, 0, 0, 0.05);
-  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
 
-  --alt-bg: #F8F8F8;
+  --alt-bg: #F5F5F7;
   --form-bg: #FFFFFF;
   --footer-bg: #FFFFFF;
 
-  --transition-smooth: all 0.25s ease;
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 18px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 * {
@@ -49,13 +53,14 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-x: hidden;
+  letter-spacing: -0.01em;
 }
 
 ::selection {
-  background-color: #EAEAEA;
-  color: #111111;
+  background-color: #0066CC;
+  color: #FFFFFF;
 }
 
 /* Scrollbars */

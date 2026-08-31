@@ -139,7 +139,7 @@ export default function Home() {
               ];
               return (
                 <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block flex flex-col items-center text-center">
-                  <div className="relative overflow-hidden bg-[#FBFBFD] w-full aspect-square rounded-3xl mb-6 flex items-center justify-center p-6 border border-[#EAEAEA]/50 hover:shadow-lg transition-shadow duration-500 ease-out">
+                  <div className="relative overflow-hidden bg-[#F5F5F7] w-full aspect-square rounded-[28px] mb-6 flex items-center justify-center p-6 border border-transparent group-hover:bg-white group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] group-hover:border-black/5 transition-all duration-500 ease-out">
                     <img 
                       src={fallbackImages[idx % fallbackImages.length]} 
                       alt={cat.name} 
@@ -170,7 +170,7 @@ export default function Home() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.slice(0, 8).map(product => (
-                <Link key={product.id} to={`/products/${product.slug}`} className="group block bg-white rounded-[24px] p-6 border border-[#EAEAEA]/40 hover:shadow-xl transition-shadow duration-500 flex flex-col items-center text-center">
+                <Link key={product.id} to={`/products/${product.slug}`} className="group block bg-white rounded-3xl p-6 border border-transparent hover:border-black/5 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 flex flex-col items-center text-center">
                   <div className="relative w-full aspect-square mb-6 overflow-hidden flex justify-center items-center">
                     <img 
                       src={product.thumbnail || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80'} 
