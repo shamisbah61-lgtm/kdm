@@ -272,60 +272,64 @@ export default function Products() {
             <>
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-white rounded-3xl p-5 border border-transparent hover:border-black/5 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full overflow-hidden relative group">
-                    {product.discount_price && (
-                      <span className="absolute top-4 right-4 bg-[#ff3333] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm uppercase tracking-wider">Sale</span>
-                    )}
-                    <Link to={`/products/${product.slug}`} className="block h-32 md:h-40 flex items-center justify-center mb-4 shrink-0 p-4 bg-[#F5F5F7] rounded-2xl group-hover:bg-white transition-colors duration-500">
-                      <img
-                        src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400'}
-                        alt={product.name}
-                        className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </Link>
+                  <div key={product.id} className="group relative flex flex-col bg-white rounded-3xl p-4 sm:p-5 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 h-full border border-transparent hover:border-black/5">
                     
-                    {/* Hover Actions overlay (Wishlist/Cart shortcuts on desktop) */}
-                    <div className="absolute top-4 left-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    <Link to={`/products/${product.slug}`} className="absolute inset-0 z-0 rounded-3xl" aria-label={`View ${product.name}`}></Link>
+                    
+                    <div className="relative z-0 w-full aspect-[4/5] mb-5 rounded-2xl bg-[#FBFBFD] overflow-hidden flex items-center justify-center p-6 transition-colors duration-500 group-hover:bg-white">
+                      {product.discount_price && (
+                        <span className="absolute top-3 left-3 bg-[#E83422] text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10 shadow-sm tracking-widest uppercase">Sale</span>
+                      )}
+                      
+                      {/* Wishlist Button Overlay */}
                       <button 
-                        className="w-8 h-8 bg-white rounded-full border border-[#E5E5EA] text-gray-600 flex items-center justify-center hover:bg-[#ff3333] hover:text-white transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
-                        onClick={(e) => handleAddToWishlist(e, product.id)}
+                        className="absolute top-3 right-3 z-20 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full border border-[#EAEAEA] text-gray-500 flex items-center justify-center hover:bg-white hover:text-[#E83422] hover:border-[#E83422] transition-colors shadow-sm"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAddToWishlist(e, product.id); }}
                         title="Toggle Wishlist"
                       >
                         <Heart 
                           size={14} 
                           fill={wishlistIds.has(product.id) ? 'currentColor' : 'none'} 
-                          className={wishlistIds.has(product.id) ? 'text-[#ff3333] hover:text-white' : ''}
+                          className={wishlistIds.has(product.id) ? 'text-[#E83422]' : ''}
                         />
                       </button>
+
+                      <img 
+                        src={product.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400'} 
+                        alt={product.name} 
+                        className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.03]" 
+                      />
                     </div>
                     
-                    <div className="flex flex-col flex-grow">
-                      <div className="text-[10px] text-gray-500 uppercase font-bold mb-1">{product.category_name}</div>
-                      <div className="flex gap-1 mb-2">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={10} className="fill-[#f59e0b] text-[#f59e0b]" />
-                        ))}
-                      </div>
-                      <Link to={`/products/${product.slug}`} className="text-xs md:text-sm font-bold text-gray-700 line-clamp-2 mb-2 hover:text-[#ff3333] min-h-[32px] md:min-h-[40px] leading-snug">
-                        {product.name}
-                      </Link>
-                      <div className="flex items-center gap-2 mb-4">
-                        {product.discount_price ? (
-                          <>
-                            <span className="font-black text-[#ff3333] text-base md:text-lg">₹{product.discount_price}</span>
-                            <span className="text-[10px] md:text-xs font-medium text-gray-400 line-through">₹{product.price}</span>
-                          </>
-                        ) : (
-                          <span className="font-black text-gray-900 text-base md:text-lg">₹{product.price}</span>
-                        )}
+                    <div className="flex flex-col flex-1 text-left px-1 relative z-0 pointer-events-none">
+                      <div className="text-[11px] font-semibold text-[#86868B] uppercase tracking-wider mb-1.5">{product.category_name || 'Accessories'}</div>
+                      <h3 className="text-[16px] md:text-[17px] font-semibold text-[#1D1D1F] line-clamp-2 leading-snug mb-1">{product.name}</h3>
+                      <div className="flex items-center gap-1 mb-4 opacity-80">
+                        {[...Array(5)].map((_, i) => <Star key={i} size={10} className="fill-[#F59E0B] text-[#F59E0B]" />)}
                       </div>
                       
-                      <button 
-                        className="w-full bg-[#111111] hover:bg-[#333333] text-white py-2.5 px-3 rounded-full text-[12px] font-medium transition-all active:scale-95 flex items-center justify-center gap-2 mt-auto shadow-sm"
-                        onClick={() => addToCart(product.id, 1)}
-                      >
-                        <ShoppingBag size={14} /> Add to Cart
-                      </button>
+                      <div className="flex items-end justify-between mt-auto pt-4 border-t border-[#F5F5F7] pointer-events-auto relative z-10">
+                        <div className="flex flex-col">
+                          <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-wider mb-0.5">Price</span>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            {product.discount_price ? (
+                              <>
+                                <span className="text-[16px] font-bold text-[#1D1D1F]">₹{product.discount_price}</span>
+                                <span className="text-[12px] font-medium text-[#86868B] line-through">₹{product.price}</span>
+                              </>
+                            ) : (
+                              <span className="text-[16px] font-bold text-[#1D1D1F]">₹{product.price}</span>
+                            )}
+                          </div>
+                        </div>
+                        
+                        <button 
+                          className="bg-[#F5F5F7] hover:bg-[#1D1D1F] text-[#1D1D1F] hover:text-white text-[13px] font-semibold py-2 px-4 rounded-full transition-all active:scale-95 shrink-0"
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToCart(product.id, 1); }}
+                        >
+                          Buy
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}

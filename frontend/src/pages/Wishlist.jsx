@@ -70,32 +70,58 @@ export default function Wishlist() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
         {wishlist.map(item => (
-          <div key={item.id} className="bg-white border border-[#F5F5F7] p-5 rounded-[28px] relative shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full overflow-hidden group/card">
-            <div className="relative h-[280px] bg-[#F5F5F7] rounded-[20px] flex items-center justify-center p-6 mb-5 overflow-hidden transition-all duration-500 group/img">
-              <Link to={`/products/${item.product?.slug}`} className="block h-full w-full flex items-center justify-center">
-                <img src={item.product?.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'} alt={item.product?.name} className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover/img:scale-110 drop-shadow-2xl" />
-              </Link>
+          <div key={item.id} className="group relative flex flex-col bg-white rounded-3xl p-4 sm:p-5 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 h-full border border-transparent hover:border-black/5">
+            
+            <Link to={`/products/${item.product?.slug}`} className="absolute inset-0 z-0 rounded-3xl" aria-label={`View ${item.product?.name}`}></Link>
+            
+            <div className="relative z-0 w-full aspect-[4/5] mb-5 rounded-2xl bg-[#FBFBFD] overflow-hidden flex items-center justify-center p-6 transition-colors duration-500 group-hover:bg-white">
+              {item.product?.discount_price && (
+                <span className="absolute top-3 left-3 bg-[#E83422] text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10 shadow-sm tracking-widest uppercase">Sale</span>
+              )}
               
+              {/* Remove Button Overlay */}
               <button 
-                className="absolute top-4 right-4 bg-red-500/10 hover:bg-red-500 border border-red-500/30 text-red-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-10 shadow-lg hover:scale-110" 
-                onClick={() => handleRemove(item.id)}
+                className="absolute top-3 right-3 z-20 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full border border-[#EAEAEA] text-gray-500 flex items-center justify-center hover:bg-white hover:text-[#E83422] hover:border-[#E83422] transition-colors shadow-sm"
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleRemove(item.id); }}
                 title="Remove from Wishlist"
               >
-                <Trash2 size={18} />
+                <Trash2 size={14} />
               </button>
+
+              <img 
+                src={item.product?.thumbnail || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400'} 
+                alt={item.product?.name} 
+                className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.03]" 
+              />
             </div>
             
-            <div className="flex flex-col grow px-2 text-center">
-              <div className="text-[10px] text-[var(--color-text-dim)] uppercase tracking-widest font-bold mb-1.5">{item.product?.category_name || 'Accessory'}</div>
-              <Link to={`/products/${item.product?.slug}`} className="text-[17px] font-bold text-[var(--color-text-bright)] no-underline mb-3 line-clamp-2 hover:text-[var(--color-primary)] transition-colors leading-snug" title={item.product?.name}>
-                {item.product?.name}
-              </Link>
-              <div className="flex items-center justify-center gap-3 mt-auto mb-4">
-                <span className="text-[20px] font-black text-[var(--color-text-bright)]">₹{item.product?.discount_price || item.product?.price}</span>
+            <div className="flex flex-col flex-1 text-left px-1 relative z-0 pointer-events-none">
+              <div className="text-[11px] font-semibold text-[#86868B] uppercase tracking-wider mb-1.5">{item.product?.category_name || 'Accessory'}</div>
+              <h3 className="text-[16px] md:text-[17px] font-semibold text-[#1D1D1F] line-clamp-2 leading-snug mb-1">{item.product?.name}</h3>
+              
+              <div className="flex items-end justify-between mt-auto pt-4 border-t border-[#F5F5F7] pointer-events-auto relative z-10">
+                <div className="flex flex-col">
+                  <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-wider mb-0.5">Price</span>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    {item.product?.discount_price ? (
+                      <>
+                        <span className="text-[16px] font-bold text-[#1D1D1F]">₹{item.product?.discount_price}</span>
+                        <span className="text-[12px] font-medium text-[#86868B] line-through">₹{item.product?.price}</span>
+                      </>
+                    ) : (
+                      <span className="text-[16px] font-bold text-[#1D1D1F]">₹{item.product?.price}</span>
+                    )}
+                  </div>
+                </div>
+                
+                <button 
+                  className="bg-[#F5F5F7] hover:bg-[#1D1D1F] text-[#1D1D1F] hover:text-white text-[13px] font-semibold py-2 px-4 rounded-full transition-all active:scale-95 shrink-0 disabled:opacity-50 disabled:pointer-events-none"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToCart(item.product?.id, 1); }}
+                  disabled={item.product?.stock_status === 'Out of Stock'}
+                >
+                  {item.product?.stock_status === 'Out of Stock' ? 'Sold Out' : 'Move to Cart'}
+                </button>
               </div>
-              <button className="btn btn-secondary w-full" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
-                <ShoppingBag size={16} className="mr-2" /> {item.product?.stock_status === 'Out of Stock' ? 'Sold Out' : 'Move to Cart'}
-              </button>
             </div>
           </div>
         ))}

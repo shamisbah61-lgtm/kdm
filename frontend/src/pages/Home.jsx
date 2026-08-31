@@ -170,38 +170,50 @@ export default function Home() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.slice(0, 8).map(product => (
-                <Link key={product.id} to={`/products/${product.slug}`} className="group block bg-white rounded-3xl p-6 border border-transparent hover:border-black/5 shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 flex flex-col items-center text-center">
-                  <div className="relative w-full aspect-square mb-6 overflow-hidden flex justify-center items-center">
+                <div key={product.id} className="group relative flex flex-col bg-white rounded-3xl p-4 sm:p-5 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 h-full border border-transparent hover:border-black/5">
+                  <Link to={`/products/${product.slug}`} className="absolute inset-0 z-0 rounded-3xl" aria-label={`View ${product.name}`}></Link>
+                  
+                  <div className="relative z-0 w-full aspect-[4/5] mb-5 rounded-2xl bg-[#FBFBFD] overflow-hidden flex items-center justify-center p-6 transition-colors duration-500 group-hover:bg-white">
+                    {product.discount_price && (
+                      <span className="absolute top-3 left-3 bg-[#E83422] text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10 shadow-sm tracking-widest uppercase">Sale</span>
+                    )}
                     <img 
                       src={product.thumbnail || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80'} 
                       alt={product.name} 
-                      className="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" 
+                      className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.03]" 
                     />
-                    
-                    {/* Tags */}
-                    {product.discount_price && (
-                      <div className="absolute top-0 left-0 bg-[#E83422] text-white text-[11px] font-semibold px-3 py-1 rounded-full tracking-wide">
-                        Sale
-                      </div>
-                    )}
                   </div>
                   
-                  <div className="flex flex-col flex-1 justify-end items-center w-full">
-                    <span className="text-[12px] font-medium text-[#6B6B6B] mb-2">{product.category_name || 'Parts'}</span>
-                    <h3 className="text-lg font-semibold text-[#111111] line-clamp-2 mb-3 leading-snug">{product.name}</h3>
-
-                    <div className="flex items-center gap-2 mt-auto">
-                      {product.discount_price ? (
-                        <>
-                          <span className="text-base font-semibold text-[#111111]">₹{product.discount_price}</span>
-                          <span className="text-sm text-[#9CA3AF] line-through">₹{product.price}</span>
-                        </>
-                      ) : (
-                        <span className="text-base font-semibold text-[#111111]">₹{product.price}</span>
-                      )}
+                  <div className="flex flex-col flex-1 text-left px-1 relative z-0 pointer-events-none">
+                    <div className="text-[11px] font-semibold text-[#86868B] uppercase tracking-wider mb-1.5">{product.category_name || 'Accessories'}</div>
+                    <h3 className="text-[17px] font-semibold text-[#1D1D1F] line-clamp-2 leading-snug mb-1">{product.name}</h3>
+                    <div className="flex items-center gap-1 mb-4 opacity-80">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={10} className="fill-[#F59E0B] text-[#F59E0B]" />)}
+                    </div>
+                    
+                    <div className="flex items-end justify-between mt-auto pt-4 border-t border-[#F5F5F7] pointer-events-auto relative z-10">
+                      <div className="flex flex-col">
+                        <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-wider mb-0.5">Price</span>
+                        <div className="flex items-center gap-2">
+                          {product.discount_price ? (
+                            <>
+                              <span className="text-[16px] font-bold text-[#1D1D1F]">₹{product.discount_price}</span>
+                              <span className="text-[13px] font-medium text-[#86868B] line-through">₹{product.price}</span>
+                            </>
+                          ) : (
+                            <span className="text-[16px] font-bold text-[#1D1D1F]">₹{product.price}</span>
+                          )}
+                        </div>
+                      </div>
+                      <button 
+                        className="bg-[#F5F5F7] hover:bg-[#1D1D1F] text-[#1D1D1F] hover:text-white text-[13px] font-semibold py-2 px-5 rounded-full transition-all active:scale-95"
+                        onClick={(e) => handleQuickAdd(e, product.id)}
+                      >
+                        Buy
+                      </button>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           )}
