@@ -98,15 +98,15 @@ export default function ProductDetail() {
       
       {/* Breadcrumb */}
       <div className="bg-[var(--bg-card)] border-b border-[var(--border-color)] py-4 mb-10">
-        <div className="container">
-          <div className="flex items-center gap-3 text-sm font-medium text-[var(--color-text-dim)] overflow-x-auto [scrollbar-width:none]">
-            <Link to="/" className="hover:text-[var(--color-primary)] transition-colors whitespace-nowrap">Home</Link>
+        <div className="container max-w-6xl mx-auto px-6">
+          <div className="flex items-center gap-2 text-[13px] font-medium text-[#86868B] overflow-x-auto [scrollbar-width:none]">
+            <Link to="/" className="hover:text-[#1D1D1F] transition-colors whitespace-nowrap">Home</Link>
             <span>/</span>
-            <Link to="/products" className="hover:text-[var(--color-primary)] transition-colors whitespace-nowrap">Shop</Link>
+            <Link to="/products" className="hover:text-[#1D1D1F] transition-colors whitespace-nowrap">Shop</Link>
             <span>/</span>
-            <Link to={`/products?category=${product.category?.slug || ''}`} className="hover:text-[var(--color-primary)] transition-colors whitespace-nowrap">{product.category_name}</Link>
+            <Link to={`/products?category=${product.category?.slug || ''}`} className="hover:text-[#1D1D1F] transition-colors whitespace-nowrap">{product.category_name}</Link>
             <span>/</span>
-            <span className="text-[var(--color-text-bright)] whitespace-nowrap overflow-hidden text-ellipsis">{product.name}</span>
+            <span className="text-[#1D1D1F] whitespace-nowrap overflow-hidden text-ellipsis">{product.name}</span>
           </div>
         </div>
       </div>
@@ -116,10 +116,10 @@ export default function ProductDetail() {
           
           {/* Images Gallery */}
           <div className="flex flex-col gap-4 sticky top-[100px] h-fit">
-            <div className="bg-gradient-to-br from-[var(--alt-bg)] to-[var(--bg-card)] aspect-square md:aspect-[4/3] lg:aspect-square rounded-[var(--border-radius-lg)] border border-[var(--border-color)] overflow-hidden flex items-center justify-center p-8 lg:p-12 shadow-2xl relative group">
-              <img src={activeImage || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80'} alt={product.name} className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105 drop-shadow-2xl" />
+            <div className="bg-[#FBFBFD] aspect-square md:aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden flex items-center justify-center p-8 lg:p-16 relative group transition-colors duration-500 hover:bg-white border border-transparent hover:border-[#EAEAEA]/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)]">
+              <img src={activeImage || 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80'} alt={product.name} className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" />
               {product.discount_price && (
-                <div className="absolute top-6 left-6 bg-[var(--color-primary)] text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.1)]">
+                <div className="absolute top-6 left-6 bg-[#E83422] text-white text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
                   Save {Math.round(((product.price - product.discount_price) / product.price) * 100)}%
                 </div>
               )}
@@ -130,10 +130,10 @@ export default function ProductDetail() {
                 {allImages.map((imgUrl, i) => (
                   <button
                     key={i}
-                    className={`aspect-square border-2 rounded-[var(--border-radius-md)] overflow-hidden transition-all duration-300 p-2 flex items-center justify-center bg-[var(--alt-bg)] ${activeImage === imgUrl ? 'border-[var(--color-primary)] shadow-[0_2px_10px_rgba(0,0,0,0.1)] scale-[1.02]' : 'border-[var(--border-color)] hover:border-[var(--color-text-muted)] hover:scale-105'}`}
+                    className={`aspect-square rounded-2xl overflow-hidden transition-all duration-300 p-2 flex items-center justify-center bg-[#FBFBFD] ${activeImage === imgUrl ? 'border-2 border-[#1D1D1F] shadow-sm' : 'border border-transparent hover:border-[#EAEAEA] hover:bg-white'}`}
                     onClick={() => setActiveImage(imgUrl)}
                   >
-                    <img src={imgUrl} alt={`Thumbnail ${i}`} className="w-full h-full object-contain" />
+                    <img src={imgUrl} alt={`Thumbnail ${i}`} className="w-full h-full object-contain mix-blend-multiply" />
                   </button>
                 ))}
               </div>
@@ -141,78 +141,73 @@ export default function ProductDetail() {
           </div>
 
           {/* Product Details */}
-          <div className="flex flex-col">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/20 text-xs font-bold tracking-widest uppercase mb-4 w-fit">
-              <CheckCircle2 size={14} /> Authentic KDM Part
-            </div>
+          <div className="flex flex-col px-2 md:px-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1D1D1F] leading-tight mb-4 tracking-tight">{product.name}</h1>
             
-            <h1 className="text-4xl lg:text-5xl font-black text-[var(--color-text-bright)] leading-tight mb-4">{product.name}</h1>
-            
-            <div className="flex flex-wrap items-center gap-6 mb-8 border-b border-[var(--border-color)] pb-6">
-              <div className="flex items-center gap-3">
-                <div className="flex gap-0.5 bg-[var(--alt-bg)] px-3 py-1.5 rounded-full border border-[var(--border-color)]">
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-[var(--color-warning)] text-[var(--color-warning)]" />
+                    <Star key={i} size={14} className="fill-[#F59E0B] text-[#F59E0B]" />
                   ))}
                 </div>
-                <span className="text-sm font-medium text-[var(--color-text-dim)]">{reviews.length} Reviews</span>
+                <span className="text-[13px] font-medium text-[#86868B]">{reviews.length} Reviews</span>
               </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-[var(--border-color)] hidden sm:block"></div>
-              <div className="text-sm font-medium text-[var(--color-text-dim)] flex items-center gap-2">
-                SKU: <span className="font-mono text-[var(--color-text-bright)] bg-[var(--alt-bg)] px-2 py-0.5 rounded">{product.sku}</span>
+              <div className="w-1 h-1 rounded-full bg-[#D2D2D7] hidden sm:block"></div>
+              <div className="text-[13px] font-medium text-[#86868B] flex items-center gap-1">
+                SKU: <span className="text-[#1D1D1F]">{product.sku}</span>
               </div>
             </div>
 
-            <div className="mb-8">
+            <div className="mb-8 pb-8 border-b border-[#F5F5F7]">
               {product.discount_price ? (
-                <div className="flex items-end gap-4">
-                  <span className="text-5xl font-black text-[var(--color-primary)] tracking-tight">₹{product.discount_price}</span>
-                  <span className="text-xl font-medium text-[var(--color-text-dim)] line-through decoration-red-500/50 mb-1">₹{product.price}</span>
+                <div className="flex items-end gap-3">
+                  <span className="text-3xl lg:text-4xl font-semibold text-[#1D1D1F] tracking-tight">₹{product.discount_price}</span>
+                  <span className="text-lg font-medium text-[#86868B] line-through mb-1">₹{product.price}</span>
                 </div>
               ) : (
-                <span className="text-5xl font-black text-[var(--color-text-bright)] tracking-tight">₹{product.price}</span>
+                <span className="text-3xl lg:text-4xl font-semibold text-[#1D1D1F] tracking-tight">₹{product.price}</span>
               )}
-              <p className="text-sm text-[var(--color-text-dim)] mt-2 italic">Prices include all applicable taxes (GST 18%)</p>
             </div>
 
-            <p className="text-lg text-[var(--color-text-muted)] mb-10 leading-relaxed font-medium">
+            <p className="text-[17px] text-[#86868B] mb-10 leading-relaxed">
               {product.short_description || product.description?.substring(0, 150) + '...' || 'Premium automotive modification accessory designed for maximum performance and unparalleled aesthetics.'}
             </p>
 
-            <div className="bg-[var(--alt-bg)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-6 mb-10">
+            <div className="bg-[#FBFBFD] border border-[#EAEAEA]/60 rounded-3xl p-6 mb-10">
               <div className="flex items-center gap-3 mb-6">
-                <div className={`w-3 h-3 rounded-full ${product.stock_status === 'In Stock' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`}></div>
-                <span className="font-semibold text-[15px] uppercase tracking-widest text-[var(--color-text-bright)]">
+                <div className={`w-2.5 h-2.5 rounded-full ${product.stock_status === 'In Stock' ? 'bg-[#34C759] animate-pulse' : 'bg-[#FF3B30]'}`}></div>
+                <span className="font-semibold text-[13px] uppercase tracking-widest text-[#1D1D1F]">
                   {product.stock_status === 'In Stock' ? `In Stock (${product.quantity} available)` : 'Out of Stock'}
                 </span>
               </div>
 
               {product.stock_status === 'In Stock' && (
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <div className="flex items-center justify-between border-2 border-[var(--border-color)] rounded-full bg-[var(--bg-card)] overflow-hidden w-full sm:w-[140px] shrink-0 h-[56px] px-2">
-                    <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--alt-bg)] text-[var(--color-text-bright)] font-bold transition-colors" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-                    <span className="font-bold text-[17px] text-[var(--color-text-bright)]">{quantity}</span>
-                    <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--alt-bg)] text-[var(--color-text-bright)] font-bold transition-colors" onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}>+</button>
+                <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                  <div className="flex items-center justify-between border border-[#EAEAEA] rounded-full bg-white overflow-hidden w-full sm:w-[130px] shrink-0 h-[52px] px-2 shadow-sm">
+                    <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#F5F5F7] text-[#1D1D1F] transition-colors" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+                    <span className="font-semibold text-[16px] text-[#1D1D1F]">{quantity}</span>
+                    <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#F5F5F7] text-[#1D1D1F] transition-colors" onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}>+</button>
                   </div>
 
-                  <button className="btn btn-secondary grow" onClick={handleAddToCart}>
-                    <ShoppingCart size={20} /> Add to Cart
+                  <button className="flex-1 bg-[#F5F5F7] hover:bg-[#EAEAEA] text-[#1D1D1F] font-semibold h-[52px] rounded-full transition-all active:scale-95 flex items-center justify-center gap-2" onClick={handleAddToCart}>
+                    Add to Cart
                   </button>
                 </div>
               )}
               
-              <button className="btn btn-primary w-full mb-4" onClick={handleBuyNow} disabled={product.stock_status === 'Out of Stock'}>
+              <button className="w-full bg-[#1D1D1F] hover:bg-[#333333] text-white font-semibold h-[52px] rounded-full transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none" onClick={handleBuyNow} disabled={product.stock_status === 'Out of Stock'}>
                 Buy It Now
               </button>
 
               <div className="flex gap-3 mt-4">
                 <button
-                  className={`flex-1 h-[50px] flex items-center justify-center gap-2 rounded-xl border-2 font-semibold transition-all duration-300 ${inWishlist ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10 text-[var(--color-primary)]' : 'border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--color-text-bright)] hover:border-[var(--color-text-muted)]'}`}
+                  className={`flex-1 h-[52px] flex items-center justify-center gap-2 rounded-full border font-medium transition-all duration-300 ${inWishlist ? 'border-[#E83422] bg-[#E83422]/5 text-[#E83422]' : 'border-[#EAEAEA] bg-white text-[#1D1D1F] hover:border-[#1D1D1F]'}`}
                   onClick={handleWishlistToggle} disabled={wishlistLoading}
                 >
-                  <Heart size={18} fill={inWishlist ? 'currentColor' : 'none'} /> {inWishlist ? 'Saved' : 'Save'}
+                  <Heart size={18} fill={inWishlist ? 'currentColor' : 'none'} /> {inWishlist ? 'Saved to Wishlist' : 'Save to Wishlist'}
                 </button>
-                <button className="w-[50px] shrink-0 h-[50px] flex items-center justify-center rounded-xl border-2 border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--color-text-bright)] hover:border-[var(--color-text-muted)] transition-all duration-300" onClick={handleShare}>
+                <button className="w-[52px] shrink-0 h-[52px] flex items-center justify-center rounded-full border border-[#EAEAEA] bg-white text-[#1D1D1F] hover:border-[#1D1D1F] transition-all duration-300" onClick={handleShare}>
                   <Share2 size={18} />
                 </button>
               </div>
@@ -220,22 +215,22 @@ export default function ProductDetail() {
 
             {/* Feature Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-auto">
-              <div className="flex items-center gap-3 p-4 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center shrink-0">
-                  <ShieldCheck size={20} />
+              <div className="flex items-center gap-3 p-4 bg-white border border-[#F5F5F7] shadow-sm rounded-2xl">
+                <div className="w-10 h-10 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0">
+                  <ShieldCheck size={18} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[var(--color-text-bright)] m-0">Quality Assured</h4>
-                  <p className="text-xs text-[var(--color-text-dim)] m-0 mt-0.5">100% Genuine Parts</p>
+                  <h4 className="text-[13px] font-semibold text-[#1D1D1F] m-0">Quality Assured</h4>
+                  <p className="text-[12px] text-[#86868B] m-0 mt-0.5">100% Genuine Parts</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center shrink-0">
-                  <Truck size={20} />
+              <div className="flex items-center gap-3 p-4 bg-white border border-[#F5F5F7] shadow-sm rounded-2xl">
+                <div className="w-10 h-10 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0">
+                  <Truck size={18} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[var(--color-text-bright)] m-0">Secure Shipping</h4>
-                  <p className="text-xs text-[var(--color-text-dim)] m-0 mt-0.5">Safe & Tracked Delivery</p>
+                  <h4 className="text-[13px] font-semibold text-[#1D1D1F] m-0">Secure Shipping</h4>
+                  <p className="text-[12px] text-[#86868B] m-0 mt-0.5">Safe & Tracked Delivery</p>
                 </div>
               </div>
             </div>
