@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
+import About from './pages/About';
 
 /**
  * Route protection wrapper. Redirects unauthenticated users to the Sign In page.
@@ -45,6 +46,7 @@ function MainAppLayout() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:slug" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
