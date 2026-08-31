@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Star, Filter, Search, RotateCcw, ArrowLeft, ArrowRight, ShoppingBag, Heart } from 'lucide-react';
 import { apiRequest } from '../utils/api';
 import { CartContext } from '../context/CartContext';
@@ -10,16 +10,25 @@ export default function Products() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   
+  const [searchParams, setSearchParams] = useSearchParams();
+  
   // Filters State
-  const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [search, setSearch] = useState(searchParams.get('search') || '');
+  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const [ordering, setOrdering] = useState('-created_at');
+  const [ordering, setOrdering] = useState(searchParams.get('sort') || '-created_at');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [count, setCount] = useState(0);
   const [wishlistIds, setWishlistIds] = useState(new Set());
+
+  // Sync state with URL if URL changes externally (e.g. Navbar search)
+  useEffect(() => {
+    setSearch(searchParams.get('search') || '');
+    setSelectedCategory(searchParams.get('category') || '');
+    setOrdering(searchParams.get('sort') || '-created_at');
+  }, [searchParams]);
 
   const { addToCart, showToast, fetchWishlistCount } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
@@ -124,7 +133,7 @@ export default function Products() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchProducts();
-  }, [selectedCategory, ordering, page]);
+  }, [selectedCategory, ordering, page, searchParams.get('search'), searchParams.get('category')]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -145,6 +154,7 @@ export default function Products() {
     setMaxPrice('');
     setOrdering('-created_at');
     setPage(1);
+    setSearchParams({});
   };
 
   return (

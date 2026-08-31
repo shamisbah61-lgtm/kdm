@@ -8,8 +8,19 @@ export default function Navbar() {
   const { isAuthenticated, logout, user } = useContext(AuthContext);
   const { totalItemsCount, wishlistCount } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,10 +75,28 @@ export default function Navbar() {
         </nav>
 
         {/* RIGHT: Icons */}
-        <div className="flex items-center gap-5 lg:gap-6 shrink-0">
-          <button className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 hidden sm:block">
-            <Search size={20} strokeWidth={1.5} />
-          </button>
+        <div className="flex items-center gap-5 lg:gap-6 shrink-0 relative">
+          
+          {isSearchOpen ? (
+            <form onSubmit={handleSearchSubmit} className="absolute right-full mr-4 flex items-center bg-white/95 backdrop-blur-xl rounded-full px-4 py-2 border border-[#EAEAEA] shadow-[0_4px_20px_rgba(0,0,0,0.08)] animate-fade-in w-[250px] z-50">
+              <Search size={16} className="text-[#6B6B6B] mr-2 shrink-0" />
+              <input 
+                type="text" 
+                placeholder="Search premium products..." 
+                className="bg-transparent border-none outline-none w-full text-sm text-[#111111] placeholder:text-[#9CA3AF]"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              <button type="button" onClick={() => setIsSearchOpen(false)} className="text-[#6B6B6B] hover:text-[#111111] ml-2 shrink-0 transition-colors">
+                <X size={16} />
+              </button>
+            </form>
+          ) : (
+            <button className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 hidden sm:block" onClick={() => setIsSearchOpen(true)}>
+              <Search size={20} strokeWidth={1.5} />
+            </button>
+          )}
           
           <Link to="/wishlist" className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 relative hidden sm:block">
             <Heart size={20} strokeWidth={1.5} />
