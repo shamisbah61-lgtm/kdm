@@ -128,9 +128,9 @@ function MainAppLayout() {
               <div className="flex flex-col gap-4">
                 <h3 className="text-[#111111] font-medium text-sm tracking-widest uppercase mb-2">Newsletter</h3>
                 <p className="text-[#6B6B6B] text-sm leading-relaxed mb-2">Get updates, new arrivals and exclusive offers directly to your inbox.</p>
-                <form className="flex border border-[#EAEAEA] rounded-sm overflow-hidden h-12 focus-within:border-[#111111] transition-colors">
-                  <input type="email" placeholder="Your email address" className="flex-1 px-4 text-sm text-[#111111] outline-none" required />
-                  <button type="submit" className="bg-[#111111] text-white px-6 text-sm font-medium hover:bg-[#333333] transition-colors">Subscribe</button>
+                <form className="flex rounded-full overflow-hidden h-12 bg-[#F5F5F7] focus-within:ring-2 ring-[#111111] transition-shadow">
+                  <input type="email" placeholder="Your email address" className="flex-1 px-6 text-sm text-[#111111] bg-transparent outline-none" required />
+                  <button type="submit" className="bg-[#111111] text-white px-6 text-sm font-medium hover:bg-[#333333] transition-colors h-full rounded-r-full active:scale-95 origin-right">Subscribe</button>
                 </form>
               </div>
               

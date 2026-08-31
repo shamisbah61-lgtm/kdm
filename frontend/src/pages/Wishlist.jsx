@@ -47,7 +47,7 @@ export default function Wishlist() {
           </div>
           <h2 className="text-4xl font-black mb-4 text-[var(--color-text-bright)]">Your Wishlist is Empty</h2>
           <p className="text-lg text-[var(--color-text-muted)] mb-10 max-w-md mx-auto">Save premium items you love here to easily find and buy them later.</p>
-          <Link to="/products" className="btn btn-primary !px-10 !py-4 text-base shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+          <Link to="/products" className="btn btn-primary">
             Explore Collection
           </Link>
         </div>
@@ -93,7 +93,7 @@ export default function Wishlist() {
               <div className="flex items-center justify-center gap-3 mt-auto mb-4">
                 <span className="text-[20px] font-black text-[var(--color-text-bright)]">₹{item.product?.discount_price || item.product?.price}</span>
               </div>
-              <button className="btn btn-secondary w-full transition-all duration-300 shadow-sm" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
+              <button className="btn btn-secondary w-full" onClick={() => addToCart(item.product?.id, 1)} disabled={item.product?.stock_status === 'Out of Stock'}>
                 <ShoppingBag size={16} className="mr-2" /> {item.product?.stock_status === 'Out of Stock' ? 'Sold Out' : 'Move to Cart'}
               </button>
             </div>

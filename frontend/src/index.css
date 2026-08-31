@@ -155,15 +155,20 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
-  font-size: 14px;
+  padding: 12px 24px;
+  font-size: 15px;
   font-weight: 500;
-  border-radius: var(--border-radius-sm);
+  border-radius: 9999px; /* Pill shape */
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid transparent;
   font-family: var(--font-body);
   text-decoration: none;
+  line-height: 1.2;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn-primary {
@@ -175,17 +180,17 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover {
   background: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .btn-secondary {
-  background-color: transparent;
-  border-color: var(--border-color);
+  background-color: #F5F5F7;
+  border-color: transparent;
   color: var(--color-primary);
 }
 
 .btn-secondary:hover {
-  border-color: var(--color-primary);
-  background-color: var(--bg-card-hover);
+  background-color: #EAEAEA;
 }
 
 /* Badges */

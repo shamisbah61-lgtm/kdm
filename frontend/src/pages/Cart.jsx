@@ -47,7 +47,7 @@ export default function Cart() {
           </div>
           <h2 className="text-4xl font-black mb-4 text-[var(--color-text-bright)]">Your Cart is Empty</h2>
           <p className="text-lg text-[var(--color-text-muted)] mb-10 max-w-md mx-auto">Looks like you haven't added any premium upgrades to your cart yet.</p>
-          <Link to="/products" className="btn btn-primary !px-10 !py-4 text-base shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+          <Link to="/products" className="btn btn-primary">
             Explore Collection
           </Link>
         </div>
@@ -128,7 +128,7 @@ export default function Cart() {
                 value={couponInput}
                 onChange={(e) => { setCouponInput(e.target.value.toUpperCase()); setCouponError(''); }}
               />
-              <button className="btn btn-secondary !rounded-full shrink-0" onClick={() => handleApplyCoupon(couponInput)}>
+              <button className="btn btn-secondary shrink-0" onClick={() => handleApplyCoupon(couponInput)}>
                 Apply
               </button>
             </div>
@@ -153,7 +153,7 @@ export default function Cart() {
             </span>
           </div>
 
-          <button className="btn btn-primary w-full h-[60px] text-lg font-bold uppercase tracking-widest shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex justify-center gap-3 items-center mb-4" onClick={() => navigate('/checkout', { state: { coupon: appliedCoupon } })}>
+          <button className="btn btn-primary w-full flex justify-center gap-3 items-center mb-4" onClick={() => navigate('/checkout', { state: { coupon: appliedCoupon } })}>
             Checkout Securely <ArrowRight size={20} />
           </button>
           

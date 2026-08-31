@@ -195,13 +195,13 @@ export default function ProductDetail() {
                     <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--alt-bg)] text-[var(--color-text-bright)] font-bold transition-colors" onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}>+</button>
                   </div>
 
-                  <button className="btn btn-secondary h-[56px] grow text-[15px] uppercase tracking-wider bg-[var(--bg-card)]" onClick={handleAddToCart}>
+                  <button className="btn btn-secondary grow" onClick={handleAddToCart}>
                     <ShoppingCart size={20} /> Add to Cart
                   </button>
                 </div>
               )}
               
-              <button className="btn btn-primary w-full h-[60px] text-lg font-bold uppercase tracking-widest shadow-[0_4px_20px_rgba(0,0,0,0.05)] mb-4" onClick={handleBuyNow} disabled={product.stock_status === 'Out of Stock'}>
+              <button className="btn btn-primary w-full mb-4" onClick={handleBuyNow} disabled={product.stock_status === 'Out of Stock'}>
                 Buy It Now
               </button>
 
@@ -322,7 +322,7 @@ export default function ProductDetail() {
                           <label className="block text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-wider mb-2">Your Experience</label>
                           <textarea rows="4" className="form-input w-full bg-[var(--bg-card)] border-2 border-[var(--border-color)] rounded-xl resize-none font-medium" placeholder="Share details of your experience..." value={comment} onChange={(e) => setComment(e.target.value)} required></textarea>
                         </div>
-                        <button type="submit" className="btn btn-primary w-full shadow-lg">Submit Review</button>
+                        <button type="submit" className="btn btn-primary w-full">Submit Review</button>
                       </form>
                     </div>
                   ) : (
@@ -344,10 +344,10 @@ export default function ProductDetail() {
 
       {/* Sticky Mobile Buy Bar */}
       <div className="flex md:hidden fixed bottom-0 left-0 right-0 bg-[var(--bg-card)]/95 backdrop-blur-xl border-t border-[var(--border-color)] p-4 gap-3 z-[100] shadow-[0_-10px_30px_rgba(0,0,0,0.3)]">
-        <button className="btn btn-secondary flex-1 border-2 font-bold" onClick={handleAddToCart}>
+        <button className="btn btn-secondary flex-1" onClick={handleAddToCart}>
           Cart
         </button>
-        <button className="btn btn-primary flex-[1.5] font-black uppercase tracking-widest" onClick={handleBuyNow}>
+        <button className="btn btn-primary flex-[1.5]" onClick={handleBuyNow}>
           Buy Now
         </button>
       </div>

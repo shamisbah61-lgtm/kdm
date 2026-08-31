@@ -335,7 +335,7 @@ export default function Products() {
               {totalPages > 1 && (
                 <div className="flex justify-center items-center gap-4 mt-16 mb-8">
                   <button
-                    className="btn btn-secondary px-5 py-2.5 text-[13px] flex items-center gap-2 rounded-full border-2"
+                    className="btn btn-secondary flex items-center gap-2"
                     disabled={page === 1}
                     onClick={() => setPage(page - 1)}
                   >
@@ -345,7 +345,7 @@ export default function Products() {
                     {page} <span className="text-[var(--color-text-dim)] font-medium mx-1">of</span> {totalPages}
                   </span>
                   <button
-                    className="btn btn-secondary px-5 py-2.5 text-[13px] flex items-center gap-2 rounded-full border-2"
+                    className="btn btn-secondary flex items-center gap-2"
                     disabled={page === totalPages}
                     onClick={() => setPage(page + 1)}
                   >

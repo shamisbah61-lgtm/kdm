@@ -389,7 +389,7 @@ export default function Checkout() {
                 </div>
 
                 <div className="form-actions-addr">
-                  <button type="submit" className="btn btn-primary" style={{ color: '#000' }}>Save Address</button>
+                  <button type="submit" className="btn btn-primary">Save Address</button>
                   <button type="button" className="btn btn-secondary" onClick={() => {
                     setShowAddressForm(false);
                     setEditingAddressId(null);
@@ -685,7 +685,7 @@ export default function Checkout() {
                   </div>
                 )}
 
-                <button type="submit" className="btn btn-primary pay-now-btn" style={{ color: '#000' }}>
+                <button type="submit" className="btn btn-primary pay-now-btn">
                   <Lock size={12} /> Pay Securely ${calculateFinalAmount()}
                 </button>
               </form>
