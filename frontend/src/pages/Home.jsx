@@ -86,11 +86,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full px-4 md:px-8 py-6 lg:py-10">
         <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center bg-[#FBFBFD] text-center">
-          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl flex flex-col items-center animate-slide-up">
+          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl mx-auto flex flex-col items-center animate-slide-up">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6">
               Pure Performance.
             </h1>
-            <p className="text-lg md:text-2xl text-[#111111] font-normal mb-10 max-w-2xl">
+            <p className="text-lg md:text-2xl text-[#6B6B6B] font-normal mb-10 max-w-3xl mx-auto text-center">
               Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
             </p>
             <div className="flex gap-4">
@@ -109,11 +109,11 @@ export default function Home() {
             </div>
           </div>
           {/* Subtle product imagery below text, like Apple */}
-          <div className="absolute bottom-0 w-full max-w-3xl flex justify-center translate-y-[20%] opacity-90 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="absolute bottom-0 w-full max-w-3xl flex justify-center translate-y-[15%] opacity-90 animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <img 
-              src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&q=80&w=1200&bg=FBFBFD" 
+              src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1200" 
               alt="Hero Product" 
-              className="w-[80%] h-auto object-contain mix-blend-multiply"
+              className="w-[85%] h-auto object-contain mix-blend-multiply drop-shadow-2xl"
             />
           </div>
         </RevealOnScroll>
@@ -132,10 +132,10 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {categories.slice(0, 4).map((cat, idx) => {
               const fallbackImages = [
-                "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600&bg=FBFBFD",
-                "https://images.unsplash.com/photo-1599818815777-62f7e7f1eab6?auto=format&fit=crop&q=80&w=600&bg=FBFBFD",
-                "https://images.unsplash.com/photo-1621215418197-0fc5451eb9dc?auto=format&fit=crop&q=80&w=600&bg=FBFBFD",
-                "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600&bg=FBFBFD"
+                "https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1590401272091-17726526715b?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1600706432502-77a0e2e32729?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1503376760356-0733fa2cb802?auto=format&fit=crop&q=80&w=600"
               ];
               return (
                 <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block flex flex-col items-center text-center">
@@ -228,11 +228,11 @@ export default function Home() {
               Discover Our Story <ArrowRight size={16} />
             </Link>
           </div>
-          <div className="md:w-1/2 min-h-[500px] relative">
+          <div className="md:w-1/2 min-h-[500px] relative flex items-center justify-center bg-[#F5F5F7]">
             <img 
-              src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=1000&q=80" 
+              src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80" 
               alt="Performance Engineering" 
-              className="absolute inset-0 w-full h-full object-cover grayscale-[30%] mix-blend-multiply opacity-90"
+              className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-95 transition-transform duration-1000 hover:scale-105"
             />
           </div>
         </RevealOnScroll>
