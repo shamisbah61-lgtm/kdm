@@ -1,8 +1,40 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Heart, Star, ArrowRight } from 'lucide-react';
 import { apiRequest } from '../utils/api';
 import { CartContext } from '../context/CartContext';
+
+function RevealOnScroll({ children, className = '' }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`${className} reveal-hidden ${isVisible ? 'reveal-visible' : ''}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -52,74 +84,83 @@ export default function Home() {
     <div className="bg-[#FFFFFF] min-h-screen text-[#111111] font-sans">
       
       {/* Hero Section */}
-      <section className="w-full px-6 md:px-10 py-8 lg:py-12">
-        <div className="max-w-[1440px] mx-auto relative rounded-lg overflow-hidden h-[65vh] md:h-[75vh] flex items-center bg-[#F8F8F8]">
-          <img 
-            src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1440&q=80" 
-            alt="Editorial Campaign" 
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-black/10"></div>
-          
-          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6">
-              Precision Engineering for the Track
+      <section className="w-full px-4 md:px-8 py-6 lg:py-10">
+        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center bg-[#FBFBFD] text-center">
+          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl flex flex-col items-center animate-slide-up">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6">
+              Pure Performance.
             </h1>
-            <p className="text-base md:text-lg text-white/90 font-medium mb-10 max-w-md">
-              Discover our latest collection of premium KDM aftermarket parts. Engineered with uncompromising attention to performance and quality.
+            <p className="text-lg md:text-2xl text-[#111111] font-normal mb-10 max-w-2xl">
+              Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
             </p>
-            <Link 
-              to="/products" 
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#111111] font-medium text-sm transition-all hover:bg-[#F8F8F8] min-w-[180px]"
-            >
-              Shop Collection
-            </Link>
+            <div className="flex gap-4">
+              <Link 
+                to="/products" 
+                className="inline-flex items-center justify-center px-8 py-3 bg-[#111111] text-white rounded-full font-medium text-[15px] transition-all hover:bg-[#333333] shadow-sm"
+              >
+                Buy
+              </Link>
+              <Link 
+                to="/about" 
+                className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#111111] rounded-full font-medium text-[15px] transition-all hover:bg-[#F5F5F7] shadow-sm border border-[#EAEAEA]"
+              >
+                Learn more
+              </Link>
+            </div>
           </div>
-        </div>
+          {/* Subtle product imagery below text, like Apple */}
+          <div className="absolute bottom-0 w-full max-w-3xl flex justify-center translate-y-[20%] opacity-90 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <img 
+              src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&q=80&w=1200&bg=FBFBFD" 
+              alt="Hero Product" 
+              className="w-[80%] h-auto object-contain mix-blend-multiply"
+            />
+          </div>
+        </RevealOnScroll>
       </section>
 
       {/* Categories Section */}
-      <section className="w-full px-6 md:px-10 py-16 lg:py-24">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="flex items-center justify-between mb-10">
-            <h2 className="text-2xl font-bold tracking-tight">Shop by Category</h2>
-            <Link to="/categories" className="text-sm font-medium text-[#6B6B6B] hover:text-[#111111] transition-colors flex items-center gap-1">
-              View All <ArrowRight size={14} />
+      <section className="w-full px-6 md:px-10 py-20 lg:py-32 bg-white">
+        <RevealOnScroll className="max-w-[1440px] mx-auto">
+          <div className="flex flex-col items-center justify-center mb-16 text-center">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-[#111111]">Which part is right for you?</h2>
+            <Link to="/categories" className="mt-4 text-[17px] text-[#0066CC] hover:underline transition-colors flex items-center gap-1">
+              View all categories <ArrowRight size={14} />
             </Link>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {categories.slice(0, 4).map((cat, idx) => {
               const fallbackImages = [
-                "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1599818815777-62f7e7f1eab6?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1621215418197-0fc5451eb9dc?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600"
+                "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=600&bg=FBFBFD",
+                "https://images.unsplash.com/photo-1599818815777-62f7e7f1eab6?auto=format&fit=crop&q=80&w=600&bg=FBFBFD",
+                "https://images.unsplash.com/photo-1621215418197-0fc5451eb9dc?auto=format&fit=crop&q=80&w=600&bg=FBFBFD",
+                "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600&bg=FBFBFD"
               ];
               return (
-                <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block relative overflow-hidden bg-[#F5F5F7] aspect-[4/5] rounded-[32px] border border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out">
-                  <img 
-                    src={fallbackImages[idx % fallbackImages.length]} 
-                    alt={cat.name} 
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-white font-medium text-lg tracking-wide">{cat.name}</h3>
+                <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block flex flex-col items-center text-center">
+                  <div className="relative overflow-hidden bg-[#FBFBFD] w-full aspect-square rounded-3xl mb-6 flex items-center justify-center p-6 border border-[#EAEAEA]/50 hover:shadow-lg transition-shadow duration-500 ease-out">
+                    <img 
+                      src={fallbackImages[idx % fallbackImages.length]} 
+                      alt={cat.name} 
+                      className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" 
+                    />
                   </div>
+                  <h3 className="text-[#111111] font-semibold text-lg tracking-tight mb-2">{cat.name}</h3>
+                  <span className="text-[#0066CC] text-sm group-hover:underline">Shop {cat.name}</span>
                 </Link>
               );
             })}
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* Featured Products */}
-      <section className="w-full px-6 md:px-10 py-16 lg:py-24 bg-[#F8F8F8]">
-        <div className="max-w-[1440px] mx-auto">
+      <section className="w-full px-6 md:px-10 py-20 lg:py-32 bg-[#FBFBFD]">
+        <RevealOnScroll className="max-w-[1440px] mx-auto">
           <div className="flex flex-col items-center text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">New Arrivals</h2>
-            <p className="text-[#6B6B6B] max-w-2xl">The latest additions to our collection. Thoughtfully designed and carefully crafted.</p>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-[#111111] mb-4">Latest Arrivals.</h2>
+            <p className="text-xl text-[#6B6B6B] max-w-2xl">The newest additions to our collection. Thoughtfully designed and carefully crafted.</p>
           </div>
 
           {loading ? (
@@ -127,58 +168,36 @@ export default function Home() {
               <div className="w-8 h-8 border-2 border-[#EAEAEA] border-t-[#111111] rounded-full animate-spin"></div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.slice(0, 8).map(product => (
-                <Link key={product.id} to={`/products/${product.slug}`} className="group block bg-white rounded-[28px] p-3 border border-[#F5F5F7] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500 ease-out overflow-hidden flex flex-col">
-                  <div className="relative bg-[#F5F5F7] aspect-[3/4] mb-4 overflow-hidden rounded-[20px]">
+                <Link key={product.id} to={`/products/${product.slug}`} className="group block bg-white rounded-[24px] p-6 border border-[#EAEAEA]/40 hover:shadow-xl transition-shadow duration-500 flex flex-col items-center text-center">
+                  <div className="relative w-full aspect-square mb-6 overflow-hidden flex justify-center items-center">
                     <img 
                       src={product.thumbnail || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80'} 
                       alt={product.name} 
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" 
+                      className="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" 
                     />
                     
                     {/* Tags */}
-                    <div className="absolute top-3 left-3 flex flex-col gap-2">
-                      {product.discount_price && (
-                        <span className="bg-[#111111] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider">Sale</span>
-                      )}
-                    </div>
-
-                    {/* Wishlist Button */}
-                    <button className="absolute top-3 right-3 w-8 h-8 bg-white flex items-center justify-center rounded-full opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hover:text-red-500 shadow-sm" onClick={(e) => { e.preventDefault(); }}>
-                      <Heart size={14} strokeWidth={2} />
-                    </button>
-
-                    {/* Quick Add Overlay */}
-                    <div className="absolute bottom-0 left-0 w-full p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <button 
-                        onClick={(e) => handleQuickAdd(e, product.id)}
-                        className="w-full bg-white/95 backdrop-blur-sm text-[#111111] py-3 text-sm font-medium border border-[#EAEAEA] hover:bg-[#111111] hover:text-white transition-colors shadow-sm"
-                      >
-                        Quick Add
-                      </button>
-                    </div>
+                    {product.discount_price && (
+                      <div className="absolute top-0 left-0 bg-[#E83422] text-white text-[11px] font-semibold px-3 py-1 rounded-full tracking-wide">
+                        Sale
+                      </div>
+                    )}
                   </div>
                   
-                  <div className="flex flex-col px-2 pb-2">
-                    <span className="text-xs text-[#6B6B6B] mb-1">{product.category_name || 'Parts'}</span>
-                    <h3 className="text-sm font-medium text-[#111111] truncate mb-2">{product.name}</h3>
-                    
-                    <div className="flex items-center gap-1 mb-2">
-                      <div className="flex text-[#111111]">
-                        {[...Array(5)].map((_, i) => <Star key={i} size={10} className={i < 4 ? 'fill-current' : 'fill-transparent stroke-[#D1D5DB]'} />)}
-                      </div>
-                      <span className="text-[10px] text-[#6B6B6B]">(12)</span>
-                    </div>
+                  <div className="flex flex-col flex-1 justify-end items-center w-full">
+                    <span className="text-[12px] font-medium text-[#6B6B6B] mb-2">{product.category_name || 'Parts'}</span>
+                    <h3 className="text-lg font-semibold text-[#111111] line-clamp-2 mb-3 leading-snug">{product.name}</h3>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 mt-auto">
                       {product.discount_price ? (
                         <>
-                          <span className="text-sm font-medium text-[#EF4444]">₹{product.discount_price}</span>
-                          <span className="text-xs text-[#9CA3AF] line-through">₹{product.price}</span>
+                          <span className="text-base font-semibold text-[#111111]">₹{product.discount_price}</span>
+                          <span className="text-sm text-[#9CA3AF] line-through">₹{product.price}</span>
                         </>
                       ) : (
-                        <span className="text-sm font-medium text-[#111111]">₹{product.price}</span>
+                        <span className="text-base font-semibold text-[#111111]">₹{product.price}</span>
                       )}
                     </div>
                   </div>
@@ -188,34 +207,35 @@ export default function Home() {
           )}
           
           <div className="mt-16 flex justify-center">
-            <Link to="/products" className="inline-flex items-center justify-center px-8 py-3 border border-[#111111] text-[#111111] text-sm font-medium hover:bg-[#111111] hover:text-white transition-colors min-w-[160px]">
-              View All Products
+            <Link to="/products" className="text-[#0066CC] hover:underline text-[17px] flex items-center gap-1 transition-colors">
+              Shop all products <ArrowRight size={16} />
             </Link>
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
       {/* Editorial Split Section */}
-      <section className="w-full px-6 md:px-10 py-16 lg:py-24">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-stretch gap-0 border border-[#EAEAEA]">
-          <div className="md:w-1/2 p-10 md:p-16 lg:p-24 flex flex-col justify-center bg-white">
-            <span className="text-xs font-bold uppercase tracking-[0.1em] text-[#6B6B6B] mb-4">Our Philosophy</span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Elevating Performance.</h2>
-            <p className="text-[#6B6B6B] text-base leading-relaxed mb-8">
-              We believe in creating parts that withstand the ultimate test of the track. By combining precision engineering with aggressive styling, we deliver aftermarket solutions that dominate the competition.
+      <section className="w-full px-6 md:px-10 py-20 lg:py-32 bg-white">
+        <RevealOnScroll className="max-w-[1440px] mx-auto rounded-3xl overflow-hidden bg-[#FBFBFD] flex flex-col md:flex-row items-stretch gap-0">
+          <div className="md:w-1/2 p-12 md:p-20 lg:p-28 flex flex-col justify-center text-center md:text-left">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 text-[#111111] leading-tight">
+              Master the<br/>track.
+            </h2>
+            <p className="text-[#6B6B6B] text-xl leading-relaxed mb-10 max-w-md mx-auto md:mx-0">
+              We believe in creating parts that withstand the ultimate test. Precision engineering meets aggressive styling.
             </p>
-            <Link to="/about" className="inline-flex items-center text-sm font-medium border-b border-[#111111] pb-1 w-max hover:text-[#6B6B6B] hover:border-[#6B6B6B] transition-colors">
-              Discover Our Story
+            <Link to="/about" className="inline-flex items-center justify-center md:justify-start text-[17px] text-[#0066CC] hover:underline gap-1 transition-colors">
+              Discover Our Story <ArrowRight size={16} />
             </Link>
           </div>
-          <div className="md:w-1/2 min-h-[400px] bg-[#F8F8F8]">
+          <div className="md:w-1/2 min-h-[500px] relative">
             <img 
-              src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80" 
+              src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=1000&q=80" 
               alt="Performance Engineering" 
-              className="w-full h-full object-cover grayscale-[20%]"
+              className="absolute inset-0 w-full h-full object-cover grayscale-[30%] mix-blend-multiply opacity-90"
             />
           </div>
-        </div>
+        </RevealOnScroll>
       </section>
 
     </div>

@@ -34,7 +34,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className={`w-full sticky top-0 z-50 transition-all duration-300 bg-white ${scrolled ? 'border-b border-[#EAEAEA] shadow-sm' : 'border-b border-transparent'}`}>
+    <header className={`w-full sticky top-0 z-50 transition-all duration-500 bg-white/90 backdrop-blur-md ${scrolled ? 'border-b border-[#EAEAEA] shadow-sm' : 'border-b border-transparent'}`}>
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
         
         {/* Mobile Hamburger */}
