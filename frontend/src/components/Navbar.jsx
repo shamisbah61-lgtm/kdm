@@ -108,7 +108,7 @@ export default function Navbar() {
               <Link to="/profile" className="text-[#111111] hover:text-[#6B6B6B] transition-colors p-1 block">
                 <User size={20} strokeWidth={1.5} />
               </Link>
-              <div className="absolute right-0 top-full mt-4 w-56 bg-white border border-[#EAEAEA] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 rounded-sm">
+              <div className="absolute right-0 top-full mt-4 w-56 bg-white border border-[#EAEAEA] shadow-[0_20px_40px_rgba(0,0,0,0.04)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-2 rounded-2xl">
                 <div className="px-5 py-3 border-b border-[#EAEAEA] mb-2">
                   <p className="text-sm font-medium text-[#111111] truncate">{user?.email}</p>
                 </div>
@@ -146,10 +146,16 @@ export default function Navbar() {
             </div>
             
             <div className="p-6">
-              <div className="flex border border-[#EAEAEA] rounded-sm overflow-hidden h-10 items-center bg-[#F8F8F8] focus-within:border-[#111111] transition-colors mb-8">
-                <input type="text" placeholder="Search..." className="flex-1 h-full px-4 outline-none text-sm text-[#111111] bg-transparent" />
-                <button className="text-[#6B6B6B] h-full px-3 flex items-center justify-center"><Search size={16} /></button>
-              </div>
+              <form onSubmit={(e) => { handleSearchSubmit(e); setIsOpen(false); }} className="flex border border-[#EAEAEA] rounded-full overflow-hidden h-12 items-center bg-[#FBFBFD] focus-within:border-[#1D1D1F] focus-within:bg-white transition-colors mb-8 px-2">
+                <input 
+                  type="text" 
+                  placeholder="Search premium products..." 
+                  className="flex-1 h-full px-4 outline-none text-[15px] text-[#1D1D1F] bg-transparent" 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" className="text-[#86868B] hover:text-[#1D1D1F] h-full px-3 flex items-center justify-center transition-colors"><Search size={16} /></button>
+              </form>
 
               <nav className="flex flex-col gap-1">
                 {navLinks.map((link) => (
@@ -165,16 +171,16 @@ export default function Navbar() {
               </nav>
             </div>
 
-            <div className="mt-auto p-6 bg-[#F8F8F8] border-t border-[#EAEAEA] flex flex-col gap-4">
+            <div className="mt-auto p-6 bg-[#FBFBFD] border-t border-[#EAEAEA] flex flex-col gap-4">
               {isAuthenticated ? (
                 <>
-                  <Link to="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-sm font-medium text-[#111111]"><User size={18} strokeWidth={1.5} /> My Account</Link>
-                  <Link to="/orders" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-sm font-medium text-[#111111]"><ShoppingBag size={18} strokeWidth={1.5} /> Orders</Link>
-                  <Link to="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-sm font-medium text-[#111111]"><Heart size={18} strokeWidth={1.5} /> Wishlist ({wishlistCount})</Link>
-                  <button onClick={() => { handleLogout(); setIsOpen(false); }} className="flex items-center gap-3 text-sm font-medium text-[#6B6B6B] mt-2 pt-4 border-t border-[#EAEAEA]"><LogOut size={18} strokeWidth={1.5} /> Sign Out</button>
+                  <Link to="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-[14px] font-medium text-[#1D1D1F]"><User size={18} strokeWidth={1.5} /> My Account</Link>
+                  <Link to="/orders" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-[14px] font-medium text-[#1D1D1F]"><ShoppingBag size={18} strokeWidth={1.5} /> Orders</Link>
+                  <Link to="/wishlist" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-[14px] font-medium text-[#1D1D1F]"><Heart size={18} strokeWidth={1.5} /> Wishlist ({wishlistCount})</Link>
+                  <button onClick={() => { handleLogout(); setIsOpen(false); }} className="flex items-center gap-3 text-[14px] font-medium text-[#86868B] hover:text-[#FF3B30] mt-2 pt-4 border-t border-[#EAEAEA] transition-colors"><LogOut size={18} strokeWidth={1.5} /> Sign Out</button>
                 </>
               ) : (
-                <Link to="/login" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 bg-[#111111] text-white py-3 rounded-sm text-sm font-medium">
+                <Link to="/login" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 bg-[#1D1D1F] text-white py-3.5 rounded-full text-[14px] font-semibold transition-transform active:scale-95">
                   <User size={16} /> Sign In / Register
                 </Link>
               )}

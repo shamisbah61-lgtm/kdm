@@ -747,15 +747,34 @@ export default function Checkout() {
           }
         }
         .checkout-section-card {
-          background: var(--bg-card-hover);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-lg);
+          background: #FFFFFF;
+          border: 1px solid #F5F5F7;
+          border-radius: 24px;
           padding: 32px;
           margin-bottom: 30px;
         }
         .checkout-section-card h2 {
           font-size: 20px;
           margin-bottom: 24px;
+        }
+        .summary-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 16px;
+          font-size: 15px;
+          color: #86868B;
+        }
+        .summary-row span:last-child {
+          font-weight: 500;
+          color: #1D1D1F;
+        }
+        .total-row {
+          margin-top: 24px;
+          padding-top: 24px;
+          border-top: 1px solid #EAEAEA;
+          font-size: 20px;
+          font-weight: 600;
+          color: #1D1D1F;
         }
         .section-title-row {
           display: flex;
@@ -804,10 +823,10 @@ export default function Checkout() {
           display: flex;
           align-items: flex-start;
           gap: 16px;
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius-md);
+          border: 1px solid #F5F5F7;
+          border-radius: 16px;
           padding: 16px 20px;
-          background: var(--bg-card-hover);
+          background: #FFFFFF;
           cursor: pointer;
           transition: var(--transition-smooth);
         }
@@ -815,8 +834,8 @@ export default function Checkout() {
           margin-top: 4px;
         }
         .address-option-label.selected {
-          border-color: var(--color-primary);
-          background: transparent;
+          border-color: #1D1D1F;
+          box-shadow: 0 0 0 1px #1D1D1F;
         }
         .address-option-details {
           display: flex;
@@ -892,7 +911,10 @@ export default function Checkout() {
         .checkout-product-item {
           display: flex;
           justify-content: space-between;
+          padding: 16px 0;
+          border-bottom: 1px solid #EAEAEA;
           font-size: 14px;
+          color: #1D1D1F;
         }
         .checkout-totals {
           margin-bottom: 24px;
@@ -935,6 +957,14 @@ export default function Checkout() {
           justify-content: center;
           z-index: 1000;
         }
+        .summary-card {
+          background: #FBFBFD;
+          border: 1px solid #EAEAEA;
+          border-radius: 24px;
+          padding: 32px;
+          position: sticky;
+          top: 100px;
+        }
         .payment-modal-card {
           background: var(--bg-card);
           border: 1px solid var(--border-color);
@@ -962,6 +992,19 @@ export default function Checkout() {
           font-weight: 700;
           letter-spacing: 0.1em;
         }
+        .btn-checkout {
+          width: 100%;
+          margin-top: 32px;
+          padding: 16px;
+          font-size: 15px;
+          font-weight: 600;
+          background: #1D1D1F;
+          color: #FFFFFF !important;
+          border-radius: 9999px;
+        }
+        .btn-checkout:hover {
+          background: #333333;
+        }
         .lock-icon {
           color: var(--color-primary);
         }
@@ -983,18 +1026,16 @@ export default function Checkout() {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          background: #FBFBFD;
+          padding: 20px;
+          border-radius: 16px;
           margin-bottom: 24px;
-          background: transparent;
-          padding: 12px 18px;
-          border-radius: var(--border-radius-md);
-          border: 1px solid var(--border-color);
-          color: var(--color-text-muted);
-          font-size: 14px;
+          border: 1px solid #EAEAEA;
         }
         .modal-amount {
-          color: var(--color-primary);
-          font-size: 18px;
-          font-weight: 700;
+          font-size: 24px;
+          font-weight: 600;
+          color: #1D1D1F;
         }
         .input-with-icon-wrapper {
           position: relative;

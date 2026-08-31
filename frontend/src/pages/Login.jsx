@@ -61,31 +61,28 @@ export default function Login() {
   };
 
   return (
-    <div className="container min-h-[85vh] flex items-center justify-center py-20 pt-10 animate-fade-in relative">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-primary)]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
-      
-      <div className="w-full max-w-lg bg-gradient-to-b from-[var(--bg-card)] to-[var(--alt-bg)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-8 md:p-12 shadow-2xl relative z-10 backdrop-blur-xl">
+    <div className="container min-h-[85vh] flex items-center justify-center py-20 animate-fade-in relative">
+      <div className="w-full max-w-lg bg-white border border-[#EAEAEA] rounded-3xl p-8 md:p-12 shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative z-10">
         
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-black text-[var(--color-text-bright)] mb-2 tracking-tight">Welcome to KDM</h1>
-          <p className="text-[var(--color-text-muted)] font-medium">Access your premium automotive portal.</p>
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-semibold text-[#1D1D1F] mb-3 tracking-tight">Welcome to KDM</h1>
+          <p className="text-[17px] text-[#86868B] font-medium">Access your premium automotive portal.</p>
         </div>
 
-        <div className="flex border-b border-[var(--border-color)] mb-8">
+        <div className="flex border-b border-[#F5F5F7] mb-8">
           <button
-            className={`flex-1 flex items-center justify-center gap-2 bg-transparent border-none text-[15px] font-bold uppercase tracking-wider py-4 cursor-pointer transition-all duration-300 relative ${isLogin ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-dim)] hover:text-[var(--color-text-bright)]'}`}
+            className={`flex-1 flex items-center justify-center gap-2 bg-transparent border-none text-[14px] font-semibold py-4 cursor-pointer transition-all duration-300 relative ${isLogin ? 'text-[#1D1D1F]' : 'text-[#86868B] hover:text-[#1D1D1F]'}`}
             onClick={() => { setIsLogin(true); setError(''); setSuccess(''); }}
           >
             <LogIn size={18} /> Sign In
-            {isLogin && <div className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-[var(--color-primary)]"></div>}
+            {isLogin && <div className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-[#1D1D1F]"></div>}
           </button>
           <button
-            className={`flex-1 flex items-center justify-center gap-2 bg-transparent border-none text-[15px] font-bold uppercase tracking-wider py-4 cursor-pointer transition-all duration-300 relative ${!isLogin ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-dim)] hover:text-[var(--color-text-bright)]'}`}
+            className={`flex-1 flex items-center justify-center gap-2 bg-transparent border-none text-[14px] font-semibold py-4 cursor-pointer transition-all duration-300 relative ${!isLogin ? 'text-[#1D1D1F]' : 'text-[#86868B] hover:text-[#1D1D1F]'}`}
             onClick={() => { setIsLogin(false); setError(''); setSuccess(''); }}
           >
             <UserPlus size={18} /> Register
-            {!isLogin && <div className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-[var(--color-primary)]"></div>}
+            {!isLogin && <div className="absolute bottom-[-1px] left-0 right-0 h-0.5 bg-[#1D1D1F]"></div>}
           </button>
         </div>
 
@@ -107,10 +104,10 @@ export default function Login() {
           /* Login Form */
           <form onSubmit={handleLoginSubmit} className="animate-fade-in flex flex-col gap-5">
             <div>
-              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Email Address</label>
+              <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Email Address</label>
               <input
                 type="email"
-                className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="john@example.com"
@@ -118,20 +115,20 @@ export default function Login() {
               />
             </div>
             <div>
-              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Password</label>
+              <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Password</label>
               <input
                 type="password"
-                className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
               />
             </div>
-            <div className="flex justify-end -mt-2">
-              <a href="#" className="text-xs font-semibold text-[var(--color-text-dim)] hover:text-[var(--color-primary)] transition-colors no-underline">Forgot Password?</a>
+            <div className="flex justify-end -mt-1">
+              <a href="#" className="text-[13px] font-semibold text-[#86868B] hover:text-[#1D1D1F] transition-colors no-underline">Forgot Password?</a>
             </div>
-            <button type="submit" className="btn btn-primary w-full mt-2">
+            <button type="submit" className="w-full bg-[#1D1D1F] hover:bg-[#333333] text-white py-4 rounded-full text-[15px] font-semibold transition-all active:scale-95 mt-2">
               Sign In to Account
             </button>
           </form>
@@ -140,10 +137,10 @@ export default function Login() {
           <form onSubmit={handleRegisterSubmit} className="animate-fade-in flex flex-col gap-5">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">First Name</label>
+                <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">First Name</label>
                 <input
                   type="text"
-                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                  className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   placeholder="John"
@@ -151,10 +148,10 @@ export default function Login() {
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Last Name</label>
+                <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Last Name</label>
                 <input
                   type="text"
-                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                  className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   placeholder="Doe"
@@ -164,10 +161,10 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Email Address</label>
+              <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Email Address</label>
               <input
                 type="email"
-                className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="john@example.com"
@@ -176,10 +173,10 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Phone Number</label>
+              <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Phone Number</label>
               <input
                 type="tel"
-                className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98765 43210"
@@ -189,10 +186,10 @@ export default function Login() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Password</label>
+                <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Password</label>
                 <input
                   type="password"
-                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                  className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
@@ -200,10 +197,10 @@ export default function Login() {
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Confirm Password</label>
+                <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Confirm Password</label>
                 <input
                   type="password"
-                  className="form-input bg-[var(--bg-main)] border-2 font-medium"
+                  className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium"
                   value={passwordConfirm}
                   onChange={(e) => setPasswordConfirm(e.target.value)}
                   placeholder="••••••••"
@@ -212,10 +209,10 @@ export default function Login() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full mt-2">
+            <button type="submit" className="w-full bg-[#1D1D1F] hover:bg-[#333333] text-white py-4 rounded-full text-[15px] font-semibold transition-all active:scale-95 mt-2">
               Create Account
             </button>
-            <p className="text-center text-xs text-[var(--color-text-dim)] mt-2">
+            <p className="text-center text-[12px] text-[#86868B] mt-2">
               By registering, you agree to our Terms of Service and Privacy Policy.
             </p>
           </form>

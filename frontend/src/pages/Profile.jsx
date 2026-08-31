@@ -140,8 +140,8 @@ export default function Profile() {
       <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10">
         
         {/* Sidebar Profile Card */}
-        <aside className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-8 text-center h-fit lg:sticky lg:top-[120px] shadow-xl">
-          <div className="w-[120px] h-[120px] rounded-full border-4 border-[var(--color-primary)] mx-auto mb-5 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] bg-[var(--alt-bg)] relative group">
+        <aside className="bg-[#FBFBFD] border border-[#EAEAEA]/60 rounded-3xl p-8 text-center h-fit lg:sticky lg:top-[120px]">
+          <div className="w-[120px] h-[120px] rounded-full mx-auto mb-5 overflow-hidden shadow-sm bg-white border border-[#EAEAEA] relative group">
             {imagePreview ? (
               <img
                 src={imagePreview}
@@ -149,35 +149,35 @@ export default function Profile() {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-4xl font-black text-[var(--color-primary)]">
+              <div className="w-full h-full flex items-center justify-center text-4xl font-semibold text-[#1D1D1F]">
                 {(user?.first_name?.[0] || user?.email?.[0] || 'U').toUpperCase()}
               </div>
             )}
           </div>
-          <h2 className="text-xl font-bold text-[var(--color-text-bright)] mb-1">{user?.first_name} {user?.last_name}</h2>
-          <p className="text-sm text-[var(--color-text-dim)] mb-8 font-medium truncate">{user?.email}</p>
+          <h2 className="text-[20px] font-semibold text-[#1D1D1F] mb-1">{user?.first_name} {user?.last_name}</h2>
+          <p className="text-[14px] text-[#86868B] mb-8 font-medium truncate">{user?.email}</p>
 
           <nav className="flex flex-col gap-2">
             <button
-              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-sm font-semibold p-3 rounded-lg cursor-pointer transition-all duration-300 ${activeTab === 'orders' ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:bg-[var(--alt-bg)] hover:text-[var(--color-text-bright)]'}`}
+              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-[14px] font-medium p-3 rounded-2xl cursor-pointer transition-all duration-300 ${activeTab === 'orders' ? 'text-[#1D1D1F] bg-white shadow-sm' : 'text-[#86868B] hover:bg-white/50 hover:text-[#1D1D1F]'}`}
               onClick={() => setActiveTab('orders')}
             >
               <ClipboardList size={18} /> Order History
             </button>
             <button
-              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-sm font-semibold p-3 rounded-lg cursor-pointer transition-all duration-300 ${activeTab === 'addresses' ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:bg-[var(--alt-bg)] hover:text-[var(--color-text-bright)]'}`}
+              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-[14px] font-medium p-3 rounded-2xl cursor-pointer transition-all duration-300 ${activeTab === 'addresses' ? 'text-[#1D1D1F] bg-white shadow-sm' : 'text-[#86868B] hover:bg-white/50 hover:text-[#1D1D1F]'}`}
               onClick={() => setActiveTab('addresses')}
             >
               <MapPin size={18} /> Addresses
             </button>
             <button
-              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-sm font-semibold p-3 rounded-lg cursor-pointer transition-all duration-300 ${activeTab === 'settings' ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:bg-[var(--alt-bg)] hover:text-[var(--color-text-bright)]'}`}
+              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-[14px] font-medium p-3 rounded-2xl cursor-pointer transition-all duration-300 ${activeTab === 'settings' ? 'text-[#1D1D1F] bg-white shadow-sm' : 'text-[#86868B] hover:bg-white/50 hover:text-[#1D1D1F]'}`}
               onClick={() => setActiveTab('settings')}
             >
               <Settings size={18} /> Edit Profile
             </button>
             <button
-              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-sm font-semibold p-3 rounded-lg cursor-pointer transition-all duration-300 ${activeTab === 'security' ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10' : 'text-[var(--color-text-muted)] hover:bg-[var(--alt-bg)] hover:text-[var(--color-text-bright)]'}`}
+              className={`flex items-center gap-3 w-full text-left bg-transparent border-none text-[14px] font-medium p-3 rounded-2xl cursor-pointer transition-all duration-300 ${activeTab === 'security' ? 'text-[#1D1D1F] bg-white shadow-sm' : 'text-[#86868B] hover:bg-white/50 hover:text-[#1D1D1F]'}`}
               onClick={() => setActiveTab('security')}
             >
               <Key size={18} /> Password & Security
@@ -186,51 +186,51 @@ export default function Profile() {
         </aside>
 
         {/* Content Box */}
-        <main className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--border-radius-lg)] p-8 md:p-10 shadow-xl min-h-[500px]">
+        <main className="bg-white border border-[#EAEAEA] rounded-3xl p-8 md:p-12 shadow-[0_20px_40px_rgba(0,0,0,0.02)] min-h-[500px]">
           
           {/* 1. Orders Tab */}
           {activeTab === 'orders' && (
             <div className="animate-fade-in">
-              <h2 className="text-2xl font-black text-[var(--color-text-bright)] mb-6 border-b border-[var(--border-color)] pb-4 flex items-center gap-3">
-                <ClipboardList className="text-[var(--color-primary)]" /> My Order History
+              <h2 className="text-2xl font-semibold text-[#1D1D1F] mb-6 border-b border-[#F5F5F7] pb-4 flex items-center gap-3 tracking-tight">
+                <ClipboardList className="text-[#1D1D1F]" /> My Order History
               </h2>
               
               {orders.length === 0 ? (
-                <div className="text-center py-16 px-6 bg-[var(--alt-bg)] rounded-xl border border-dashed border-[var(--border-color)]">
-                  <Package size={40} className="text-[var(--color-text-dim)] mx-auto mb-4" />
-                  <p className="text-lg font-bold text-[var(--color-text-bright)] mb-2">No Orders Yet</p>
-                  <p className="text-[var(--color-text-muted)]">You haven't placed any orders with us yet.</p>
+                <div className="text-center py-16 px-6 bg-[#FBFBFD] rounded-2xl border border-[#EAEAEA]">
+                  <Package size={32} className="text-[#86868B] mx-auto mb-4" />
+                  <p className="text-[17px] font-medium text-[#1D1D1F] mb-2">No Orders Yet</p>
+                  <p className="text-[14px] text-[#86868B]">You haven't placed any orders with us yet.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse min-w-[600px]">
                     <thead>
-                      <tr className="border-b border-[var(--border-color)]">
-                        <th className="text-left text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-widest pb-4 pl-2">Order ID</th>
-                        <th className="text-left text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-widest pb-4">Date</th>
-                        <th className="text-left text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-widest pb-4">Status</th>
-                        <th className="text-left text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-widest pb-4">Total</th>
-                        <th className="text-left text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-widest pb-4">Payment</th>
-                        <th className="text-right text-xs font-bold text-[var(--color-text-dim)] uppercase tracking-widest pb-4 pr-2">Action</th>
+                      <tr className="border-b border-[#F5F5F7]">
+                        <th className="text-left text-[12px] font-semibold text-[#86868B] uppercase tracking-wider pb-4 pl-2">Order ID</th>
+                        <th className="text-left text-[12px] font-semibold text-[#86868B] uppercase tracking-wider pb-4">Date</th>
+                        <th className="text-left text-[12px] font-semibold text-[#86868B] uppercase tracking-wider pb-4">Status</th>
+                        <th className="text-left text-[12px] font-semibold text-[#86868B] uppercase tracking-wider pb-4">Total</th>
+                        <th className="text-left text-[12px] font-semibold text-[#86868B] uppercase tracking-wider pb-4">Payment</th>
+                        <th className="text-right text-[12px] font-semibold text-[#86868B] uppercase tracking-wider pb-4 pr-2">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {orders.map((ord) => (
-                        <tr key={ord.id} className="border-b border-[var(--border-color)] hover:bg-[var(--alt-bg)] transition-colors">
-                          <td className="py-4 pl-2 font-mono text-[13px] text-[var(--color-text-bright)] font-semibold">{ord.order_number}</td>
-                          <td className="py-4 text-sm text-[var(--color-text-muted)]">{new Date(ord.created_at).toLocaleDateString()}</td>
+                        <tr key={ord.id} className="border-b border-[#F5F5F7] hover:bg-[#FBFBFD] transition-colors">
+                          <td className="py-4 pl-2 text-[14px] text-[#1D1D1F] font-medium">{ord.order_number}</td>
+                          <td className="py-4 text-[14px] text-[#86868B]">{new Date(ord.created_at).toLocaleDateString()}</td>
                           <td className="py-4">
-                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${ord.status === 'Cancelled' ? 'bg-red-500/10 text-red-500 border border-red-500/20' : ord.status === 'Pending' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'}`}>
+                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-medium tracking-wide ${ord.status === 'Cancelled' ? 'bg-[#FF3B30]/10 text-[#FF3B30]' : ord.status === 'Pending' ? 'bg-[#F59E0B]/10 text-[#F59E0B]' : 'bg-[#34C759]/10 text-[#34C759]'}`}>
                               {ord.status}
                             </span>
                           </td>
-                          <td className="py-4 font-bold text-[var(--color-text-bright)]">₹{ord.final_amount}</td>
-                          <td className="py-4 text-xs font-semibold text-[var(--color-text-muted)]">
+                          <td className="py-4 font-semibold text-[#1D1D1F]">₹{ord.final_amount}</td>
+                          <td className="py-4 text-[13px] font-medium text-[#86868B]">
                             {ord.payment_method.toUpperCase()} <span className="opacity-60">({ord.payment_status})</span>
                           </td>
                           <td className="py-4 pr-2 text-right">
                             {ord.status === 'Pending' && (
-                              <button className="bg-red-500/10 hover:bg-red-500 border border-red-500/30 text-red-500 hover:text-white px-3 py-1.5 rounded text-xs font-bold transition-colors" onClick={() => handleCancelOrder(ord.id)}>
+                              <button className="bg-white hover:bg-[#FBFBFD] border border-[#EAEAEA] text-[#FF3B30] hover:border-[#FF3B30] px-4 py-1.5 rounded-full text-[13px] font-medium transition-colors" onClick={() => handleCancelOrder(ord.id)}>
                                 Cancel
                               </button>
                             )}
@@ -247,34 +247,34 @@ export default function Profile() {
           {/* 2. Addresses Tab */}
           {activeTab === 'addresses' && (
             <div className="animate-fade-in">
-              <h2 className="text-2xl font-black text-[var(--color-text-bright)] mb-6 border-b border-[var(--border-color)] pb-4 flex items-center gap-3">
-                <MapPin className="text-[var(--color-primary)]" /> Shipping Addresses
+              <h2 className="text-2xl font-semibold text-[#1D1D1F] mb-6 border-b border-[#F5F5F7] pb-4 flex items-center gap-3 tracking-tight">
+                <MapPin className="text-[#1D1D1F]" /> Shipping Addresses
               </h2>
               
               {addresses.length === 0 ? (
-                <div className="text-center py-16 px-6 bg-[var(--alt-bg)] rounded-xl border border-dashed border-[var(--border-color)]">
-                  <MapPin size={40} className="text-[var(--color-text-dim)] mx-auto mb-4" />
-                  <p className="text-lg font-bold text-[var(--color-text-bright)] mb-2">No Addresses Saved</p>
-                  <p className="text-[var(--color-text-muted)]">Your saved shipping addresses will appear here.</p>
+                <div className="text-center py-16 px-6 bg-[#FBFBFD] rounded-2xl border border-[#EAEAEA]">
+                  <MapPin size={32} className="text-[#86868B] mx-auto mb-4" />
+                  <p className="text-[17px] font-medium text-[#1D1D1F] mb-2">No Addresses Saved</p>
+                  <p className="text-[14px] text-[#86868B]">Your saved shipping addresses will appear here.</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {addresses.map((addr) => (
-                    <div key={addr.id} className="bg-[var(--alt-bg)] border border-[var(--border-color)] rounded-xl p-6 relative group hover:border-[var(--color-primary)] transition-colors">
-                      <div className="flex justify-between items-start mb-3">
-                        <h4 className="text-[15px] font-bold text-[var(--color-text-bright)] m-0">{addr.name}</h4>
+                    <div key={addr.id} className="bg-[#FBFBFD] border border-[#EAEAEA] rounded-2xl p-6 relative group hover:border-[#1D1D1F]/20 transition-colors shadow-sm">
+                      <div className="flex justify-between items-start mb-4">
+                        <h4 className="text-[16px] font-semibold text-[#1D1D1F] m-0">{addr.name}</h4>
                         <div className="flex gap-2">
-                          {addr.default && <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider">Default</span>}
-                          <button className="bg-transparent border-none text-[var(--color-text-dim)] hover:text-red-500 cursor-pointer p-0 transition-colors" onClick={() => handleDeleteAddress(addr.id)}>
+                          {addr.default && <span className="bg-[#1D1D1F] text-white px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider">Default</span>}
+                          <button className="bg-transparent border-none text-[#86868B] hover:text-[#FF3B30] cursor-pointer p-0 transition-colors" onClick={() => handleDeleteAddress(addr.id)}>
                             <Trash2 size={16} />
                           </button>
                         </div>
                       </div>
-                      <p className="text-sm text-[var(--color-text-muted)] mb-2 leading-relaxed">
+                      <p className="text-[14px] text-[#86868B] mb-3 leading-relaxed">
                         {addr.address}<br />
                         {addr.city}, {addr.state} - {addr.zipcode}
                       </p>
-                      <p className="text-xs font-semibold text-[var(--color-text-dim)] flex items-center gap-1.5"><Key size={12}/> {addr.phone}</p>
+                      <p className="text-[13px] font-medium text-[#1D1D1F] flex items-center gap-1.5"><Key size={12} className="text-[#86868B]" /> {addr.phone}</p>
                     </div>
                   ))}
                 </div>
@@ -285,56 +285,56 @@ export default function Profile() {
           {/* 3. Settings Tab */}
           {activeTab === 'settings' && (
             <div className="animate-fade-in max-w-2xl">
-              <h2 className="text-2xl font-black text-[var(--color-text-bright)] mb-6 border-b border-[var(--border-color)] pb-4 flex items-center gap-3">
-                <Settings className="text-[var(--color-primary)]" /> Account Settings
+              <h2 className="text-2xl font-semibold text-[#1D1D1F] mb-6 border-b border-[#F5F5F7] pb-4 flex items-center gap-3 tracking-tight">
+                <Settings className="text-[#1D1D1F]" /> Account Settings
               </h2>
               
               <form onSubmit={handleProfileSubmit} className="flex flex-col gap-6">
                 {profileError && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-500 px-4 py-3 rounded-lg text-sm font-medium flex items-start gap-2">
+                  <div className="bg-[#FF3B30]/10 border border-[#FF3B30]/20 text-[#FF3B30] px-4 py-3 rounded-2xl text-[14px] font-medium flex items-start gap-2">
                     <AlertCircle size={18} className="shrink-0 mt-0.5" /> <p className="m-0">{profileError}</p>
                   </div>
                 )}
                 {profileSuccess && (
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 px-4 py-3 rounded-lg text-sm font-medium flex items-start gap-2">
+                  <div className="bg-[#34C759]/10 border border-[#34C759]/20 text-[#34C759] px-4 py-3 rounded-2xl text-[14px] font-medium flex items-start gap-2">
                     <CheckCircle2 size={18} className="shrink-0 mt-0.5" /> <p className="m-0">{profileSuccess}</p>
                   </div>
                 )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">First Name</label>
-                    <input type="text" className="form-input border-2 font-medium bg-[var(--bg-card)]" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">First Name</label>
+                    <input type="text" className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Last Name</label>
-                    <input type="text" className="form-input border-2 font-medium bg-[var(--bg-card)]" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Last Name</label>
+                    <input type="text" className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Phone Number</label>
-                  <input type="text" className="form-input border-2 font-medium bg-[var(--bg-card)]" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                  <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Phone Number</label>
+                  <input type="text" className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium" value={phone} onChange={(e) => setPhone(e.target.value)} />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Profile Avatar</label>
+                  <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Profile Avatar</label>
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full border-2 border-[var(--border-color)] overflow-hidden shrink-0 bg-[var(--alt-bg)]">
+                    <div className="w-16 h-16 rounded-full border border-[#EAEAEA] overflow-hidden shrink-0 bg-[#FBFBFD]">
                       {imagePreview ? (
                         <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-xl font-bold text-[var(--color-text-dim)]">?</div>
+                        <div className="w-full h-full flex items-center justify-center text-xl font-semibold text-[#86868B]">?</div>
                       )}
                     </div>
-                    <label className="btn btn-secondary cursor-pointer text-sm font-semibold flex items-center gap-2">
+                    <label className="bg-[#F5F5F7] hover:bg-[#EAEAEA] text-[#1D1D1F] px-5 py-2.5 rounded-full text-[14px] font-medium transition-colors cursor-pointer flex items-center gap-2">
                       <Camera size={16} /> Choose Image
                       <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
                     </label>
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary w-full sm:w-auto self-start mt-4">
+                <button type="submit" className="w-full sm:w-auto bg-[#1D1D1F] hover:bg-[#333333] text-white px-8 py-3.5 rounded-full text-[15px] font-semibold transition-all active:scale-95 self-start mt-4">
                   Save Changes
                 </button>
               </form>
@@ -344,38 +344,38 @@ export default function Profile() {
           {/* 4. Security Tab */}
           {activeTab === 'security' && (
             <div className="animate-fade-in max-w-lg">
-              <h2 className="text-2xl font-black text-[var(--color-text-bright)] mb-6 border-b border-[var(--border-color)] pb-4 flex items-center gap-3">
-                <Key className="text-[var(--color-primary)]" /> Password & Security
+              <h2 className="text-2xl font-semibold text-[#1D1D1F] mb-6 border-b border-[#F5F5F7] pb-4 flex items-center gap-3 tracking-tight">
+                <Key className="text-[#1D1D1F]" /> Password & Security
               </h2>
               
               <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-6">
                 {passError && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-500 px-4 py-3 rounded-lg text-sm font-medium flex items-start gap-2">
+                  <div className="bg-[#FF3B30]/10 border border-[#FF3B30]/20 text-[#FF3B30] px-4 py-3 rounded-2xl text-[14px] font-medium flex items-start gap-2">
                     <AlertCircle size={18} className="shrink-0 mt-0.5" /> <p className="m-0">{passError}</p>
                   </div>
                 )}
                 {passSuccess && (
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 px-4 py-3 rounded-lg text-sm font-medium flex items-start gap-2">
+                  <div className="bg-[#34C759]/10 border border-[#34C759]/20 text-[#34C759] px-4 py-3 rounded-2xl text-[14px] font-medium flex items-start gap-2">
                     <CheckCircle2 size={18} className="shrink-0 mt-0.5" /> <p className="m-0">{passSuccess}</p>
                   </div>
                 )}
 
                 <div>
-                  <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Current Password</label>
-                  <input type="password" className="form-input border-2 font-medium bg-[var(--bg-card)]" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
+                  <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Current Password</label>
+                  <input type="password" className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">New Password</label>
-                  <input type="password" className="form-input border-2 font-medium bg-[var(--bg-card)]" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+                  <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">New Password</label>
+                  <input type="password" className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-[var(--color-text-dim)] uppercase tracking-widest mb-2">Confirm New Password</label>
-                  <input type="password" className="form-input border-2 font-medium bg-[var(--bg-card)]" value={newPasswordConfirm} onChange={(e) => setNewPasswordConfirm(e.target.value)} required />
+                  <label className="block text-[13px] font-semibold text-[#1D1D1F] mb-2">Confirm New Password</label>
+                  <input type="password" className="form-input bg-[#FBFBFD] border-[#EAEAEA] font-medium" value={newPasswordConfirm} onChange={(e) => setNewPasswordConfirm(e.target.value)} required />
                 </div>
 
-                <button type="submit" className="btn btn-primary w-full sm:w-auto self-start mt-4">
+                <button type="submit" className="w-full sm:w-auto bg-[#1D1D1F] hover:bg-[#333333] text-white px-8 py-3.5 rounded-full text-[15px] font-semibold transition-all active:scale-95 self-start mt-4">
                   Update Password
                 </button>
               </form>
