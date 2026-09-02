@@ -139,16 +139,16 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {categories.slice(0, 4).map((cat, idx) => {
               const fallbackImages = [
-                "https://images.unsplash.com/photo-1611016186353-9af58c69a533?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1590401272091-17726526715b?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1600706432502-77a0e2e32729?auto=format&fit=crop&q=80&w=600",
-                "https://images.unsplash.com/photo-1503376760356-0733fa2cb802?auto=format&fit=crop&q=80&w=600"
+                "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1600705354929-e8544c4b5722?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1611082697843-0268ecf7d0dc?auto=format&fit=crop&q=80&w=600",
+                "https://images.unsplash.com/photo-1589139611181-e28d48a27d14?auto=format&fit=crop&q=80&w=600"
               ];
               return (
                 <Link key={cat.id} to={`/products?category=${cat.slug}`} className="group block flex flex-col items-center text-center">
                   <div className="relative overflow-hidden bg-[#F5F5F7] w-full aspect-square rounded-[28px] mb-6 flex items-center justify-center p-6 border border-transparent group-hover:bg-white group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] group-hover:border-black/5 transition-all duration-500 ease-out">
                     <img 
-                      src={fallbackImages[idx % fallbackImages.length]} 
+                      src={cat.image || fallbackImages[idx % fallbackImages.length]} 
                       alt={cat.name} 
                       className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105" 
                     />
