@@ -86,33 +86,7 @@ export default function Home() {
   return (
     <div className="bg-[#FFFFFF] min-h-screen text-[#111111] font-sans">
       
-      {/* Hero Section */}
-      <section className="w-full px-4 md:px-8 py-6 lg:py-10">
-        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center text-center bg-[#FBFBFD] border border-black/5">
-          <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up m-auto">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-4 md:mb-6">
-              Pure Performance.
-            </h1>
-            <p className="text-lg md:text-2xl text-[#6B6B6B] font-medium mb-8 md:mb-10 max-w-3xl mx-auto text-center">
-              Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
-            </p>
-            <div className="flex gap-5 md:gap-6 mt-4">
-              <Link 
-                to="/products" 
-                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-[#111111] text-white rounded-full font-bold text-[17px] md:text-lg transition-all hover:bg-black/80 hover:scale-105 shadow-md min-w-[160px]"
-              >
-                Buy
-              </Link>
-              <Link 
-                to="/about" 
-                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-transparent text-[#111111] rounded-full font-semibold text-[17px] md:text-lg transition-all hover:bg-black/5 hover:scale-105 border border-[#EAEAEA] min-w-[160px]"
-              >
-                Learn more
-              </Link>
-            </div>
-          </div>
-        </RevealOnScroll>
-      </section>
+
 
       {/* Categories Section */}
       <section className="w-full px-6 md:px-10 py-20 lg:py-32 bg-white">
@@ -206,20 +180,7 @@ export default function Home() {
         </RevealOnScroll>
       </section>
 
-      {/* Editorial Section */}
-      <section className="w-full px-6 md:px-10 py-20 lg:py-32 bg-white">
-        <RevealOnScroll className="max-w-[1000px] mx-auto rounded-3xl overflow-hidden bg-[#FBFBFD] border border-black/5 p-12 md:p-24 flex flex-col justify-center items-center text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 text-[#111111] leading-tight">
-            Master the track.
-          </h2>
-          <p className="text-[#6B6B6B] text-xl md:text-2xl leading-relaxed mb-10 max-w-2xl">
-            We believe in creating parts that withstand the ultimate test. Precision engineering meets aggressive styling.
-          </p>
-          <Link to="/about" className="inline-flex items-center justify-center text-[17px] text-[#0066CC] hover:underline gap-1 transition-colors">
-            Discover Our Story <ArrowRight size={16} />
-          </Link>
-        </RevealOnScroll>
-      </section>
+
 
     </div>
   );
