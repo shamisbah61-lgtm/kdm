@@ -87,10 +87,10 @@ export default function Home() {
     <div className="bg-[#FFFFFF] min-h-screen text-[#111111] font-sans">
       
       {/* Hero Section */}
-      <section className="w-full px-6 md:px-12 py-8 lg:py-12">
-        <RevealOnScroll className="max-w-[1400px] mx-auto relative rounded-[2rem] overflow-hidden min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center items-center text-center bg-[#FBFBFD] border border-black/5 shadow-sm">
-          <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up m-auto">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-4 md:mb-6">
+      <section className="w-full px-6 md:px-12 py-8 lg:py-10">
+        <RevealOnScroll className="max-w-[1400px] mx-auto relative rounded-[2.5rem] overflow-hidden flex flex-col justify-center items-center text-center bg-[#FBFBFD] border border-black/5 shadow-sm py-20 md:py-28 lg:py-36">
+          <div className="relative z-10 px-8 w-full max-w-4xl mx-auto flex flex-col items-center animate-slide-up">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6">
               Pure Performance.
             </h1>
             <p className="text-lg md:text-2xl text-[#6B6B6B] font-medium mb-8 md:mb-10 max-w-3xl mx-auto text-center">
