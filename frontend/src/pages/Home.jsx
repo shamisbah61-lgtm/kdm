@@ -108,16 +108,16 @@ export default function Home() {
             <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 md:mb-10 max-w-3xl mx-auto text-center drop-shadow-md">
               Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-5 md:gap-6 mt-4">
               <Link 
                 to="/products" 
-                className="inline-flex items-center justify-center px-10 py-3.5 bg-white text-[#111111] rounded-full font-semibold text-[15px] transition-all hover:bg-gray-100 hover:scale-105 shadow-xl"
+                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-white text-[#111111] rounded-full font-bold text-[17px] md:text-lg transition-all hover:bg-gray-100 hover:scale-105 shadow-xl min-w-[160px]"
               >
                 Buy
               </Link>
               <Link 
                 to="/about" 
-                className="inline-flex items-center justify-center px-10 py-3.5 bg-transparent text-white rounded-full font-medium text-[15px] transition-all hover:bg-white/15 hover:scale-105 border border-white/40 backdrop-blur-md"
+                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-transparent text-white rounded-full font-semibold text-[17px] md:text-lg transition-all hover:bg-white/15 hover:scale-105 border-2 border-white/40 backdrop-blur-md min-w-[160px]"
               >
                 Learn more
               </Link>
