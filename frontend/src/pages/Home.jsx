@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Heart, Star, ArrowRight } from 'lucide-react';
 import { apiRequest } from '../utils/api';
 import { CartContext } from '../context/CartContext';
-import { Canvas } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, Sphere, Environment, ContactShadows } from '@react-three/drei';
+// Removed 3D imports
 
 function RevealOnScroll({ children, className = '' }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,28 +37,7 @@ function RevealOnScroll({ children, className = '' }) {
   );
 }
 
-function AnimatedMatteShape() {
-  return (
-    <>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <Sphere args={[1, 64, 64]} scale={2.2}>
-          <MeshDistortMaterial 
-            color="#222222" 
-            attach="material" 
-            distort={0.4} 
-            speed={1.5} 
-            roughness={0.9} 
-            metalness={0.1}
-          />
-        </Sphere>
-      </Float>
-      <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2} far={4} />
-      <Environment preset="city" />
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-    </>
-  );
-}
+
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -110,16 +88,20 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="w-full px-4 md:px-8 py-6 lg:py-10">
-        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center bg-[#FBFBFD] text-center">
+        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center text-center">
           
-          {/* 3D Background/Foreground Element */}
-          <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <AnimatedMatteShape />
-            </Canvas>
+          {/* Image Background Element */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=2000" 
+              alt="Automotive Parts Background" 
+              className="w-full h-full object-cover opacity-90"
+            />
+            {/* Subtle gradient overlay to ensure text readability while maintaining a premium look */}
+            <div className="absolute inset-0 bg-black/10"></div>
           </div>
 
-          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl mx-auto flex flex-col items-center animate-slide-up bg-white/30 backdrop-blur-md rounded-[32px] border border-white/50 shadow-2xl mt-12 md:mt-0">
+          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl mx-auto flex flex-col items-center animate-slide-up bg-white/75 backdrop-blur-2xl rounded-[32px] border border-white/60 shadow-2xl mt-12 md:mt-0">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6 drop-shadow-sm">
               Pure Performance.
             </h1>
