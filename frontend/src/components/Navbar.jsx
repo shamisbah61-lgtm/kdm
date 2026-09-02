@@ -57,7 +57,7 @@ export default function Navbar() {
         </button>
 
         {/* LEFT: Brand Logo */}
-        <Link to="/" className="flex items-center no-underline shrink-0 z-50 lg:ml-4">
+        <Link to="/" className="flex items-center no-underline shrink-0 z-50 ml-4 lg:ml-8">
           <span className="text-[#111111] font-bold text-2xl tracking-tight uppercase">KDM</span>
         </Link>
 
