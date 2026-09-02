@@ -87,8 +87,8 @@ export default function Home() {
     <div className="bg-[#FFFFFF] min-h-screen text-[#111111] font-sans">
       
       {/* Hero Section */}
-      <section className="w-full px-4 md:px-8 py-6 lg:py-10">
-        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center text-center bg-[#FBFBFD] border border-black/5">
+      <section className="w-full lg:pt-0">
+        <RevealOnScroll className="w-full mx-auto relative lg:rounded-none overflow-hidden min-h-[65vh] md:min-h-[75vh] flex flex-col justify-center items-center text-center bg-[#FBFBFD] lg:border-none border-b border-black/5">
           <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up m-auto">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-4 md:mb-6">
               Pure Performance.
