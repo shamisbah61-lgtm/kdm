@@ -97,27 +97,27 @@ export default function Home() {
               alt="Automotive Parts Background" 
               className="w-full h-full object-cover opacity-90"
             />
-            {/* Subtle gradient overlay to ensure text readability while maintaining a premium look */}
-            <div className="absolute inset-0 bg-black/10"></div>
+            {/* Dark gradient overlay to make text pop without a box */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
           </div>
 
-          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl mx-auto flex flex-col items-center animate-slide-up bg-white/75 backdrop-blur-2xl rounded-[32px] border border-white/60 shadow-2xl mt-12 md:mt-0">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6 drop-shadow-sm">
+          <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up mt-auto mb-8 md:mb-16">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white leading-[1.05] mb-4 md:mb-6 drop-shadow-lg">
               Pure Performance.
             </h1>
-            <p className="text-lg md:text-2xl text-[#333333] font-medium mb-10 max-w-3xl mx-auto text-center drop-shadow-sm">
+            <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 md:mb-10 max-w-3xl mx-auto text-center drop-shadow-md">
               Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
             </p>
             <div className="flex gap-4">
               <Link 
                 to="/products" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-[#111111] text-white rounded-full font-medium text-[15px] transition-all hover:bg-[#333333] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center px-10 py-3.5 bg-white text-[#111111] rounded-full font-semibold text-[15px] transition-all hover:bg-gray-100 hover:scale-105 shadow-xl"
               >
                 Buy
               </Link>
               <Link 
                 to="/about" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#111111] rounded-full font-medium text-[15px] transition-all hover:bg-[#F5F5F7] shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-[#EAEAEA]"
+                className="inline-flex items-center justify-center px-10 py-3.5 bg-transparent text-white rounded-full font-medium text-[15px] transition-all hover:bg-white/15 hover:scale-105 border border-white/40 backdrop-blur-md"
               >
                 Learn more
               </Link>
