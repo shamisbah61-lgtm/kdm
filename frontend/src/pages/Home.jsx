@@ -95,7 +95,7 @@ export default function Home() {
             <img 
               src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=2000" 
               alt="Automotive Parts Background" 
-              className="w-full h-full object-cover opacity-90"
+              className="w-full h-full object-cover object-center opacity-90"
             />
             {/* Dark gradient overlay to make text pop without a box */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
