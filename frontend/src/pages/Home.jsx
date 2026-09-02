@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Heart, Star, ArrowRight } from 'lucide-react';
 import { apiRequest } from '../utils/api';
 import { CartContext } from '../context/CartContext';
+import { Canvas } from '@react-three/fiber';
+import { Float, MeshDistortMaterial, Sphere, Environment, ContactShadows } from '@react-three/drei';
 
 function RevealOnScroll({ children, className = '' }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,6 +35,29 @@ function RevealOnScroll({ children, className = '' }) {
     >
       {children}
     </div>
+  );
+}
+
+function AnimatedMatteShape() {
+  return (
+    <>
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+        <Sphere args={[1, 64, 64]} scale={2.2}>
+          <MeshDistortMaterial 
+            color="#222222" 
+            attach="material" 
+            distort={0.4} 
+            speed={1.5} 
+            roughness={0.9} 
+            metalness={0.1}
+          />
+        </Sphere>
+      </Float>
+      <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2} far={4} />
+      <Environment preset="city" />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+    </>
   );
 }
 
@@ -86,35 +111,35 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full px-4 md:px-8 py-6 lg:py-10">
         <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center bg-[#FBFBFD] text-center">
-          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl mx-auto flex flex-col items-center animate-slide-up">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6">
+          
+          {/* 3D Background/Foreground Element */}
+          <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
+            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+              <AnimatedMatteShape />
+            </Canvas>
+          </div>
+
+          <div className="relative z-10 p-8 md:p-16 lg:p-24 max-w-4xl mx-auto flex flex-col items-center animate-slide-up bg-white/30 backdrop-blur-md rounded-[32px] border border-white/50 shadow-2xl mt-12 md:mt-0">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-6 drop-shadow-sm">
               Pure Performance.
             </h1>
-            <p className="text-lg md:text-2xl text-[#6B6B6B] font-normal mb-10 max-w-3xl mx-auto text-center">
+            <p className="text-lg md:text-2xl text-[#333333] font-medium mb-10 max-w-3xl mx-auto text-center drop-shadow-sm">
               Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
             </p>
             <div className="flex gap-4">
               <Link 
                 to="/products" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-[#111111] text-white rounded-full font-medium text-[15px] transition-all hover:bg-[#333333] shadow-sm"
+                className="inline-flex items-center justify-center px-8 py-3 bg-[#111111] text-white rounded-full font-medium text-[15px] transition-all hover:bg-[#333333] shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 Buy
               </Link>
               <Link 
                 to="/about" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#111111] rounded-full font-medium text-[15px] transition-all hover:bg-[#F5F5F7] shadow-sm border border-[#EAEAEA]"
+                className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#111111] rounded-full font-medium text-[15px] transition-all hover:bg-[#F5F5F7] shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-[#EAEAEA]"
               >
                 Learn more
               </Link>
             </div>
-          </div>
-          {/* Subtle product imagery below text, like Apple */}
-          <div className="absolute bottom-0 w-full max-w-3xl flex justify-center translate-y-[15%] opacity-90 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <img 
-              src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1200" 
-              alt="Hero Product" 
-              className="w-[85%] h-auto object-contain mix-blend-multiply drop-shadow-2xl"
-            />
           </div>
         </RevealOnScroll>
       </section>
