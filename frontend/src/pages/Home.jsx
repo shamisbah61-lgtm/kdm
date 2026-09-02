@@ -88,36 +88,24 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="w-full px-4 md:px-8 py-6 lg:py-10">
-        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center text-center">
-          
-          {/* Image Background Element */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=2000" 
-              alt="Automotive Parts Background" 
-              className="w-full h-full object-cover object-center opacity-90"
-            />
-            {/* Dark gradient overlay to make text pop without a box */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
-          </div>
-
-          <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up mt-auto mb-8 md:mb-16">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white leading-[1.05] mb-4 md:mb-6 drop-shadow-lg">
+        <RevealOnScroll className="max-w-[1440px] mx-auto relative rounded-3xl overflow-hidden h-[65vh] md:h-[75vh] flex flex-col justify-center items-center text-center bg-[#FBFBFD] border border-black/5">
+          <div className="relative z-10 p-8 md:p-16 w-full max-w-5xl mx-auto flex flex-col items-center animate-slide-up m-auto">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-[#111111] leading-[1.05] mb-4 md:mb-6">
               Pure Performance.
             </h1>
-            <p className="text-lg md:text-2xl text-white/90 font-medium mb-8 md:mb-10 max-w-3xl mx-auto text-center drop-shadow-md">
+            <p className="text-lg md:text-2xl text-[#6B6B6B] font-medium mb-8 md:mb-10 max-w-3xl mx-auto text-center">
               Precision engineering for the modern driver. Experience the pinnacle of KDM aftermarket parts.
             </p>
             <div className="flex gap-5 md:gap-6 mt-4">
               <Link 
                 to="/products" 
-                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-white text-[#111111] rounded-full font-bold text-[17px] md:text-lg transition-all hover:bg-gray-100 hover:scale-105 shadow-xl min-w-[160px]"
+                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-[#111111] text-white rounded-full font-bold text-[17px] md:text-lg transition-all hover:bg-black/80 hover:scale-105 shadow-md min-w-[160px]"
               >
                 Buy
               </Link>
               <Link 
                 to="/about" 
-                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-transparent text-white rounded-full font-semibold text-[17px] md:text-lg transition-all hover:bg-white/15 hover:scale-105 border-2 border-white/40 backdrop-blur-md min-w-[160px]"
+                className="inline-flex items-center justify-center px-12 py-4 md:px-14 md:py-4.5 bg-transparent text-[#111111] rounded-full font-semibold text-[17px] md:text-lg transition-all hover:bg-black/5 hover:scale-105 border border-[#EAEAEA] min-w-[160px]"
               >
                 Learn more
               </Link>
@@ -218,27 +206,18 @@ export default function Home() {
         </RevealOnScroll>
       </section>
 
-      {/* Editorial Split Section */}
+      {/* Editorial Section */}
       <section className="w-full px-6 md:px-10 py-20 lg:py-32 bg-white">
-        <RevealOnScroll className="max-w-[1440px] mx-auto rounded-3xl overflow-hidden bg-[#FBFBFD] flex flex-col md:flex-row items-stretch gap-0">
-          <div className="md:w-1/2 p-12 md:p-20 lg:p-28 flex flex-col justify-center text-center md:text-left">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 text-[#111111] leading-tight">
-              Master the<br/>track.
-            </h2>
-            <p className="text-[#6B6B6B] text-xl leading-relaxed mb-10 max-w-md mx-auto md:mx-0">
-              We believe in creating parts that withstand the ultimate test. Precision engineering meets aggressive styling.
-            </p>
-            <Link to="/about" className="inline-flex items-center justify-center md:justify-start text-[17px] text-[#0066CC] hover:underline gap-1 transition-colors">
-              Discover Our Story <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="md:w-1/2 min-h-[500px] relative flex items-center justify-center bg-[#F5F5F7]">
-            <img 
-              src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80" 
-              alt="Performance Engineering" 
-              className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-95 transition-transform duration-1000 hover:scale-105"
-            />
-          </div>
+        <RevealOnScroll className="max-w-[1000px] mx-auto rounded-3xl overflow-hidden bg-[#FBFBFD] border border-black/5 p-12 md:p-24 flex flex-col justify-center items-center text-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 text-[#111111] leading-tight">
+            Master the track.
+          </h2>
+          <p className="text-[#6B6B6B] text-xl md:text-2xl leading-relaxed mb-10 max-w-2xl">
+            We believe in creating parts that withstand the ultimate test. Precision engineering meets aggressive styling.
+          </p>
+          <Link to="/about" className="inline-flex items-center justify-center text-[17px] text-[#0066CC] hover:underline gap-1 transition-colors">
+            Discover Our Story <ArrowRight size={16} />
+          </Link>
         </RevealOnScroll>
       </section>
 
